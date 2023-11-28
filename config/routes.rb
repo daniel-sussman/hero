@@ -1,16 +1,10 @@
 Rails.application.routes.draw do
-  get 'collections/index'
-  get 'collections/show'
-  get 'collections/new'
-  get 'collections/create'
-  get 'collections/edit'
-  get 'collections/update'
-  get 'collections/destroy'
-  get 'encounters/update'
-  get 'categories/index'
-  get 'categories/show'
-  get 'activities/index'
-  get 'activities/show'
+
+  resources :activities, only: [:index, :show]
+  resources :categories, only: [:index, :show]
+  resources :encounters, only: [:update]
+  resources :collections
+
   devise_for :users
   root to: "/"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
