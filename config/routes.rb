@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'collections/index'
+  get 'collections/show'
+  get 'collections/new'
+  get 'collections/create'
+  get 'collections/edit'
+  get 'collections/update'
+  get 'collections/destroy'
+  get 'encounters/update'
+  get 'categories/index'
+  get 'categories/show'
+  get 'activities/index'
+  get 'activities/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
