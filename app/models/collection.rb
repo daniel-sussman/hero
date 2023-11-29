@@ -5,7 +5,7 @@ class Collection < ApplicationRecord
 
   validates :title, presence: true
 
-  def activity
-    encounter.activity
+  def activities
+    encounters.map(&:activity)
   end
 end
