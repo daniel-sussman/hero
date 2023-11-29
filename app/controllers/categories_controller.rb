@@ -11,6 +11,5 @@ class CategoriesController < ApplicationController
     @activities = Activity.joins(:activity_categories)
                   .joins(:categories)
                   .where(“activity_categories.category_id = categories.id”)
-                  .select(“activities.name”)
   end
 end
