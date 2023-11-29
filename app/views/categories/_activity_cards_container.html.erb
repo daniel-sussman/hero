@@ -1,0 +1,8 @@
+<div>
+  <% @activities.each do |activity| %>
+    <img src="<%=activity.photo_url%>">
+    <h3><%= activity.name %></h3>
+
+    <button><%= link_to "See more", activity_path(category) %></button>
+  <% end %>
+</div>
