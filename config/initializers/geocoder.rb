@@ -3,10 +3,6 @@ Geocoder.configure(
   timeout: 5,
   lookup: :mapbox,
   api_key: ENV['MAPBOX_API_KEY'],
-  params: {
-    country: 'gb', # Specify the country code for the United Kingdom (replace with the desired country code)
-    proximity: '51.508045,-0.128217' # Specify the proximity coordinates
-  }
 
   # ip_lookup: :ipinfo_io,      # name of IP address geocoding service (symbol)
   # language: :en,              # ISO-639 language code
