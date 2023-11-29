@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_28_162415) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_29_150632) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,22 +48,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_162415) do
     t.string "photo_url"
     t.float "latitude"
     t.float "longitude"
-    t.time "monday_opening_time"
-    t.time "monday_closing_time"
-    t.time "tuesday_opening_time"
-    t.time "tuesday_closing_time"
-    t.time "wednesday_opening_time"
-    t.time "wednesday_closing_time"
-    t.time "thursday_opening_time"
-    t.time "thursday_closing_time"
-    t.time "friday_opening_time"
-    t.time "friday_closing_time"
-    t.time "saturday_opening_time"
-    t.time "saturday_closing_time"
-    t.time "sunday_opening_time"
-    t.time "sunday_closing_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.string "monday_opening_hours"
+    t.string "tuesday_opening_hours"
+    t.string "wednesday_opening_hours"
+    t.string "thursday_opening_hours"
+    t.string "friday_opening_hours"
+    t.string "saturday_opening_hours"
+    t.string "sunday_opening_hours"
+    t.string "website_url"
   end
 
   create_table "activity_categories", force: :cascade do |t|
@@ -109,11 +104,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_162415) do
   create_table "encounters", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "activity_id", null: false
-    t.boolean "show_me_fewer"
-    t.boolean "clicked_on"
-    t.boolean "liked"
-    t.boolean "saved"
-    t.boolean "attended"
+    t.boolean "show_me_fewer", default: false, null: false
+    t.boolean "clicked_on", default: false, null: false
+    t.boolean "liked", default: false, null: false
+    t.boolean "saved", default: false, null: false
+    t.boolean "attended", default: false, null: false
     t.integer "rating"
     t.string "review"
     t.datetime "created_at", null: false
