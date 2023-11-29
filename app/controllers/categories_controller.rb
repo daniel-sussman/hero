@@ -7,10 +7,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @activity = Activity.find(params[:id])
-    @activities = Activity.joins(:activity_categories)
-                  .joins(:categories)
-                  .where(“activity_categories.category_id = categories.id”)
-                  .select(“activities.name”)
+    @activities = Activity.joins(activity_categories: :category)
+                  .where("activity_categories.category_id = categories.id")
   end
 end

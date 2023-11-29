@@ -1,2 +1,10 @@
 <h1>Collections#show</h1>
 <p>Find me in app/views/collections/show.html.erb</p>
+
+<div>
+  <%# <%= cl_image_tag category.photo.key, crop: :fill %>
+  <%= @collection.name %>
+</div>
+<div>
+  <%= render partial: "./activites/activity_cards", collections: @collections%>
+</div>

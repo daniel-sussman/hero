@@ -2,7 +2,7 @@
   <% @categories.each do |category| %>
     <%= link_to category_path(category) do %>
       <div class="category-card">
-        <%= cl_image_tag category.photo.key, crop: :fill %>
+        <%# <%= cl_image_tag category.photo.key, crop: :fill %>
         <h3><%= category.name %></h3>
       </div>
     <% end %>
