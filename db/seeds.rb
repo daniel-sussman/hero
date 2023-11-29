@@ -1,5 +1,21 @@
+puts "Wiping all users from the database..."
+
+UserCategory.destroy_all
+Child.destroy_all
+EncounterCollection.destroy_all
+Collection.destroy_all
+Encounter.destroy_all
+User.destroy_all
+
+puts "Creating users"
+
+User.create(name: "Daniel", address: "285 Highbury Quadrant, London N5 2TD", email: "daniel@example.com", password: "password")
+
+puts "Successfully created #{User.all.count} user."
+
 puts "Wiping all categories from the database..."
 
+ActivityCategory.destroy_all
 Category.destroy_all
 
 puts "Creating categories..."
@@ -162,3 +178,26 @@ new_activity = Activity.create(params)
 ActivityCategory.create(activity_id: new_activity.id, category_id: museums.id)
 ActivityCategory.create(activity_id: new_activity.id, category_id: indoor.id)
 ActivityCategory.create(activity_id: new_activity.id, category_id: arts_and_crafts.id)
+
+puts "Successfully created #{Activity.all.count} activities."
+
+puts "Seeding the database with new encounters for the first user..."
+
+user = User.first
+
+a = Encounter.create(user_id: user.id, activity_id: Activity.all[0].id)
+b = Encounter.create(user_id: user.id, activity_id: Activity.all[1].id)
+c = Encounter.create(user_id: user.id, activity_id: Activity.all[2].id)
+
+puts "Successfully created three encounters."
+
+puts "Giving the user a new collection..."
+
+collection = Collection.create(user_id: user.id, title: "Half-term activities")
+EncounterCollection.create(collection_id: collection.id, encounter_id: a.id)
+EncounterCollection.create(collection_id: collection.id, encounter_id: b.id)
+EncounterCollection.create(collection_id: collection.id, encounter_id: c.id)
+
+puts "There are #{collection.activities.count} activities in this collection."
+
+puts "Finished seeding!"
