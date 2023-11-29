@@ -1,2 +1,9 @@
 <h1>Categories#show</h1>
 <p>Find me in app/views/categories/show.html.erb</p>
+<div>
+  <%= cl_image_tag category.photo.key, crop: :fill %>
+  <%= category.name %>
+</div>
+<div>
+  <%= render partial: "activity_cards_container", categories: @categories%>
+</div>
