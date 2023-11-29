@@ -1,2 +1,16 @@
-<h1>Activities#index</h1>
-<p>Find me in app/views/activities/index.html.erb</p>
+<h1>Here are your recommendations:</h1>
+
+<%= render 'category_carousel', category: @categories[0], activities: @activities_first_category %>
+<br>
+
+<%= render 'category_carousel', category: @categories[1], activities: @activities_second_category %>
+<br>
+
+<%= render 'category_carousel', category: @categories[2], activities: @activities_third_category %>
+<br>
+
+<%= render 'category_carousel', category: @categories[3], activities: @activities_fourth_category %>
+<br>
+
+<%= render 'category_carousel', category: @categories[4], activities: @activities_fifth_category %>
+<br>
