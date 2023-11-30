@@ -1,11 +1,19 @@
-<div>
-  <div class="d-flex justify-content-between m-3">
-    <h2><%= category.name %></h2>
-    <%= link_to "See more", category_path(category) %>
+<h2><%= category.name %></h2>
+    <%= link_to "See more", categories_path(category) %>
+
+
+<div class="carousel-will" data-controller='carousel-will' data-carousel-will-length-value='<%=activities.length%>'>
+  <div class="inner" data-carousel-will-target='inner'>
+      <% activities.each_with_index do |activity, i| %>
+        <div class="carousel-will-item" style='left: <%= i * 100%>%' data-carousel-will-target='item'>
+          <img src="https://hips.hearstapps.com/hmg-prod/images/beautiful-smooth-haired-red-cat-lies-on-the-sofa-royalty-free-image-1678488026.jpg?crop=0.88847xw:1xh;center,top&resize=1200:*", alt="photo of <%= activity.title %>" style="width: 180px">
+          <%= link_to activity.title, activity_path(activity) %>
+          <% if user_signed_in? %>
+            <p><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</p>
+          <% end %>
+        </div>
+      <%end%>
   </div>
-  <div class="d-flex justify-content-evenly">
-    <% activities.each do |activity| %>
-      <%= render 'activity_card', activity: activity %>
-    <% end %>
-  </div>
+  <button class='left' type='text' data-action='click->carousel-will#moveLeft'>Left</button>
+  <button class='right'type='text' data-action='click->carousel-will#moveRight'>Right</button>
 </div>

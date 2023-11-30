@@ -1,4 +1,4 @@
-<div class="collection-card" data-controller="edit-collection" data-edit-collection-target="infos">
+<div class="collection-card" data-controller="edit-collection" data-edit-collection-target="card">
   <%# <%= image-tag collection.image_url %>
 
   <div class="collection-infos" data-edit-collection-target="infos">
@@ -11,5 +11,5 @@
   <%= simple_form_for [current_user, collection], html: {class: "d-none", data: {edit_collection_target: "form", action: "submit->edit-collection#update"}} do |f| %>
     <%= f.input :title %>
     <%= f.submit "Update collection"%>
-  <%end%>
+  <% end %>
 </div>

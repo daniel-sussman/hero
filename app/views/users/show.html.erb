@@ -17,7 +17,7 @@
 
 <h3>My activities</h3>
 <div>
-  <%# cards %>
+  <%# <%= render partial: "./activites/activity_cards", users: @users%>
 </div>
 
 <%= link_to "Edit my profile", edit_user_registration_path(@user) %>

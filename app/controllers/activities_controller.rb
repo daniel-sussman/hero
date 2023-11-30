@@ -4,11 +4,10 @@ class ActivitiesController < ApplicationController
   def index
     @categories = Category.take(5)
     @all_recommended_activities = Activity.geocoded.take(7)
-    @activities_first_category = Activity.take(5)
-    @activities_second_category = Activity.take(5)
-    @activities_third_category = Activity.take(5)
-    @activities_fourth_category = Activity.take(5)
-    @activities_fifth_category = Activity.take(5)
+    @activities = []
+    @categories.each do |cat|
+      @activities << Activity.all.sample(5)
+    end
 
     #create encounters
     @all_recommended_activities.each do |activity|

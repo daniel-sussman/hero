@@ -1,18 +1,7 @@
 <h1>Here are your recommendations:</h1>
 
-<%= render 'category_carousel', category: @categories[0], activities: @activities_first_category %>
-<br>
+<% @categories.first(5).each_with_index do |category, i|%>
+  <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
+<% end %>
 
-<%= render 'category_carousel', category: @categories[1], activities: @activities_second_category %>
-<br>
-
-<%= render 'category_carousel', category: @categories[2], activities: @activities_third_category %>
-<br>
-
-<%= render 'category_carousel', category: @categories[3], activities: @activities_fourth_category %>
-<br>
-
-<%= render 'category_carousel', category: @categories[4], activities: @activities_fifth_category %>
-<br>
-
-<%= render 'map', activities: @all_recommended_activities %>
+<%# <%= render 'map', activities: @all_recommended_activities %>
