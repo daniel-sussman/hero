@@ -11,7 +11,7 @@ class ActivitiesController < ApplicationController
     @activities_fifth_category = Activity.take(5)
 
     #geocoding
-    @coords = user_logged_in? ? [current_user.latitude, current_user.longitude] : [51.508045, -0.128217] #replace default coords with IP address coords
+    @coords = user_signed_in? ? [current_user.latitude, current_user.longitude] : [51.508045, -0.128217] #replace default coords with IP address coords
 
     @markers = @all_recommended_activities.map do |activity|
       {
@@ -30,7 +30,7 @@ end
 
 private
 
-def color_code(activity)
+def color_code(_activity)
   #to-do: color code by category
   "green"
 end
