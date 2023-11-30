@@ -9,8 +9,6 @@
       <p><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</p>
     <% end %>
   </div>
-  <%= link_to like_activity_path(activity) do %>
-    <i class="fa-solid fa-heart"></i>
-  <% end %>
+
 </div>
 <% end %>
