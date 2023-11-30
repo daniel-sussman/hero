@@ -1,16 +1,8 @@
 <div>
-  <div class="d-flex justify-content-between m-3">
-    <h2><%= @categories[1].name %></h2>
-    <%= link_to "See more", categories_path(@categories[1]) %>
-  </div>
-  <div class="d-flex justify-content-evenly">
-    <% @activities_second_category.each do |activity| %>
-      <div class="mb-3 mx-3">
-        <%= link_to activity.title, activity_path(activity) %>
-        <% if user_signed_in? %>
-          <p><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</p>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <% @activities.each do |activity| %>
+    <img src="<%=activity.photo_url%>">
+    <h3><%= activity.name %></h3>
+
+    <button><%= link_to "See more", activity_path(category) %></button>
+  <% end %>
 </div>
