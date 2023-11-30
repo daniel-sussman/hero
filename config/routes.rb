@@ -7,10 +7,8 @@ Rails.application.routes.draw do
       get :save
     end
   end
-  resources :users, only: [:show] do
-    resources :collections
-  end
-
+  resources :users, only: [:show]
+  resources :collections
   devise_for :users
   root "activities#index"
   get "up" => "rails/health#show", as: :rails_health_check

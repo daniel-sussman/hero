@@ -1,7 +1,7 @@
 <h1>Collections#index</h1>
 <p>Find me in app/views/collections/index.html.erb</p>
 <div data-controller="search-collections">
-  <%= form_with url: user_collections_path(current_user), method: :get, html: {class: "mb-4", data: {search_collections_target: "form"}} do |f| %>
+  <%= form_with url: collections_path, method: :get, html: {class: "mb-4", data: {search_collections_target: "form"}} do |f| %>
           <%= f.label :query, "Type a collection title" %>
           <%= f.text_field :query,
                            class: "form-control",
@@ -16,5 +16,5 @@
   <div >
    <%= render "collection_cards", collection: @collection %>
   </div>
-  <%= link_to "Add your collection", new_user_collection_path(current_user) %>
+  <%= link_to "Add your collection", new_collection_path %>
 </div>
