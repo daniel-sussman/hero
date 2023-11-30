@@ -1,9 +1,7 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<h1><%= @category.name.capitalize %> activities</h1>
+
 <div>
-  <%# <%= cl_image_tag category.photo.key, crop: :fill %>
-  <%= @category.name %>
-</div>
-<div>
-  <%= render partial: "activities/activity_card", categories: @categories%>
+  <% @activities.each do |activity| %>
+    <%= render 'activities/activity_card', activity: activity %>
+  <% end %>
 </div>

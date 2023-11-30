@@ -1,2 +1,13 @@
-<h1>Activities#show</h1>
-<p>Find me in app/views/activities/show.html.erb</p>
+<div class="image">
+  <img src="<%= @activity.photo_url %>">
+</div>
+<div class="d-flex justify-space-between">
+  <h1><%= @activity.title %></h1>
+  <h3><i class="fa-solid fa-location-dot"></i>
+  <%= @activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi<h3>
+</div>
+<p><%= @activity.address %></p>
+<p><%= @activity.description %></p>
+<% if @activity.website_url.present? %>
+  <%= link_to 'Visit website', @activity.website_url, target: '_blank' %>
+<% end %>
