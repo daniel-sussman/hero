@@ -1,8 +1,9 @@
 class EncountersController < ApplicationController
   def create
-    encounter = Encounter.new(encounter_params)
-    encounter.save!
-    raise
+    if Encounter.where(user_id: params[:user_id], activity_id: params[:activity_id])
+      encounter = Encounter.new(encounter_params)
+      encounter.save
+    end
   end
 
   def update
