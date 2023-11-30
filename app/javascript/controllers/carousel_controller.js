@@ -1,14 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="carousel-will"
+// Connects to data-controller="carousel"
 export default class extends Controller {
   static targets = ['item', 'inner']
   static values = {
-    length: Number
+    length: Number,
+    userid: Number
   }
   connect() {
     this.steps = 0
-    // console.log('carousel connected')
   }
 
   moveRight() {
@@ -36,6 +36,22 @@ export default class extends Controller {
     if (this.steps >= this.lengthValue) {
       console.log('back to start')
       this.steps = 0
+    } else {
+
+      const activityID = parseInt(this.itemTargets[this.steps].getAttribute('data-value'), 10)
+
+      fetch('/encounters', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+          user_id: this.useridValue,
+          activity_id: activityID
+        }),
+      })
     }
   }
 }

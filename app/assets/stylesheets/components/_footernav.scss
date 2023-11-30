@@ -1,6 +1,10 @@
 .footer-container{
   background-color: $light-white-color;
   padding: 15px;
+  width: 390px;
+  position: fixed;
+  bottom: 0;
+  z-index: 5;
   .footer-nav{
     flex: 1 0 auto;
     align-items: flex-start;
@@ -29,4 +33,8 @@
       font-size: 18px;
     }
   }
+}
+
+.spacer {
+  height: 100px;
 }

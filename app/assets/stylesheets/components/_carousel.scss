@@ -1,4 +1,4 @@
-.carousel-will {
+.carousel-will{
   position: relative;
   width: 100%;
   height: fit-content;
@@ -26,6 +26,7 @@
     transform: translateY(-50%);
   }
   .carousel-will-item {
+    display: block !important;
     position: absolute;
     top: 0px;
     width: 100%;
