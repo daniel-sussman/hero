@@ -6,9 +6,10 @@
     <button aria-label="Edit collection">
       <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-collection#reveal"></i>
     </button>
+    <%= link_to '🗑️', collection_path(collection), data: {turbo_method: :delete, turbo_confirm: "Do you want to remove this collection?"}%>
   </div>
 
-  <%= simple_form_for [current_user, collection], html: {class: "d-none", data: {edit_collection_target: "form", action: "submit->edit-collection#update"}} do |f| %>
+  <%= simple_form_for collection, html: {class: "d-none", data: {edit_collection_target: "form", action: "submit->edit-collection#update"}} do |f| %>
     <%= f.input :title %>
     <%= f.submit "Update collection"%>
   <% end %>

@@ -1,7 +1,7 @@
 <div>
   <h1>Create Your Collection</h1>
 </div>
-<%= simple_form_for [current_user, @collection] do |f| %>
+<%= simple_form_for @collection do |f| %>
   <%= f.input :title, placeholder: 'New Collection Title...'%>
   <%= f.submit 'Create My Collection'%>
 <% end %>
