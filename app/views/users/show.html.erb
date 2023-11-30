@@ -12,7 +12,7 @@
 <h3>My activities</h3>
 <div>
   <p>View on map</p>
-  <p>Collections</p>
+  <%= link_to "My Collections", user_collections_path(@collection) %>
 </div>
 
 <h3>My activities</h3>
@@ -20,5 +20,5 @@
   <%# cards %>
 </div>
 
-<p>Edit Profile</p>
-<p>Log Out</p>
+<%= link_to "Edit my profile", edit_user_registration_path(@user) %>
+<%= link_to "Log out", destroy_user_session_path %>
