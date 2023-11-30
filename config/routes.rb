@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  get 'users/show'
   resources :activities, only: [:index, :show]
   resources :categories, only: [:index, :show]
   resources :encounters, only: [:update]
   resources :collections
+  resources :users, only: [:show]
   devise_for :users
   root "activities#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
