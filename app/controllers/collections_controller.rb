@@ -2,7 +2,7 @@ class CollectionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
   def index
-    @collections = Collection.all
+    @collections = current_user.collections
 
     if params[:query].present?
       @collections = @collections.where("title ILIKE ?", "%#{params[:query]}%")
@@ -27,7 +27,7 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(collection_params)
     @collection.user = current_user
     if @collection.save
-      redirect_to user_collections_path, notice: 'You created a new collection.'
+      redirect_to collections_path, notice: 'You created a new collection.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class CollectionsController < ApplicationController
 
   def destroy
     @collection.destroy
-    redirect_to user_collections_path, notice: 'Collection was successfully deleted.', status: :see_other
+    redirect_to collections_path, notice: 'Collection was successfully deleted.', status: :see_other
   end
 
   private
