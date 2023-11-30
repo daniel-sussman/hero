@@ -2,10 +2,10 @@
     <%= link_to "See more", categories_path(category) %>
 
 
-<div class="carousel-will" data-controller='carousel-will' data-carousel-will-length-value='<%=activities.length%>'>
+<div class="carousel-will" data-controller='carousel-will' data-carousel-will-length-value='<%=activities.length%>' data-carousel-will-userid-value='<%= current_user.id %>'>
   <div class="inner" data-carousel-will-target='inner'>
       <% activities.each_with_index do |activity, i| %>
-        <div class="carousel-will-item" style='left: <%= i * 100%>%' data-carousel-will-target='item'>
+        <div class="carousel-will-item" style='left: <%= i * 100%>%' data-carousel-will-target='item' data-value=<%= activity.id %>>
           <img src="https://hips.hearstapps.com/hmg-prod/images/beautiful-smooth-haired-red-cat-lies-on-the-sofa-royalty-free-image-1678488026.jpg?crop=0.88847xw:1xh;center,top&resize=1200:*", alt="photo of <%= activity.title %>" style="width: 180px">
           <%= link_to activity.title, activity_path(activity) %>
           <% if user_signed_in? %>

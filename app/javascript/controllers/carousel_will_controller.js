@@ -4,11 +4,11 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['item', 'inner']
   static values = {
-    length: Number
+    length: Number,
+    userid: Number
   }
   connect() {
     this.steps = 0
-    // console.log('carousel connected')
   }
 
   moveRight() {
@@ -33,6 +33,30 @@ export default class extends Controller {
 
   increaseStep() {
     this.steps += 1
+    console.log(this.itemTargets[this.steps])
+
+    const activityID = parseInt(this.itemTargets[this.steps].getAttribute('data-value'), 10)
+
+    fetch('/encounters', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({
+        user_id: this.useridValue,
+        activity_id: activityID
+      }),
+    })
+    // .then(response => response.json())
+    // .then(data => {
+    //   console.log(data);
+    // })
+    // .catch(error => {
+    //   console.error('Error:', error);
+    // });
+
     if (this.steps >= this.lengthValue) {
       console.log('back to start')
       this.steps = 0
