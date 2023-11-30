@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   resources :activities, only: [:index, :show]
   resources :categories, only: [:index, :show]
   resources :encounters, only: [:update]
-  resources :collections
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :collections
+  end
   devise_for :users
   root "activities#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
