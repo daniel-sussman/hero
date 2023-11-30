@@ -5,17 +5,7 @@
   </div>
   <div class="d-flex justify-content-evenly">
     <% activities.each do |activity| %>
-      <div>
-        <div>
-          <img src="<%= activity.photo_url %>", alt="photo of <%= activity.title %>" style="width: 180px">
-        </div>
-        <div class="mb-3 mx-3">
-          <%= link_to activity.title, activity_path(activity) %>
-          <% if user_signed_in? %>
-            <p><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</p>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'activity_card', activity: activity %>
     <% end %>
   </div>
 </div>
