@@ -8,7 +8,7 @@
     </button>
   </div>
 
-  <%= simple_form_for collection,html: {class: "d-none", data: {edit_collection_target: "form", action: "submit->edit-collection#update"}} do |f| %>
+  <%= simple_form_for [current_user, collection], html: {class: "d-none", data: {edit_collection_target: "form", action: "submit->edit-collection#update"}} do |f| %>
     <%= f.input :title %>
     <%= f.submit "Update collection"%>
   <%end%>
