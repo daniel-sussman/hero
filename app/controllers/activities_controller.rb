@@ -5,13 +5,13 @@ class ActivitiesController < ApplicationController
     @categories = Category.take(5)
     @all_recommended_activities = Activity.geocoded.take(7)
     @activities = []
-    @categories.each do |cat|
+    @categories.each do |_cat|
       @activities << Activity.all.sample(5)
     end
 
     #create encounters
     @all_recommended_activities.each do |activity|
-      unless Encounter.find(:first, user_id: current_user, activity_id: activity.id)
+      unless Encounter.where(user_id: current_user, activity_id: activity.id).length > 0
         Encounter.create(user_id: current_user, activity_id: activity.id)
       end
     end

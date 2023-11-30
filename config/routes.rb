@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :activities, only: [:index, :show]
   resources :categories, only: [:index, :show]
-  resources :encounters, only: [:update] do
+  resources :encounters, only: [:create, :update] do
     member do
       get :like
       get :save
