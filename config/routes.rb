@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/show'
   resources :activities, only: [:index, :show]
   resources :categories, only: [:index, :show]
   resources :encounters, only: [:update]
