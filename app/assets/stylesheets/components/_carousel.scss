@@ -1,0 +1,36 @@
+.carousel-will {
+  position: relative;
+  width: 100%;
+  height: 200px !important;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform .3s ease;
+  }
+  button.right {
+    position: absolute;
+    z-index: 3;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  button.left {
+    position: absolute;
+    z-index: 3;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .carousel-will-item {
+    display: block !important;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
