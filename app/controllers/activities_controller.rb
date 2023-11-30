@@ -10,6 +10,13 @@ class ActivitiesController < ApplicationController
     @activities_fourth_category = Activity.take(5)
     @activities_fifth_category = Activity.take(5)
 
+    #create encounters
+    @all_recommended_activities.each do |activity|
+      unless Encounter.find(:first, user_id: current_user, activity_id: activity.id)
+        Encounter.create(user_id: current_user, activity_id: activity.id)
+      end
+    end
+
     #geocoding
     @coords = user_signed_in? ? [current_user.latitude, current_user.longitude] : [51.508045, -0.128217] #replace default coords with IP address coords
 
