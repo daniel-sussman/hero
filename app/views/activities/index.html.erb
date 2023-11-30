@@ -4,4 +4,5 @@
   <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
 <% end %>
 
+<%= link_to "See more Categroies", categories_path %>
 <%= render 'map', activities: @all_recommended_activities %>

@@ -12,7 +12,7 @@
 <h3>My activities</h3>
 <div>
   <p>View on map</p>
-  <%= link_to "My Collections", collections_path(@collection) %>
+  <%= link_to "My Collections", collections_path %>
 </div>
 
 <h3>My activities</h3>
@@ -20,5 +20,5 @@
   <%# <%= render partial: "./activites/activity_cards", users: @users%>
 </div>
 
-<%= link_to "Edit my profile", edit_user_registration_path(@user) %>
+<%= link_to "Edit my profile", edit_user_registration_path %>
 <%= link_to "Log out", destroy_user_session_path %>
