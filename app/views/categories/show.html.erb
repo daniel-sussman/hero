@@ -1,8 +1,7 @@
 <h1><%= @category.name.capitalize %> activities</h1>
-<div>
-  <%# <%= cl_image_tag category.photo.key, crop: :fill %>
 
-</div>
 <div>
-  <%= render 'activities/activity_card', category: @category, activities: @activities %>
+  <% @activities.each do |activity| %>
+    <%= render 'activities/activity_card', activity: activity %>
+  <% end %>
 </div>

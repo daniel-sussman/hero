@@ -1,14 +1,13 @@
+<%= link_to activity_path(activity) do %>
 <div>
-  <% activities.each do |activity| %>
-    <div>
-      <img src="<%=activity.photo_url%>">
-    </div>
-    <div>
-      <h3><%= activity.title %></h3>
-      <p><%= activity.description %></p>
-    </div>
-    <div>
-      <button><%= link_to "See more", activity_path(activity) %></button>
-    </div>
-  <% end %>
+  <div>
+    <img src="<%= activity.photo_url %>", alt="photo of <%= activity.title %>" style="width: 180px">
+  </div>
+  <div class="mb-3 mx-3">
+    <p><%= activity.title %></p>
+    <% if user_signed_in? %>
+      <p><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</p>
+    <% end %>
+  </div>
 </div>
+<% end %>
