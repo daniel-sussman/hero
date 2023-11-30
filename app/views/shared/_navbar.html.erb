@@ -1,3 +1,19 @@
+<div class="navbar">
+  <div class="d-flex justify-content-evenly align-items-center w-100">
+    <%= link_to (image_tag "logo.png", alt: "Hero", width: 60), activities_path %>
+    <%= link_to (image_tag "search_glass.png", alt: "Search", width: 44), categories_path %>
+
+    <% if user_signed_in? %>
+      <%= link_to (image_tag "save.png", alt: "Saved", width: 32), collections_path %>
+      <%= link_to (image_tag "user.png", alt: "User", width: 38), activities_path %> <!-- user_path(current_user) -->
+    <% else %>
+      <%= link_to (image_tag "save.png", alt: "Saved", width: 32), new_user_session_path %>
+      <%= link_to (image_tag "user.png", alt: "User", width: 38), new_user_session_path %>
+    <% end %>
+  </div>
+</div>
+
+<!--
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to "#", class: "navbar-brand" do %>
@@ -35,4 +51,6 @@
       </ul>
     </div>
   </div>
-</div>
+</div> %>
+
+-->
