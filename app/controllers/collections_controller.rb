@@ -27,7 +27,7 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(collection_params)
     @collection.user = current_user
     if @collection.save
-      redirect_to collections_path, notice: 'You created a new collection.'
+      redirect_to user_collections_path, notice: 'You created a new collection.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,13 +42,13 @@ class CollectionsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.text{render partial: "./views/collections/collection_infos", locals: {collection: @collection}, formats: [:html]}
+      format.text{render partial: "collections/collection_infos", locals: {collection: @collection}, formats: [:html]}
     end
   end
 
   def destroy
     @collection.destroy
-    redirect_to collections_path, notice: 'Collection was successfully deleted.'
+    redirect_to user_collections_path, notice: 'Collection was successfully deleted.', status: :see_other
   end
 
   private
