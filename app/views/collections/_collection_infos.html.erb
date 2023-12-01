@@ -2,7 +2,7 @@
   <%# <%= image-tag collection.image_url %>
 
   <div class="collection-infos" data-edit-collection-target="infos">
-    <h2><%= collection.title %></h2>
+    <h2><%= link_to collection.title, collection_path(collection) %></h2>
     <button aria-label="Edit collection">
       <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-collection#reveal"></i>
     </button>

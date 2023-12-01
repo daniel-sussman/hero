@@ -1,10 +1,15 @@
-<h1>Collections#show</h1>
-<p>Find me in app/views/collections/show.html.erb</p>
+<%= render 'activities/search', activities: @search_activities, path: collection_path %>
 
-<div>
-  <%# <%= cl_image_tag category.photo.key, crop: :fill %>
-  <%= @collection.name %>
-</div>
-<div>
-  <%= render partial: "./activites/activity_cards", collections: @collections%>
-</div>
+<% if @search_activities.any?%>
+  <%= render 'activities/search_results', activities: @search_activities %>
+<% else %>
+  <div>
+    <%# <%= cl_image_tag category.photo.key, crop: :fill %>
+    <h1><%= @collection.title %></h1>
+  </div>
+  <div>
+      <% @activities.each do |activity| %>
+        <%= render 'activities/activity_card', activity: activity %>
+      <% end %>
+    </div>
+<%end%>
