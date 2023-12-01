@@ -1,0 +1,43 @@
+.category-card{
+  margin-bottom: 20px;
+  .card{
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 3px 4px rgba(0,0,0,0.4);
+    border-radius: 15px;
+    img{
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      -webkit-transition: all .2s ease;
+    }
+    .card-img{
+      overflow: hidden;
+    }
+    .card-body{
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h3{
+        font-family: $headers-font;
+        font-size: 16px;
+        font-weight: 600;
+        color: $secondary-color;
+        text-transform: capitalize;
+        text-align: center;
+      }
+    }
+  }
+  &:hover{
+      .card{
+        img{
+          opacity: 0.7;
+          transform: scale(0.95);
+        }
+        .card-body{
+          h3{
+            color: $primary-color;
+          }
+        }
+      }
+  }
+}
