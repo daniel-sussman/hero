@@ -8,5 +8,9 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @activities = Activity.joins(activity_categories: :category).where("activity_categories.category_id = #{params[:id]}")
+    @search_activities = Activity.joins(activity_categories: :category).where("activity_categories.category_id = #{params[:id]}")
+    if params[:query].present?
+      @search_activities = Activity.where(title: params[:query])
+    end
   end
 end
