@@ -1,8 +1,23 @@
-<h1>Here are your recommendations:</h1>
+<div>
+  <%= form_with url: activities_path, method: :get, class: "d-flex" do %>
+    <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "search..."
+      %>
+    <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+  <% end %>
+</div>
 
-<% @categories.first(5).each_with_index do |category, i|%>
-  <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
+<% if @search_activities.any?%>
+  <%= render 'search_results', activities: @search_activities %>
+<% else %>
+  <h1>Here are your recommendations:</h1>
+
+  <% @categories.first(5).each_with_index do |category, i|%>
+    <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
+  <% end %>
+
+  <%= link_to "See more categories", categories_path %>
+  <%# <%= render 'map', activities: @all_recommended_activities %>
 <% end %>
-
-<%= link_to "See more categories", categories_path %>
-<%# <%= render 'map', activities: @all_recommended_activities %>
