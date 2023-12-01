@@ -1,13 +1,13 @@
   <div class="col-12">
-    <%= link_to activity_path(activity) do %>
-    <div class="activity-card mb-4">
+    <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: activity.id) if user_signed_in? %>
+    <div class="activity-card mb-4" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value=<%= activity.id %>>
       <div class="card-inner">
         <div class="image-box">
           <img src="<%= activity.photo_url %>" alt="photo of <%= activity.title %>">
           <%# <img src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o"> %>
-          <%= link_to categories_path(), class: "link-btn btn-heart" do %>
-            <span><i class="fa-regular fa-heart"></i></span>
-          <% end %>
+          <div class="link-btn btn-heart" data-action="click->activity#like">
+            <span><i class="<%= encounter && encounter.liked ? 'fa-solid' : 'fa-regular' %> fa-heart" data-activity-target='heart'></i></span>
+          </div>
           <%= link_to categories_path(), class: "link-btn btn-checkview" do %>
             <span><i class="fas fa-user-check"></i></span>
           <% end %>
@@ -26,5 +26,4 @@
         </div>
       </div>
     </div>
-    <% end %>
   </div>

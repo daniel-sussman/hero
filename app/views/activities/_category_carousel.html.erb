@@ -11,26 +11,31 @@
         <div class="carousel" data-controller='carousel' data-carousel-length-value='<%=activities.length%>' data-carousel-userid-value='<%= user_signed_in? ? current_user.id : 0 %>'>
             <div class="inner" data-carousel-target='inner'>
                 <% activities.each_with_index do |activity, i| %>
+                  <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: activity.id) if user_signed_in? %>
                   <!-- DO NOT DELETE: data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value=<%= activity.id %> in the line below
-                  BUT DO NOT RESTORE: the deleted item for carousel_controller -->
+                  BUT DO NOT RESTORE: the deleted item for carousel_controller
+                  the classes 'activity-card carousel-item' are unique to carousel items -->
                   <div class="activity-card carousel-item h-100" style='left: <%= i * 100%>%' data-controller='activity' data-carousel-target='item' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value=<%= activity.id %>>
                     <div class="card-inner">
                         <div class="image-box">
                           <img src="<%= activity.photo_url %>" alt="photo of <%= activity.title %>">
                           <%# <img src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o"> %>
-                          <%= link_to categories_path(category), class: "link-btn btn-heart" do %>
-                            <span><i class="fa-regular fa-heart"></i></span>
-                          <% end %>
+                          <!-- added data-action to the div -->
+                          <div class="link-btn btn-heart" data-action="click->activity#like">
+                            <span><i class="<%= encounter && encounter.liked ? 'fa-solid' : 'fa-regular' %> fa-heart" data-activity-target='heart'></i></span>
+                          </div>
                           <%= link_to categories_path(category), class: "link-btn btn-checkview" do %>
                             <span><i class="fas fa-user-check"></i></span>
                           <% end %>
-                          <%= link_to categories_path(category), class: "link-btn btn-subnav" do %>
+                          <%= link_to save_activity_path(activity), data: {turbo_method: :patch}, class: "link-btn btn-subnav" do %>
                             <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
                           <% end %>
                         </div>
                         <div class="text-box p-3">
                           <div class="header">
-                            <h3><%= link_to activity.title, activity_path(activity) %></h3>
+                            <%= link_to click_activity_path(activity), data: {turbo_method: :patch} do %>
+                              <h3><%= link_to activity.title, activity_path(activity) %></h3>
+                            <% end %>
                             <% if user_signed_in? %>
                               <span><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</span>
                             <% end %>
