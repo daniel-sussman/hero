@@ -1,13 +1,4 @@
-<div>
-  <%= form_with url: activities_path, method: :get, class: "d-flex" do %>
-    <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "search..."
-      %>
-    <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-  <% end %>
-</div>
+<%= render 'search', activities: @search_activities, path: activities_path %>
 
 <% if @search_activities.any?%>
   <%= render 'search_results', activities: @search_activities %>
