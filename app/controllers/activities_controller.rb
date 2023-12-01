@@ -3,6 +3,7 @@ class ActivitiesController < ApplicationController
 
   def index
     @categories = Category.take(5)
+    @categories_all = Category.all
     @all_recommended_activities = Activity.geocoded.take(7)
     @activities = []
     @categories.each do |_cat|
