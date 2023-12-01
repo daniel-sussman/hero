@@ -1,4 +1,4 @@
-<%= render 'search', activities: @search_activities, path: activities_path %>
+<%= render 'searches/search', path: searches_path %>
 
 <div class="container page-header">
   <div class="row">
@@ -23,10 +23,3 @@
     </div>
   </div>
 </div>
-
-<!--
-<% if @search_activities.any?%>
-  <%= render 'search_results', activities: @search_activities %>
-<% else %>
-<% end %>
--->
