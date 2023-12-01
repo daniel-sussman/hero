@@ -28,6 +28,11 @@ class ActivitiesController < ApplicationController
         marker_html: render_to_string(partial: "marker_#{color_code(activity)}")
       }
     end
+
+    @search_activities = Activity.all
+    if params[:query].present?
+      @search_activities = Activity.where(title: params[:query])
+    end
   end
 
   def show
