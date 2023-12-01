@@ -38,11 +38,24 @@ class ActivitiesController < ApplicationController
   def show
     @activity = Activity.find(params[:id])
   end
-end
 
-private
+  def like
+    encounter = Encounter.find_by(activity_id: params[:id], user_id: current_user.id)
+    encounter.update(liked: !encounter.liked)
+  end
 
-def color_code(_activity)
-  #to-do: color code by category
-  "green"
+  def save
+
+  end
+
+  def click
+
+  end
+
+  private
+
+  def color_code(_activity)
+    #to-do: color code by category
+    "green"
+  end
 end
