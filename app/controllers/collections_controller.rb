@@ -17,6 +17,10 @@ class CollectionsController < ApplicationController
   def show
     @collection = Collection.find(params[:id])
     @activities = @collection.activities
+    @search_activities = @collection.activities
+    if params[:query].present?
+      @search_activities = @search_activities.where("title ILIKE ?", "%#{params[:query]}%")
+    end
   end
 
   def new

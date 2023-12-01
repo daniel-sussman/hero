@@ -31,7 +31,7 @@ class ActivitiesController < ApplicationController
 
     @search_activities = Activity.all
     if params[:query].present?
-      @search_activities = Activity.where(title: params[:query])
+      @search_activities = Activity.where("title ILIKE ?", "%#{params[:query]}%")
     end
   end
 
