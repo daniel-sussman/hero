@@ -8,6 +8,7 @@
 <% @categories.first(5).each_with_index do |category, i|%>
   <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
 <% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-12 all-cat">
