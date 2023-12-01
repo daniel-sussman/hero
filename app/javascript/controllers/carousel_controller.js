@@ -36,7 +36,7 @@ export default class extends Controller {
     if (this.steps >= this.lengthValue) {
       console.log('back to start')
       this.steps = 0
-    } else {
+    } else if (this.useridValue !== 0) {
 
       const activityID = parseInt(this.itemTargets[this.steps].getAttribute('data-value'), 10)
 

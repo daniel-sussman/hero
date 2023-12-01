@@ -7,7 +7,9 @@
 <div class="d-flex justify-space-between">
   <h1><%= @activity.title %></h1>
   <h3><i class="fa-solid fa-location-dot"></i>
-  <%= @activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi<h3>
+  <% if user_signed_in? %>
+    <%= @activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi<h3>
+  <% end %>
 </div>
 <p><%= @activity.address %></p>
 <p><%= @activity.description %></p>
