@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :activities, only: [:index, :show]
-  resources :categories, only: [:index, :show]
-  resources :encounters, only: [:create, :update] do
+  resources :activities, only: [:index, :show] do
     member do
       patch :like
       patch :save
       patch :click
     end
   end
+  resources :categories, only: [:index, :show]
+  resources :encounters, only: [:create, :update]
   resources :users, only: [:show]
   resources :collections
   root "activities#index"

@@ -88,3 +88,75 @@
     }
   }
 }
+.activity-details{
+  .imgbox{
+    position: relative;
+    .close-btn{
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      cursor: pointer;
+      i{
+        color: $white;
+        text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.4);
+      }
+      transition: all 0.2s ease-in;
+      &:hover{
+        i{
+          color: $primary-color;
+        }
+      }
+    }
+  }
+  .infobox{
+    .textinfo{
+      h1{
+        font-family: $headers-font;
+        font-size: 24px;
+        font-weight: 600;
+        color: $secondary-color;
+        margin-bottom: 5px;
+      }
+      p{
+        font-size: 14px;
+        color: $gray;
+      }
+    }
+    .mapinfo{
+      color: $primary-color;
+      font-size: 22px;
+    }
+    .visit-btn{
+      max-width: 120px;
+      padding: 8px 15px;
+      border-color: $cornflower-Blue-color;
+      background-color: $white;
+      color:$cornflower-Blue-color;
+      border: 2px solid;
+      font-size: 16px;
+      border-radius: 9px;
+      &:hover{
+        color:$primary-color;
+        border-color: $primary-color;
+      }
+    }
+    .opening-hours{
+      margin-top: 15px;
+      h4{
+        color: $secondary-color;
+        font-size: 16px;
+        font-family: 600;
+      }
+      p{
+        font-size: 14px;
+        color: $secondary-color;
+        span{
+          color:$primary-color;
+        }
+        margin-bottom: 0px;
+      }
+      margin-bottom: 15px;
+    }
+  }
+}

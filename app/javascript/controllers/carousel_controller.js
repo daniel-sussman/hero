@@ -4,8 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['item', 'inner']
   static values = {
-    length: Number,
-    userid: Number
+    length: Number
   }
   connect() {
     this.steps = 0

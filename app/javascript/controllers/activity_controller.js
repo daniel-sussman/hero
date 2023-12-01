@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="activity"
 export default class extends Controller {
+  static targets = ['heart']
   static values = {
     userid: Number
   }
@@ -39,5 +40,19 @@ export default class extends Controller {
         activity_id: activityID
       }),
     })
+  }
+
+  like() {
+    const activityID = parseInt(this.element.getAttribute('data-value'), 10)
+    fetch(`/activities/${activityID}/like`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      }
+    })
+    this.heartTarget.classList.toggle("fa-regular")
+    this.heartTarget.classList.toggle("fa-solid")
   }
 }
