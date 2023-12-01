@@ -1,6 +1,6 @@
 class EncountersController < ApplicationController
   def create
-    if Encounter.where(user_id: params[:user_id], activity_id: params[:activity_id])
+    unless Encounter.find_by(user_id: params[:user_id], activity_id: params[:activity_id])
       encounter = Encounter.new(encounter_params)
       encounter.save
     end
