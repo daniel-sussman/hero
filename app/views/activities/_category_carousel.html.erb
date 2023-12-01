@@ -2,7 +2,7 @@
     <%= link_to "See more", category_path(category) %>
 
 
-<div class="carousel" data-controller='carousel' data-carousel-length-value='<%=activities.length%>' data-carousel-userid-value='<%= current_user.id %>'>
+<div class="carousel" data-controller='carousel' data-carousel-length-value='<%=activities.length%>' data-carousel-userid-value='<%= user_signed_in? ? current_user.id : 0 %>'>
   <div class="inner" data-carousel-target='inner'>
       <% activities.each_with_index do |activity, i| %>
         <div class="carousel-item" style='left: <%= i * 100%>%' data-carousel-target='item' data-value=<%= activity.id %>>
