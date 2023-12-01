@@ -4,7 +4,7 @@ class ActivitiesController < ApplicationController
   def index
     @categories = Category.take(5)
     @categories_all = Category.all
-    @all_recommended_activities = Activity.geocoded.take(7)
+    @all_recommended_activities = Activity.geocoded.take(25)
     @activities = []
     @categories.each do |_cat|
       @activities << Activity.all.sample(5)
@@ -29,6 +29,7 @@ class ActivitiesController < ApplicationController
       }
     end
 
+    #search_function
     @search_activities = Activity.all
     if params[:query].present?
       @search_activities = Activity.where(title: params[:query])

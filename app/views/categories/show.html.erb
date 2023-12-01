@@ -1,13 +1,18 @@
 <%= render 'activities/search', activities: @search_activities, path: category_path %>
 
-<% if @search_activities.any?%>
-  <%= render 'activities/search_results', activities: @search_activities %>
-<% else %>
-  <h1><%= @category.name.capitalize %> activities</h1>
-
-  <div>
-    <% @activities.each do |activity| %>
-      <%= render 'activities/activity_card', activity: activity %>
-    <% end %>
+<div class="container page-header">
+  <div class="row">
+    <div class="col-12">
+      <h1><%= @category.name.capitalize %> activities</h1>
+    </div>
   </div>
-<% end %>
+</div>
+<section class="list-activities">
+  <div class="container">
+    <div class="row">
+      <% @activities.each do |activity| %>
+        <%= render 'activities/activity_card', activity: activity %>
+      <% end %>
+    </div>
+  </div>
+</section>

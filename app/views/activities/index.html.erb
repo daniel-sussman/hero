@@ -1,14 +1,32 @@
 <%= render 'search', activities: @search_activities, path: activities_path %>
 
+<div class="container page-header">
+  <div class="row">
+    <div class="col-12">
+      <h1>Here are your recommendations:</h1>
+    </div>
+  </div>
+</div>
+
+<% @categories.first(5).each_with_index do |category, i|%>
+  <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 all-cat">
+      <h2><%= link_to "Search By Categories", categories_path %></h2>
+      <%= render "categories/category_cards_container", categories: @categories_all%>
+    </div>
+    <div class="col-12 map-box">
+      <%= render 'map', activities: @all_recommended_activities %>
+    </div>
+  </div>
+</div>
+
+<!--
 <% if @search_activities.any?%>
   <%= render 'search_results', activities: @search_activities %>
 <% else %>
-  <h1>Here are your recommendations:</h1>
-
-  <% @categories.first(5).each_with_index do |category, i|%>
-    <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
-  <% end %>
-
-  <%= link_to "See more categories", categories_path %>
-  <%# <%= render 'map', activities: @all_recommended_activities %>
 <% end %>
+-->
