@@ -37,7 +37,7 @@
                               <h3><%= link_to activity.title, activity_path(activity) %></h3>
                             <% end %>
                             <% if user_signed_in? %>
-                              <span><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</span>
+                              <span><i class="fa-solid fa-location-dot me-2 mb-2"></i><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</span>
                             <% end %>
                           </div>
                           <p><%= activity.description%></p>
