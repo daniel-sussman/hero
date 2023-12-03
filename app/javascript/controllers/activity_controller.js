@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="activity"
 export default class extends Controller {
-  static targets = ['heart', 'attended', 'stars', 'link']
+  static targets = ['heart', 'attended', 'stars', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save']
   static values = {
     userid: Number
   }
@@ -101,5 +101,39 @@ export default class extends Controller {
       this.linkTarget.classList.remove("expanded")
       // this.attendedTarget.innerHTML = `<span><i class='star'></i></span> Rated ${rating}`;
     }
+  }
+
+  expand(event) {
+    if (event.target.classList.contains("option")) {
+      const selection = event.target.getAttribute("data-selection");
+      const activityID = parseInt(this.element.getAttribute('data-value'), 10);
+
+      fetch(`/activities/${activityID}/${selection}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        }
+      });
+
+      if (selection === 'fewer') {
+        this.#fewer()
+      } else {
+        this.#save()
+      }
+    }
+    this.ellipsisTarget.classList.toggle("d-none");
+    this.optionsTarget.classList.toggle("d-none");
+    this.menuTarget.classList.toggle("show-menu")
+  }
+
+  #fewer() {
+
+  }
+
+  #save() {
+    this.saveTarget.classList.toggle("save")
+    this.saveTarget.classList.toggle("saved")
   }
 }

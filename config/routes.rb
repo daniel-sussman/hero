@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       patch :click
       patch :attended
       patch :rating
+      patch :fewer
     end
   end
   resources :categories, only: [:index, :show] do
