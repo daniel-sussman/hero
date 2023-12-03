@@ -1,4 +1,5 @@
 class ActivitiesController < ApplicationController
+  before_action :set_encounter, only: %i[like attended rating save click fewer]
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
@@ -36,29 +37,34 @@ class ActivitiesController < ApplicationController
   end
 
   def like
-    encounter = Encounter.find_by(activity_id: params[:id], user_id: current_user.id)
-    encounter.update(liked: !encounter.liked)
+    @encounter.update(liked: !@encounter.liked)
   end
 
   def attended
-    encounter = Encounter.find_by(activity_id: params[:id], user_id: current_user.id)
-    encounter.update(attended: true)
+    @encounter.update(attended: true)
   end
 
   def rating
-    encounter = Encounter.find_by(activity_id: params[:id], user_id: current_user.id)
-    encounter.update(rating: params[:rating].to_i)
+    @encounter.update(rating: params[:rating].to_i)
   end
 
   def save
-
+    @encounter.update(saved: !@encounter.saved)
   end
 
   def click
+    @encounter.update(clicked_on: true)
+  end
 
+  def fewer
+    @encounter.update(show_me_fewer: !@encounter.show_me_fewer)
   end
 
   private
+
+  def set_encounter
+    @encounter = Encounter.find_by(activity_id: params[:id], user_id: current_user.id)
+  end
 
   def color_code(_activity)
     #to-do: color code by category

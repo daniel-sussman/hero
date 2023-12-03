@@ -1,0 +1,44 @@
+.ellipsis {
+  background-image: image-url('ellipsis.png');
+  height: 36px;
+  width: 14px;
+  display: block;
+  background-size: contain;
+}
+@keyframes expandOptions {
+  0% {
+    transform: translateX(130%);;
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.options {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  i {
+    background-size: contain;
+    display: block;
+  }
+}
+.fewer {
+  animation: expandOptions 0.3s;
+  background-image: image-url('heart_broken.png');
+  width: 38px;
+  height: 32px;
+}
+.save {
+  background-image: image-url('save_to_collection.png');
+  width: 30px;
+  height: 40px;
+}
+.saved {
+  transition: opacity 0.5s ease-in-out; /* Adjust the duration and easing as needed */
+  opacity: 1;
+  background-image: image-url('saved_to_collection.png');
+  width: 30px;
+  height: 40px;
+}

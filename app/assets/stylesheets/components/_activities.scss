@@ -41,6 +41,9 @@
       .link-btn.expanded{
         width: 192px;
       }
+      .link-btn.show-menu{
+        width: 112px;
+      }
       .btn-heart{
         top:15px;
         right: 15px;
@@ -77,9 +80,12 @@
       }
       .btn-subnav{
         bottom:15px;
-        right: 15px;
+        right: 24px;
         width: 30px;
-        height: 30px;
+        height: 48px;
+      }
+      .btn-subnav.show-menu{
+        right: 15px;
       }
     }
     .text-box{
