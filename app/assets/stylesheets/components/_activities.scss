@@ -19,65 +19,70 @@
         width: 100%;
         height: 200px;
       }
-        .link-btn{
-          position: absolute;
-          height: 40px;
-          width: 40px;
-          background-color: rgba(249,249,249,0.6);
-          border: 1px solid;
-          display: flex;
-          justify-content: center;
-          align-items:center;
-          border-radius: 5px;
-          border-color: $white-color;
-          span{
-            font-size: 18px;
-          }
-          &:hover{
-            background-color: rgba(38,70,83,0.6);
-            border-color: rgba(38,70,83,0.1);
-            span{
-              color: $primary-color;
-            }
-          }
-        }
-        .btn-heart{
-          top:15px;
-          right: 15px;
-          border-radius: 50%;
-        }
-        .btn-checkview{
-          top:15px;
-          left: 15px;
-        }
-        .btn-subnav{
-          bottom:15px;
-          right: 15px;
-          width: 30px;
-          height: 30px;
+      .link-btn{
+        position: absolute;
+        height: 48px;
+        width: 48px;
+        background-color: rgba(249,249,249,0.6);
+        border: 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        border-radius: 5px;
+        border-color: $white-color;
+        span{
+          font-size: 18px;
         }
       }
-      .text-box{
-        h3{
-          font-family: $headers-font;
-          font-size: 22px;
-          font-weight: 600;
-          color: $gray;
-          text-transform: capitalize;
-          a{
-            text-decoration: none;
-          }
-        }
-        p{
-          display: -webkit-box;
-          max-width: 400px;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
+      .btn-heart{
+        top:15px;
+        right: 15px;
+        border-radius: 50%;
+      }
+      .heart-regular {
+        background-image: image-url('heart_empty.png');
+      }
+      .heart-solid {
+        background-image: image-url('heart_full.png');
+      }
+      .heart-icon {
+        height: 32px;
+        width: 36px;
+        display: block;
+        background-size: contain;
+      }
+      .btn-checkview{
+        top:15px;
+        left: 15px;
+      }
+      .btn-subnav{
+        bottom:15px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .text-box{
+      h3{
+        font-family: $headers-font;
+        font-size: 22px;
+        font-weight: 600;
+        color: $gray;
+        text-transform: capitalize;
+        a{
+          text-decoration: none;
         }
       }
-      &:hover {
+      p{
+        display: -webkit-box;
+        max-width: 400px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+      //&:hover {
       // background: #fff;
       // box-shadow: 0px 15px 26px rgba(0,0,0,0.5);
       // transition: all 0.2s ease-in;
@@ -85,7 +90,7 @@
       //   opacity: 0.7;
       //   transform: scale(1.15)
       // }
-    }
+      // }
   }
 }
 .activity-details{
