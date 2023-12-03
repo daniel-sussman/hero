@@ -54,6 +54,19 @@
       .btn-checkview{
         top:15px;
         left: 15px;
+        position: absolute;
+        height: 48px;
+        width: 48px;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+      }
+      .checkmark {
+        background-image: image-url('checkmark.png');
+        height: 40px;
+        width: 40px;
+        display: block;
+        background-size: contain;
       }
       .btn-subnav{
         bottom:15px;
