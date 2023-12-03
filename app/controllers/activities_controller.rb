@@ -40,6 +40,16 @@ class ActivitiesController < ApplicationController
     encounter.update(liked: !encounter.liked)
   end
 
+  def attended
+    encounter = Encounter.find_by(activity_id: params[:id], user_id: current_user.id)
+    encounter.update(attended: true)
+  end
+
+  def rating
+    encounter = Encounter.find_by(activity_id: params[:id], user_id: current_user.id)
+    encounter.update(rating: params[:rating].to_i)
+  end
+
   def save
 
   end
