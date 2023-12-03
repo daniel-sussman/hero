@@ -8,9 +8,9 @@
           <div class="link-btn btn-heart" data-action="click->activity#like">
             <span><i class="<%= encounter && encounter.liked ? 'heart-solid' : 'heart-regular' %> heart-icon" data-activity-target='heart'></i></span>
           </div>
-          <%= link_to categories_path(), class: "link-btn btn-checkview" do %>
-            <span><i class="checkmark"></i></span>
-          <% end %>
+          <div class="link-btn btn-checkview" data-action="click->activity#attended">
+            <span><i class='<%= encounter && encounter.attended ? 'star' : 'checkmark' %>' data-activity-target='attended'></i></span>
+          </div>
           <%= link_to categories_path(), class: "link-btn btn-subnav" do %>
             <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
           <% end %>

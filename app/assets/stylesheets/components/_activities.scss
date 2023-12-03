@@ -10,7 +10,7 @@
   .card-inner{
     .image-box{
       background: #ffffff;
-      overflow: hidden;
+      // overflow: hidden;
       // box-shadow: 0px 2px 15px rgba(0,0,0,0.5);
       border-radius: 5px 5px 0px 0px;
       position: relative;
@@ -19,6 +19,7 @@
         -moz-transition: all .9s ease;
         -o-transition: all .9s ease;
         -ms-transition: all .9s ease;
+        object-fit: cover;
         width: 100%;
         height: 200px;
       }
@@ -36,6 +37,9 @@
         span{
           font-size: 18px;
         }
+      }
+      .link-btn.expanded{
+        width: 192px;
       }
       .btn-heart{
         top:15px;

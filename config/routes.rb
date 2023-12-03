@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       patch :like
       patch :save
       patch :click
+      patch :attended
+      patch :rating
     end
   end
   resources :categories, only: [:index, :show] do
