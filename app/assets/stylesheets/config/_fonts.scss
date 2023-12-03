@@ -1,8 +1,9 @@
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 // Define fonts for body and headers
-$body-font: "Roboto", "Helvetica", "sans-serif";
-$headers-font: "Poppins", "Helvetica", "sans-serif";
+$body-font: "Gochi Hand", "Helvetica", "sans-serif";
+$headers-font: "Pangolin", "Helvetica", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
