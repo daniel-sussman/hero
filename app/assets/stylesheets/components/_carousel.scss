@@ -60,21 +60,16 @@
       font-family: $headers-font;
       font-size: 26px;
       font-weight: 600;
-      color: $secondary-color;
       text-transform: capitalize;
     }
     a{
       font-size: 16px;
       font-weight: bold;
-      color: $secondary-color;
       i{
         color: $light-yellow-color;
       }
       &:hover{
         color: $light-yellow-color;
-        i{
-          color: $secondary-color;
-        }
       }
     }
   }
