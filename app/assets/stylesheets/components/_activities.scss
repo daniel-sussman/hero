@@ -2,8 +2,11 @@
   position: relative;
   background: #FFFFFF;
   transition: all 0.2s ease-in;
-  box-shadow: 0px 3px 4px rgba(0,0,0,0.4);
-  border-radius: 5px;
+  //box-shadow: 0px 3px 4px rgba(0,0,0,0.4);
+  //border-radius: 5px;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border: solid 5px $orange-color;
+  overflow: hidden;
   .card-inner{
     .image-box{
       background: #ffffff;
@@ -29,7 +32,7 @@
         justify-content: center;
         align-items:center;
         border-radius: 5px;
-        border-color: $white-color;
+        border-color: $secondary-color;
         span{
           font-size: 18px;
         }
