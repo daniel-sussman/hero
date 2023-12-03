@@ -6,6 +6,7 @@ export default class extends Controller {
   static values = {
     apiKey: String,
     markers: Array,
+    homeMarker: String,
     pos: Array  }
 
   connect() {
@@ -17,15 +18,18 @@ export default class extends Controller {
         center: this.posValue,
         zoom: 12
       })
-      this.#addMarkersToMap()
+      this.#addHomeMarker();
     } else {
       this.map = new mapboxgl.Map({
         container: this.element,
-        style: "mapbox://styles/mapbox/streets-v10"
+        style: "mapbox://styles/mapbox/streets-v10",
+        center: [-0.128217, 51.508045],
+        zoom: 11
       })
-    this.#addMarkersToMap()
-    this.#fitMapToMarkers()
+
+    // this.#fitMapToMarkers()
     }
+    this.#addMarkersToMap()
   }
 
   #addMarkersToMap() {
@@ -40,6 +44,14 @@ export default class extends Controller {
         .setPopup(popup)
         .addTo(this.map)
     })
+  }
+  #addHomeMarker() {
+    const homeMarker = document.createElement("div")
+    homeMarker.innerHTML = this.homeMarkerValue
+
+    new mapboxgl.Marker(homeMarker)
+      .setLngLat(this.posValue)
+      .addTo(this.map)
   }
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()

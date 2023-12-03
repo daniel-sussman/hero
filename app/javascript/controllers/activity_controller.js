@@ -52,7 +52,7 @@ export default class extends Controller {
         'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
       }
     })
-    this.heartTarget.classList.toggle("fa-regular")
-    this.heartTarget.classList.toggle("fa-solid")
+    this.heartTarget.classList.toggle("heart-regular")
+    this.heartTarget.classList.toggle("heart-solid")
   }
 }
