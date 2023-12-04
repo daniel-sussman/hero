@@ -8,4 +8,8 @@ class Collection < ApplicationRecord
   def activities
     encounters.map(&:activity)
   end
+
+  def editable?
+    self.title.downcase != "all saved activities"
+  end
 end

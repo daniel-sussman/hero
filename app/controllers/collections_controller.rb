@@ -2,6 +2,11 @@ class CollectionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
   def index
+    if !current_user
+      redirect_to root_path
+      return
+    end
+
     @collections = current_user.collections
 
     if params[:query].present?
