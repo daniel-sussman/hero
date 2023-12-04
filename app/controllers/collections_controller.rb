@@ -2,7 +2,7 @@ class CollectionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
   def index
-    @collections = Collection.all
+    @collections = current_user.collections
 
     if params[:query].present?
       @collections = @collections.where("title ILIKE ?", "%#{params[:query]}%")
@@ -17,6 +17,10 @@ class CollectionsController < ApplicationController
   def show
     @collection = Collection.find(params[:id])
     @activities = @collection.activities
+    @search_activities = @collection.activities
+    if params[:query].present?
+      @search_activities = @search_activities.where("title ILIKE ?", "%#{params[:query]}%")
+    end
   end
 
   def new
@@ -42,13 +46,13 @@ class CollectionsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.text{render partial: "./views/collections/collection_infos", locals: {collection: @collection}, formats: [:html]}
+      format.text{render partial: "collections/collection_infos", locals: {collection: @collection}, formats: [:html]}
     end
   end
 
   def destroy
     @collection.destroy
-    redirect_to collections_path, notice: 'Collection was successfully deleted.'
+    redirect_to collections_path, notice: 'Collection was successfully deleted.', status: :see_other
   end
 
   private

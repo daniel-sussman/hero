@@ -1,0 +1,44 @@
+@keyframes expandStars {
+  0% {
+    transform: translateX(-300%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* Apply animation to stars */
+.stars {
+  animation: expandStars 0.7s;
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  top: 15px;
+  left: 87px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.star {
+  width: 36px;
+  height: 36px;
+  display: block;
+  background-size: contain;
+}
+
+.star-1 {
+  background-image: image-url('star-one.png');
+}
+.star-2 {
+  background-image: image-url('star-two.png');
+}
+.star-3 {
+  background-image: image-url('star-three.png');
+}
+.star-4 {
+  background-image: image-url('star-four.png');
+}
+.star-5 {
+  background-image: image-url('star-five.png');
+}

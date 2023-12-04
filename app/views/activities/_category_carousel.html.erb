@@ -1,21 +1,25 @@
-<div>
-  <div class="d-flex justify-content-between m-3">
-    <h2><%= category.name %></h2>
-    <%= link_to "See more", categories_path(category) %>
-  </div>
-  <div class="d-flex justify-content-evenly">
-    <% activities.each do |activity| %>
-      <div>
-        <div>
-          <img src="<%= activity.photo_url %>", alt="photo of <%= activity.title %>" style="width: 180px">
-        </div>
-        <div class="mb-3 mx-3">
-          <%= link_to activity.title, activity_path(activity) %>
-          <% if user_signed_in? %>
-            <p><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</p>
-          <% end %>
-        </div>
+<div class="custom-container categories-container">
+  <div class="row">
+    <div class="col-md-12 categories-headinfo">
+      <div class="cat-header d-flex justify-content-between align-items-center">
+        <h2><%= category.name %></h2> <%= link_to category_path(category) do %>
+          See more <i class="fa-solid fa-chevron-right"></i>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+    <div class="col-md-12 categories-contentinfo">
+      <div class="carousel" data-controller='carousel' data-carousel-length-value='<%=activities.length%>' data-carousel-userid-value='<%= user_signed_in? ? current_user.id : 0 %>'>
+        <div class="inner" data-carousel-target='inner'>
+          <% activities.each_with_index do |activity, i| %>
+            <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: activity.id) if user_signed_in? %>
+            <div class='activity-card carousel-item h-100' style='left: <%= i * 100 %>%' data-controller='activity' data-carousel-target='item' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value='<%= activity.id %>'>
+              <%= render 'activity', activity: activity, encounter: encounter %>
+            </div>
+          <%end%>
+        </div>
+        <div class='left slider-btn' type='text' data-action='click->carousel#moveLeft'><i class="fa-solid fa-chevron-left"></i></div>
+        <div class='right slider-btn'type='text' data-action='click->carousel#moveRight'><i class="fa-solid fa-chevron-right"></i></div>
+      </div>
+    </div>
   </div>
 </div>

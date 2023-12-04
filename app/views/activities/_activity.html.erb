@@ -1,0 +1,43 @@
+<div class="card-inner">
+  <div class="image-box">
+    <img src="<%= activity.photo_url %>" alt="photo of <%= activity.title %>">
+    <%# <img src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o"> %>
+    <!-- added data-action to the div -->
+    <div class="link-btn btn-heart" data-action="click->activity#like">
+      <span><i class="<%= encounter && encounter.liked ? 'heart-solid' : 'heart-regular' %> heart-icon" data-activity-target='heart'></i></span>
+    </div>
+
+    <div class="link-btn btn-checkview" data-action="click->activity#attended" data-activity-target='link'>
+      <span><i class='<%= encounter && encounter.attended ? "star star-#{encounter.rating}" : 'checkmark' %>' data-activity-target='attended'></i></span>
+    </div>
+
+    <div class="stars d-none" data-activity-target="stars" data-action="click->activity#rate">
+      <span><i class='star star-1' data-rating='1'></i></span>
+      <span><i class='star star-2' data-rating='2'></i></span>
+      <span><i class='star star-3' data-rating='3'></i></span>
+      <span><i class='star star-4' data-rating='4'></i></span>
+      <span><i class='star star-5' data-rating='5'></i></span>
+    </div>
+
+    <div class='link-btn btn-subnav' data-action='click->activity#expand' data-activity-target='menu'>
+      <span><i class='ellipsis' data-activity-target='ellipsis'></i></span>
+
+      <div class='options d-none' data-activity-target='options'>
+        <span><i class='option fewer' data-activity-target='fewer' data-selection='fewer'></i></span>
+        <span><i class='option <%= encounter && encounter.saved ? 'saved' : 'save' %>' data-activity-target='save' data-selection='save'></i></span>
+      </div>
+    </div>
+
+  </div>
+  <div class="text-box p-3">
+    <div class="header">
+      <%= link_to click_activity_path(activity), data: {turbo_method: :patch} do %>
+        <h3><%= link_to activity.title, activity_path(activity) %></h3>
+      <% end %>
+      <% if user_signed_in? %>
+        <span><i class="fa-solid fa-location-dot me-2 mb-2"></i><%= activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi</span>
+      <% end %>
+    </div>
+    <p><%= activity.description%></p>
+  </div>
+</div>

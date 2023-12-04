@@ -1,18 +1,25 @@
-<h1>Here are your recommendations:</h1>
+<%= render 'searches/search', path: searches_path %>
 
-<%= render 'category_carousel', category: @categories[0], activities: @activities_first_category %>
-<br>
+<div class="container page-header">
+  <div class="row">
+    <div class="col-12">
+      <h1>Be a hero...</h1>
+    </div>
+  </div>
+</div>
 
-<%= render 'category_carousel', category: @categories[1], activities: @activities_second_category %>
-<br>
+<% @categories.first(5).each_with_index do |category, i|%>
+  <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
+<% end %>
 
-<%= render 'category_carousel', category: @categories[2], activities: @activities_third_category %>
-<br>
-
-<%= render 'category_carousel', category: @categories[3], activities: @activities_fourth_category %>
-<br>
-
-<%= render 'category_carousel', category: @categories[4], activities: @activities_fifth_category %>
-<br>
-
-<%= render 'map', activities: @all_recommended_activities %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 map-box">
+      <%= render 'map', activities: @all_recommended_activities %>
+    </div>
+    <div class="col-12 all-cat">
+      <h2><%= link_to "Search By Categories", categories_path %></h2>
+      <%= render "categories/category_cards_container", categories: @categories_all%>
+    </div>
+  </div>
+</div>

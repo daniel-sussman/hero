@@ -1,2 +1,40 @@
-<h1>Activities#show</h1>
-<p>Find me in app/views/activities/show.html.erb</p>
+<section class="activity-details">
+  <div class="imgbox">
+    <img  class="img-fluid" src="<%= @activity.photo_url %>">
+    <%= link_to activities_path, class: "close-btn" do %>
+      <i class="fa-solid fa-xmark"></i>
+    <% end %>
+  </div>
+  <div class="container infobox">
+    <div class="row">
+      <div class="col-12">
+        <div class="head d-flex justify-content-between align-items-center">
+          <div class="textinfo">
+            <h1><%= @activity.title %></h1>
+            <p><%= @activity.address %></p>
+          </div>
+          <span class="mapinfo">
+          <% if user_signed_in? %>
+            <i class="fa-solid fa-location-dot"></i>
+            <%= @activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi
+          <% end %>
+          </span>
+        </div>
+      <p><%= @activity.description %></p>
+      <% if @activity.website_url.present? %>
+        <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
+      <% end %>
+      <div class="opening-hours">
+        <h4>Opening Hours:</h4>
+        <p>Monday: <span><%= @activity.monday_opening_hours %></span></p>
+        <p>Tuesday: <span><%= @activity.tuesday_opening_hours %></span></p>
+        <p>Wednesday: <span><%= @activity.wednesday_opening_hours %></span></p>
+        <p>Thursday: <span><%= @activity.thursday_opening_hours %></span></p>
+        <p>Friday: <span><%= @activity.friday_opening_hours %></span></p>
+        <p>Saturday: <span><%= @activity.saturday_opening_hours %></span></p>
+        <p>Sunday: <span><%= @activity.sunday_opening_hours %></span></p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

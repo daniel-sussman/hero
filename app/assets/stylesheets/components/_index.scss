@@ -1,5 +1,33 @@
 // Import your components CSS files here.
+@import "activities";
 @import "alert";
 @import "avatar";
+@import "carousel";
+@import "categorycard";
+@import "footernav";
 @import "form_legend_clear";
+@import "menu";
 @import "navbar";
+@import "stars";
+@import "viewbox";
+
+a{
+  text-decoration: none;
+}
+
+h1{
+  font-family: $headers-font;
+  font-size: 30px;
+  font-weight: 600;
+  color: $secondary-color;
+  text-transform: capitalize;
+  margin: 15px 0px;
+}
+h2{
+  font-family: $headers-font;
+  font-size: 26px;
+  font-weight: 600;
+  color: $primary-color;
+  text-transform: capitalize;
+  margin: 15px 0px;
+}

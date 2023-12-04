@@ -1,0 +1,40 @@
+.footer-container{
+  background-color: $light-white-color;
+  padding: 15px;
+  width: 390px;
+  position: fixed;
+  bottom: 0;
+  z-index: 5;
+  .footer-nav{
+    flex: 1 0 auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 560px;
+    a{
+      i{
+        font-size: 26px;
+        margin-bottom: 5px;
+      }
+      display: flex ;
+      flex: 1 1 0;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      border: 0px;
+      max-width: 25%;
+      min-width: 0px;
+      overflow-wrap: break-word;
+      hyphens: auto;
+      padding: 0 2px;
+      font-size: 18px;
+    }
+  }
+}
+
+.spacer {
+  height: 100px;
+}

@@ -1,7 +1,8 @@
-<div class="map-container m-3" style="width: 80%; height: 600px;"
+<div class="map-container mb-4" style="width: 100%; height: 450px;"
         data-controller="map"
-        data-map-pos-value="<%= @coords.reverse %>"
+        data-map-pos-value="<%= @coords ? @coords.reverse : [] %>"
         data-map-markers-value="<%= @markers.to_json %>"
+        data-map-home-marker-value='<%= @home_marker %>'
         data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
       >
 </div>

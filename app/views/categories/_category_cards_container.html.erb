@@ -1,10 +1,18 @@
-<div>
-  <% @categories.each do |category| %>
-    <%= link_to category_path(category) do %>
-      <div class="category-card">
-        <%# <%= cl_image_tag category.photo.key, crop: :fill %>
-        <h3><%= category.name %></h3>
+<div class="container">
+  <div class="row">
+    <% categories.each do |category| %>
+      <div class="category-card col-md-6 col-6">
+        <%= link_to category_path(category) do %>
+          <div class="card h-100">
+            <div class="card-img">
+              <img src="https://picsum.photos/200/200?<%= category.name %>" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+              <h3><%= category.name %></h3>
+            </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
-  <% end %>
+    </div>
 </div>
