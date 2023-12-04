@@ -6,4 +6,9 @@ class Activity < ApplicationRecord
   has_many :categories, through: :activity_categories
   has_many :encounters, dependent: :destroy
   has_many :users, through: :encounters
+
+  def color_code
+    #to-do: color code by category
+    "green"
+  end
 end
