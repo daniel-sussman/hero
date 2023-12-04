@@ -1,15 +1,15 @@
 <h1>My Account</h1>
 
-  <div class="row d-flex justify-content-center">
-    <div>
-      <div class="row">
-        <%= image_tag "heros.jpeg", class: "avatar-large" %>
-        <div class="flex-column">
-          <h2><%= @user.name %></h2>
-        </div>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= image_tag "heros.jpeg", class: "avatar-large" %>
+    </div>
+    <div class="col">
+      <h2><%= @user.name %></h2>
     </div>
   </div>
+</div>
 
 <%# <% if @user.photo.present? %>
   <%# <%= cl_image_tag @user.photo.key, crop: :fill %>
@@ -17,15 +17,36 @@
   <%# <%= image_tag "heros.jpeg", size: "200" %>
 <%# <% end %>
 <h3>My activities</h3>
-<div class="d-flex flex-column">
-  <%= link_to "Map of my Activities", map_users_path %>
-  <%= link_to "My Collections", collections_path %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= image_tag "marker_green.png", :style => "width: 50px" %>
+    </div>
+    <div class="col">
+      <%= link_to "Map of my Activities", map_users_path %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= image_tag "save.png", :style => "width: 50px" %>
+    </div>
+    <div class="col">
+      <%= link_to "My Collections", collections_path %>
+    </div>
+  </div>
 </div>
 
 <h3>Recently liked</h3>
 <div>
-  <%# <%= render partial: "./activites/activity_cards", users: @users%>
+  <%= render "activities/activities_carousel" %>
 </div>
 
-<%= link_to "Edit my profile", edit_user_registration_path %>
-<%= link_to "Log out", destroy_user_session_path %>
+<div class="container">
+  <div class="row">
+    <%= link_to "Edit my profile", edit_user_registration_path %>
+  </div>
+  <div class="row">
+    <%= link_to "Log out", destroy_user_session_path %>
+  </div>
+</div>
