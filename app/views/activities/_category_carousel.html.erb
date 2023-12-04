@@ -1,4 +1,4 @@
-<div class="custom-container categories-container">
+<div class="container categories-container">
   <div class="row">
     <div class="col-md-12 categories-headinfo">
       <div class="cat-header d-flex justify-content-between align-items-center">
@@ -8,17 +8,23 @@
       </div>
     </div>
     <div class="col-md-12 categories-contentinfo">
-      <div class="carousel" data-controller='carousel' data-carousel-length-value='<%=activities.length%>' data-carousel-userid-value='<%= user_signed_in? ? current_user.id : 0 %>'>
-        <div class="inner" data-carousel-target='inner'>
+      <%# Create custom activitycarousel %>
+      <div id="activitycarousel-<%= category.id %>" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
+        <div class="carousel-indicators">
+          <% activities.each_with_index do |slide, i| %>
+            <button type="button" data-bs-target="#activitycarousel-<%= category.id %>" data-bs-slide-to="<%= i %>" class="<%= i == 1 ? "active" : "" ;%>" aria-current="<%= i == 1 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
+          <%end%>
+        </div>
+        <div class="carousel-inner">
           <% activities.each_with_index do |activity, i| %>
             <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: activity.id) if user_signed_in? %>
-            <div class='activity-card carousel-item h-100' style='left: <%= i * 100 %>%' data-controller='activity' data-carousel-target='item' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value='<%= activity.id %>'>
-              <%= render 'activity', activity: activity, encounter: encounter %>
+            <div class="carousel-item <%= i == 1 ? "active" : "" ;%>" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value='<%= activity.id %>'>
+              <div class="activity-card mb-2">
+                <%= render 'activity', activity: activity, encounter: encounter %>
+              </div>
             </div>
           <%end%>
         </div>
-        <div class='left slider-btn' type='text' data-action='click->carousel#moveLeft'><i class="fa-solid fa-chevron-left"></i></div>
-        <div class='right slider-btn'type='text' data-action='click->carousel#moveRight'><i class="fa-solid fa-chevron-right"></i></div>
       </div>
     </div>
   </div>
