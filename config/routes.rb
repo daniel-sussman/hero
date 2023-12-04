@@ -17,7 +17,10 @@ Rails.application.routes.draw do
     end
   end
   resources :encounters, only: [:create, :update]
-  resources :users, only: [:show]
+  resources :users, only: [] do
+    get :show, on: :collection
+    get :map, on: :collection
+  end
   resources :collections do
     member do
       get :collection_index

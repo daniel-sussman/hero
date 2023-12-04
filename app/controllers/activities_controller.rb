@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
         lat: activity.latitude,
         lng: activity.longitude,
         info_card_html: render_to_string(partial: "info_card", locals: { activity: activity }),
-        marker_html: render_to_string(partial: "marker_#{color_code(activity)}")
+        marker_html: render_to_string(partial: "marker_#{activity.color_code}")
       }
     end
     @home_marker = render_to_string(partial: "marker_home")
@@ -64,10 +64,5 @@ class ActivitiesController < ApplicationController
 
   def set_encounter
     @encounter = Encounter.find_by(activity_id: params[:id], user_id: current_user.id)
-  end
-
-  def color_code(_activity)
-    #to-do: color code by category
-    "green"
   end
 end

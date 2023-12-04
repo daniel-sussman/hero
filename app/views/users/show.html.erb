@@ -10,12 +10,12 @@
   <%# <%= image_tag "heros.jpeg", size: "200" %>
 <%# <% end %>
 <h3>My activities</h3>
-<div>
-  <p>View on map</p>
+<div class="d-flex flex-column">
+  <%= link_to "Map of my Activities", map_users_path %>
   <%= link_to "My Collections", collections_path %>
 </div>
 
-<h3>My activities</h3>
+<h3>Recently liked</h3>
 <div>
   <%# <%= render partial: "./activites/activity_cards", users: @users%>
 </div>
