@@ -38,7 +38,26 @@
 </div>
 
 <h3>Recently liked</h3>
-<%# insert carousel %>
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <% @liked_activities.each_with_index do |liked_activity, index| %>
+    <% active = index == 0 ? "active" : "" %>
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-item <%= active %>">
+        <img src="<%= liked_activity.activity.photo_url %>" class="d-block w-100" alt="...">
+      </div>
+    </div>
+  <% end %>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+  </div>
+</div>
 
 <div class="container">
   <div class="row">
