@@ -8,4 +8,8 @@ class Collection < ApplicationRecord
   def activities
     encounters.map(&:activity)
   end
+
+  def default(user_id)
+    Encounters.where(user_id: user_id, saved: true)
+  end
 end
