@@ -16,10 +16,14 @@ class CollectionsController < ApplicationController
 
   def show
     @collection = Collection.find(params[:id])
-    @activities = @collection.activities
-    @search_activities = @collection.activities
+    if @collection.title.downcase == "all saved activities" && @collection.user == current_user
+      @activities = Activity.where(id: current_user.encounters.where(saved: true).pluck(:activity_id).uniq)
+    else
+      @activities = @collection.activities
+    end
+
     if params[:query].present?
-      @search_activities = @search_activities.where("title ILIKE ?", "%#{params[:query]}%")
+      @search_activities = @activities.where("title ILIKE ?", "%#{params[:query]}%")
     end
   end
 
