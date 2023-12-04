@@ -1,9 +1,16 @@
 <h1>My Account</h1>
 
-<h2><%= @user.name %>'s Profile</h2>
-<div>
-  <%= image_tag "heros.jpeg", size: "200" %>
-</div>
+  <div class="row d-flex justify-content-center">
+    <div>
+      <div class="row">
+        <%= image_tag "heros.jpeg", class: "avatar-large" %>
+        <div class="flex-column">
+          <h2><%= @user.name %></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <%# <% if @user.photo.present? %>
   <%# <%= cl_image_tag @user.photo.key, crop: :fill %>
 <%# <% else %>
