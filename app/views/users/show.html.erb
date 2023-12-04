@@ -16,7 +16,7 @@
 <%# <% else %>
   <%# <%= image_tag "heros.jpeg", size: "200" %>
 <%# <% end %>
-<h3>My activities</h3>
+<h3>My Activities</h3>
 
 <div class="container">
   <div class="row">
@@ -37,16 +37,14 @@
   </div>
 </div>
 
-<h3>Recently liked</h3>
-<div>
-  <%= render "activities/activities_carousel" %>
-</div>
+<h3>Recently Liked</h3>
+<%# insert activities carousel %>
 
 <div class="container">
   <div class="row">
-    <%= link_to "Edit my profile", edit_user_registration_path %>
+    <%= link_to "Edit Profile", edit_user_registration_path %>
   </div>
   <div class="row">
-    <%= link_to "Log out", destroy_user_session_path %>
+    <%= link_to "Log Out", destroy_user_session_path %>
   </div>
 </div>
