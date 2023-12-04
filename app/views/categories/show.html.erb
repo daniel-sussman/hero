@@ -10,8 +10,15 @@
 <section class="list-activities">
   <div class="container">
     <div class="row">
-      <% @activities.each do |activity| %>
-        <%= render 'activities/activity_card', activity: activity %>
+      <% if @activities.empty?%>
+        <h2><%= link_to category_path(@category) do %>
+         <p>No result, Go back to <u><%= "#{@category.name}" %></u></p>
+        <% end %>
+        </h2>
+      <% else %>
+        <% @activities.each do |activity| %>
+          <%= render 'activities/activity_card', activity: activity %>
+        <% end %>
       <% end %>
     </div>
   </div>
