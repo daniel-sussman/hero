@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = current_user
+    @children = @user.children
+    # raise
     @collection = Collection.where("user_id = #{@user.id}")
     @liked_activities = current_user.encounters.where(liked: true).order(updated_at: :desc)
   end

@@ -601,4 +601,13 @@ EncounterCollection.create(collection_id: collection.id, encounter_id: c.id)
 
 puts "There are #{collection.activities.count} activities in this collection."
 
+puts "Creating children..."
+child1 = Child.new(birthday:Date.parse('01/01/2017'))
+child1.user = user
+child1.save!
+child2 = Child.new(birthday:Date.parse('23/05/2019'))
+child2.user = user
+child2.save!
+puts "2 children created"
+
 puts "Finished seeding!"

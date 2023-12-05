@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
   end
   resources :searches, only: [:index]
+  resources :children, only: [:birthday]
   root "activities#index"
   get "up" => "rails/health#show", as: :rails_health_check
 end

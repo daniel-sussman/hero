@@ -16,6 +16,10 @@
 <%# <% else %>
   <%# <%= image_tag "heros.jpeg", size: "200" %>
 <%# <% end %>
+<h3>My children's birthdays</h3>
+<% @children.each do |child|%>
+  <%= child.birthday%><br>
+<%end %>
 <h3>My activities</h3>
 
 <div class="container">
