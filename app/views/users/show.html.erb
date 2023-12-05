@@ -1,12 +1,58 @@
-<h1>My Account</h1>
-
-<div class="container">
+<div class="container profile-page">
   <div class="row">
-    <div class="col">
+    <div class="col-12">
+      <h1>My Account</h1>
+    </div>
+    <div class="col-12 d-flex justify-content-between align-content-center">
+      <h2><%= @user.name %></h2>
       <%= image_tag "heros.jpeg", class: "avatar-large" %>
     </div>
-    <div class="col">
-      <h2><%= @user.name %></h2>
+    <% if @children.present? %>
+      <div class="col-12">
+        <h3>My children's birthdays</h3>
+        <% @children.each do |child|%>
+          <%= child.birthday%><br>
+        <%end %>
+      </div>
+    <% end %>
+    <div class="col-12">
+      <h3>My activities</h3>
+      <ul class="list-activities">
+        <li class="d-flex justify-content-start align-items-center">
+          <%= image_tag "marker_green.png", :style => "width: 50px" %>
+          <%= link_to "Map of my Activities", map_users_path %>
+        </li>
+        <li class="d-flex justify-content-start align-items-center">
+          <%= image_tag "save.png", :style => "width: 50px" %>
+          <%= link_to "My Collections", collections_path %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 like_carousel">
+      <h3>Recently liked</h3>
+      <div id="likeactivitycarousel" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
+        <div class="carousel-indicators">
+          <% @liked_activities.each_with_index do |slide, i| %>
+            <button type="button" data-bs-target="#likeactivitycarousel" data-bs-slide-to="<%= i %>" class="<%= i == 1 ? "active" : "" ;%>" aria-current="<%= i == 1 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
+          <%end%>
+        </div>
+        <div class="carousel-inner">
+          <% @liked_activities.each_with_index do |likeactivity, i| %>
+            <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: likeactivity.activity.id) if user_signed_in? %>
+            <div class="carousel-item <%= i == 1 ? "active" : "" ;%>" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value='<%= likeactivity.activity.id %>'>
+              <div class="activity-card mb-2">
+                  <%= render 'activities/activity', activity: likeactivity.activity, encounter: encounter %>
+              </div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-5 mt-3 btn-section">
+      <div class="d-flex justify-content-between align-items-center">
+        <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-info  border rounded-2"%>
+        <%= link_to "Log Out", destroy_user_session_path, class: "btn btn-dark border rounded-2" , data: {turbo_method: :delete} %>
+      </div>
     </div>
   </div>
 </div>
@@ -16,58 +62,3 @@
 <%# <% else %>
   <%# <%= image_tag "heros.jpeg", size: "200" %>
 <%# <% end %>
-<h3>My children's birthdays</h3>
-<% @children.each do |child|%>
-  <%= child.birthday%><br>
-<%end %>
-<h3>My activities</h3>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%= image_tag "marker_green.png", :style => "width: 50px" %>
-    </div>
-    <div class="col">
-      <%= link_to "Map of my Activities", map_users_path %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <%= image_tag "save.png", :style => "width: 50px" %>
-    </div>
-    <div class="col">
-      <%= link_to "My Collections", collections_path %>
-    </div>
-  </div>
-</div>
-
-<h3>Recently liked</h3>
-<div id="carouselExample" class="carousel slide">
-  <div class="carousel-inner">
-    <% @liked_activities.each_with_index do |liked_activity, index| %>
-    <% active = index == 0 ? "active" : "" %>
-    <div id="carouselExample" class="carousel slide">
-      <div class="carousel-item <%= active %>">
-        <img src="<%= liked_activity.activity.photo_url %>" class="d-block w-100" alt="...">
-      </div>
-    </div>
-  <% end %>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <%= link_to "Edit my Profile", edit_user_registration_path %>
-  </div>
-  <div class="row">
-    <%= link_to "Log Out", destroy_user_session_path, data: {turbo_method: :delete} %>
-  </div>
-</div>

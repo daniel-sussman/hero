@@ -1,0 +1,41 @@
+// Profile page scss
+.profile-page{
+  h3{
+    border-bottom: 2px solid #dee2e6;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .list-activities{
+    padding-left: 0px;
+    li{
+      margin-bottom: 10px;
+      img{
+        width: 35px !important;
+      }
+      a{
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+  .btn-section{
+    a{
+      border-radius: 5px !important;
+    }
+  }
+}
+
+// editpage
+.edit-page{
+  h3{
+    border-bottom: 2px solid #dee2e6;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  a,
+  button,
+  .btn{
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 3px;
+    border-radius: 5px;
+  }
+}
