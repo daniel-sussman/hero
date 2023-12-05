@@ -2,7 +2,24 @@ class CollectionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
   def index
+    if !current_user
+      redirect_to root_path
+      return
+    end
+
     @collections = current_user.collections
+    @activities = Activity.where(id: current_user.encounters.where(saved: true).pluck(:activity_id).uniq)
+    @coords = [current_user.latitude, current_user.longitude] if user_signed_in? #replace default coords with IP address coords
+
+    @markers = @activities.map do |activity|
+      {
+        lat: activity.latitude,
+        lng: activity.longitude,
+        info_card_html: render_to_string(partial: "activities/info_card", locals: { activity: activity }),
+        marker_html: render_to_string(partial: "activities/marker_#{activity.color_code}")
+      }
+    end
+    @home_marker = render_to_string(partial: "activities/marker_home")
 
     if params[:query].present?
       @collections = @collections.where("title ILIKE ?", "%#{params[:query]}%")
@@ -16,10 +33,14 @@ class CollectionsController < ApplicationController
 
   def show
     @collection = Collection.find(params[:id])
-    @activities = @collection.activities
-    @search_activities = @collection.activities
+    if @collection.title.downcase == "all saved activities" && @collection.user == current_user
+      @activities = Activity.where(id: current_user.encounters.where(saved: true).pluck(:activity_id).uniq)
+    else
+      @activities = @collection.activities
+    end
+
     if params[:query].present?
-      @search_activities = @search_activities.where("title ILIKE ?", "%#{params[:query]}%")
+      @search_activities = @activities.where("title ILIKE ?", "%#{params[:query]}%")
     end
   end
 

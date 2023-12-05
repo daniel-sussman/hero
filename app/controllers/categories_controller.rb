@@ -14,10 +14,12 @@ class CategoriesController < ApplicationController
   end
 
   def category_index
-    @category = params[:id]
-    @search_activities = Activity.joins(activity_categories: :category).where("activity_categories.category_id = #{params[:id]}")
+    @category = Category.find(params[:id])
+    @activities = Activity.joins(activity_categories: :category).where("activity_categories.category_id = #{params[:id]}")
     if params[:query].present?
-      @search_activities = @search_activities.where("title ILIKE ?", "%#{params[:query]}%")
+      @activities = @activities.where("title ILIKE ?", "%#{params[:query]}%")
     end
+    render :show
   end
+
 end

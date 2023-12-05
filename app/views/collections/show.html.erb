@@ -1,15 +1,15 @@
-<%= render 'activities/search', activities: @search_activities, path: collection_path %>
+<%= render 'searches/search', activities: @search_activities, path: collection_path %>
 
-<% if @search_activities.any?%>
-  <%= render 'activities/search_results', activities: @search_activities %>
+<% if @search_activities %>
+  <%= render 'searches/search_results', activities: @search_activities %>
 <% else %>
   <div>
     <%# <%= cl_image_tag category.photo.key, crop: :fill %>
     <h1><%= @collection.title %></h1>
   </div>
   <div>
-      <% @activities.each do |activity| %>
-        <%= render 'activities/activity_card', activity: activity %>
-      <% end %>
-    </div>
+    <% @activities.each do |activity| %>
+      <%= render 'activities/activity_card', activity: activity %>
+    <% end %>
+  </div>
 <%end%>

@@ -1,14 +1,14 @@
 <div data-search-collections-target="collection_card">
  <p class="h3">
     <% if params[:query].blank? %>
-      <%= pluralize @collections.count, "collection" %> available
+      <%= pluralize collections.count, "collection" %> available
     <% else %>
-      <%= pluralize @collections.count, "result" %> for <code><%= params[:query] %></code>
+      <%= pluralize collections.count, "result" %> for <code><%= params[:query] %></code>
     <% end %>
   </p>
   <div class="collections">
-    <% @collections.each do |collection| %>
-      <%= render "collection_infos", collection: collection%>
+    <% collections.each do |collection| %>
+      <%= render "collection_infos", collection: collection %>
     <% end %>
   </div>
 </div>

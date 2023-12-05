@@ -3,10 +3,12 @@
 
   <div class="collection-infos" data-edit-collection-target="infos">
     <h2><%= link_to collection.title, collection_path(collection) %></h2>
-    <button aria-label="Edit collection">
-      <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-collection#reveal"></i>
-    </button>
-    <%= link_to '🗑️', collection_path(collection), data: {turbo_method: :delete, turbo_confirm: "Do you want to remove this collection?"}%>
+    <% if collection.editable? %>
+      <button aria-label="Edit collection">
+        <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-collection#reveal"></i>
+      </button>
+      <%= link_to '🗑️', collection_path(collection), data: {turbo_method: :delete, turbo_confirm: "Do you want to remove this collection?"}%>
+    <% end %>
   </div>
 
   <%= simple_form_for collection, html: {class: "d-none", data: {edit_collection_target: "form", action: "submit->edit-collection#update"}} do |f| %>

@@ -1,24 +1,69 @@
 <h1>My Account</h1>
 
-<h2><%= @user.name %>'s Profile</h2>
-<div>
-  <%= image_tag "heros.jpeg", size: "200" %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= image_tag "heros.jpeg", class: "avatar-large" %>
+    </div>
+    <div class="col">
+      <h2><%= @user.name %></h2>
+    </div>
+  </div>
 </div>
+
 <%# <% if @user.photo.present? %>
   <%# <%= cl_image_tag @user.photo.key, crop: :fill %>
 <%# <% else %>
   <%# <%= image_tag "heros.jpeg", size: "200" %>
 <%# <% end %>
 <h3>My activities</h3>
-<div>
-  <p>View on map</p>
-  <%= link_to "My Collections", collections_path %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= image_tag "marker_green.png", :style => "width: 50px" %>
+    </div>
+    <div class="col">
+      <%= link_to "Map of my Activities", map_users_path %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= image_tag "save.png", :style => "width: 50px" %>
+    </div>
+    <div class="col">
+      <%= link_to "My Collections", collections_path %>
+    </div>
+  </div>
 </div>
 
-<h3>My activities</h3>
-<div>
-  <%# <%= render partial: "./activites/activity_cards", users: @users%>
+<h3>Recently liked</h3>
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <% @liked_activities.each_with_index do |liked_activity, index| %>
+    <% active = index == 0 ? "active" : "" %>
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-item <%= active %>">
+        <img src="<%= liked_activity.activity.photo_url %>" class="d-block w-100" alt="...">
+      </div>
+    </div>
+  <% end %>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+  </div>
 </div>
 
-<%= link_to "Edit my profile", edit_user_registration_path %>
-<%= link_to "Log out", destroy_user_session_path %>
+<div class="container">
+  <div class="row">
+    <%= link_to "Edit my Profile", edit_user_registration_path %>
+  </div>
+  <div class="row">
+    <%= link_to "Log Out", destroy_user_session_path, data: {turbo_method: :delete} %>
+  </div>
+</div>

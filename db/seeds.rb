@@ -594,7 +594,7 @@ puts "Successfully created three encounters."
 
 puts "Giving the user a new collection..."
 
-collection = Collection.create(user_id: user.id, title: "Half-term activities")
+collection = Collection.create(user_id: user.id, title: "All Saved Activities")
 EncounterCollection.create(collection_id: collection.id, encounter_id: a.id)
 EncounterCollection.create(collection_id: collection.id, encounter_id: b.id)
 EncounterCollection.create(collection_id: collection.id, encounter_id: c.id)

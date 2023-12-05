@@ -9,10 +9,14 @@
         <% end %>
 </div>
 
+<div>
+  <%= render 'activities/map', activities: @activities %>
+</div>
+
 <div class="container">
-  <h2>Your Collection</h2>
-  <div >
-   <%= render "collection_cards", collection: @collection %>
+  <h2>Your Collections</h2>
+  <div>
+    <%= render "collection_cards", collections: @collections %>
   </div>
   <%= link_to "Add your collection", new_collection_path %>
 </div>

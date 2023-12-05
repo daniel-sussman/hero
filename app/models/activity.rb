@@ -13,4 +13,9 @@ class Activity < ApplicationRecord
   def purge_photos
     self.photo.purge
   end
+  
+  def color_code
+    #to-do: color code by category
+    "green"
+  end
 end
