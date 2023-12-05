@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'searches/index'
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :activities, only: [:index, :show] do
     member do
       patch :like
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
   end
   resources :searches, only: [:index]
-  resources :children, only: [:birthday]
+  resources :children, only: [:destroy]
   root "activities#index"
   get "up" => "rails/health#show", as: :rails_health_check
 end
