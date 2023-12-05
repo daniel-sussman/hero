@@ -1,3 +1,8 @@
+require 'dotenv/load'
+
+# api_key = ENV['GOOGLEMAPS_API_KEY']
+api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+
 puts "Wiping all users from the database..."
 
 UserCategory.destroy_all
@@ -43,6 +48,9 @@ sports = Category.create(name: "sports")
 historic = Category.create(name: "historic")
 theme_parks = Category.create(name: "theme parks")
 winter_holidays = Category.create(name: "winter holidays")
+libraries = Category.create(name: "libraries")
+water_play = Category.create(name: "water play")
+forest_school = Category.create(name: "forest school")
 
 puts "Wiping all activities from the database..."
 
@@ -50,17 +58,15 @@ Activity.destroy_all
 
 puts "Seeding the database with new activities..."
 
-Dir[Rails.root.join("db/files/*.json")].each do |f|
+Dir[Rails.root.join("db/files/*.json")].first(2).each do |f|
   google_data = JSON.parse(File.open(f).read)
-  pp google_data
 
   activity_attributes = {
     title: google_data["result"]["name"],
     description: google_data.dig("result", "editorial_summary", "overview") || (google_data["result"]["reviews"][0]["text"] if google_data["result"]["reviews"]),
     # address: google_data["result"]["formatted_address"]
     latitude: google_data["result"]["geometry"]["location"]["lat"],
-    longitude: google_data["result"]["geometry"]["location"]["lng"],
-
+    longitude: google_data["result"]["geometry"]["location"]["lng"]
   }
   if google_data['result']['opening_hours']
     activity_attributes[:monday_opening_hours] = google_data["result"]["opening_hours"]["weekday_text"][0].split("day: ")[1]
@@ -84,8 +90,18 @@ Dir[Rails.root.join("db/files/*.json")].each do |f|
   end
   new_activity = Activity.create!(activity_attributes)
 
-  # make api call
-  #new_activity.photo.attach(photo)
+  if google_data['result']['photos']
+    photo_reference = google_data['result']['photos'][0]['photo_reference']
+    # make api call
+    url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{photo_reference}&key=#{api_key}"
+
+    #new_activity.photo.attach(photo)
+    file = URI.open(url)
+    new_activity.photo.attach(io: file, filename: "#{new_activity.title.gsub(" ", "-")}.jpeg", content_type: 'image/jpeg')
+    puts "Successfully created a new activity: #{new_activity.title}"
+  else
+    puts "Was unable to locate a photo for #{new_activity.title}"
+  end
 
   google_data["categories"].each do |cat|
     ActivityCategory.create!(activity_id: new_activity.id, category_id: Category.find_by(name: cat).id)
@@ -564,25 +580,25 @@ end
 
 # end ChatGPT
 
-# puts "Successfully created #{Activity.all.count} activities."
+puts "Successfully created #{Activity.all.count} activities."
 
-# puts "Seeding the database with new encounters for the first user..."
+puts "Seeding the database with new encounters for the first user..."
 
-# user = User.first
+user = User.first
 
-# a = Encounter.create(user_id: user.id, activity_id: Activity.all[0].id)
-# b = Encounter.create(user_id: user.id, activity_id: Activity.all[1].id)
-# c = Encounter.create(user_id: user.id, activity_id: Activity.all[2].id)
+a = Encounter.create(user_id: user.id, activity_id: Activity.all[0].id)
+b = Encounter.create(user_id: user.id, activity_id: Activity.all[1].id)
+c = Encounter.create(user_id: user.id, activity_id: Activity.all[2].id)
 
-# puts "Successfully created three encounters."
+puts "Successfully created three encounters."
 
-# puts "Giving the user a new collection..."
+puts "Giving the user a new collection..."
 
-# collection = Collection.create(user_id: user.id, title: "Half-term activities")
-# EncounterCollection.create(collection_id: collection.id, encounter_id: a.id)
-# EncounterCollection.create(collection_id: collection.id, encounter_id: b.id)
-# EncounterCollection.create(collection_id: collection.id, encounter_id: c.id)
+collection = Collection.create(user_id: user.id, title: "Half-term activities")
+EncounterCollection.create(collection_id: collection.id, encounter_id: a.id)
+EncounterCollection.create(collection_id: collection.id, encounter_id: b.id)
+EncounterCollection.create(collection_id: collection.id, encounter_id: c.id)
 
-# puts "There are #{collection.activities.count} activities in this collection."
+puts "There are #{collection.activities.count} activities in this collection."
 
 puts "Finished seeding!"

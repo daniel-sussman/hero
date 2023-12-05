@@ -6,4 +6,6 @@ class Activity < ApplicationRecord
   has_many :categories, through: :activity_categories
   has_many :encounters, dependent: :destroy
   has_many :users, through: :encounters
+
+  has_one_attached :photo
 end
