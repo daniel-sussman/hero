@@ -1,7 +1,5 @@
-# require 'dotenv/load' (heroku doesn't like this)
-
-# api_key = ENV['GOOGLEMAPS_API_KEY']
-api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+api_key = ENV['GOOGLEMAPS_API_KEY']
+# api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
 
 puts "Wiping all users from the database..."
 

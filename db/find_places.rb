@@ -1,6 +1,8 @@
 require 'open-uri'
 require 'json'
 
+api_key = ENV['GOOGLEMAPS_API_KEY']
+
 stay_and_play = [
   "ALL ABOARD TRAIN PLAY",
   "ALL SOULS CHURCH LANGHAM PLACE",
@@ -82,7 +84,6 @@ stay_and_play.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -100,8 +101,7 @@ stay_and_play.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -177,7 +177,6 @@ museums.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -196,7 +195,6 @@ museums.each do |activity|
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
     # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -254,7 +252,6 @@ outdoor.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -272,8 +269,7 @@ outdoor.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -347,7 +343,6 @@ historic.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -365,8 +360,7 @@ historic.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -426,7 +420,6 @@ theatre.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -444,8 +437,7 @@ theatre.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -496,7 +488,6 @@ arts_and_crafts.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -514,8 +505,7 @@ arts_and_crafts.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -562,7 +552,6 @@ theme_parks.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -580,8 +569,7 @@ theme_parks.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -632,7 +620,6 @@ sports.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -650,8 +637,7 @@ sports.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -698,7 +684,6 @@ animals.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -716,8 +701,7 @@ animals.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -831,7 +815,6 @@ winter_holidays.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -849,8 +832,7 @@ winter_holidays.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1002,7 +984,6 @@ playgrounds.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1020,8 +1001,7 @@ playgrounds.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1087,7 +1067,6 @@ play_cafes.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1105,8 +1084,7 @@ play_cafes.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1175,7 +1153,6 @@ leisure_centres.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1193,8 +1170,7 @@ leisure_centres.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1321,7 +1297,6 @@ libraries.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1339,8 +1314,7 @@ libraries.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1496,7 +1470,6 @@ soft_play.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1514,8 +1487,7 @@ soft_play.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1575,7 +1547,6 @@ swimming.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1593,8 +1564,7 @@ swimming.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1712,7 +1682,6 @@ adventure_playgrounds.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1730,8 +1699,7 @@ adventure_playgrounds.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1870,7 +1838,6 @@ water_play.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1888,8 +1855,7 @@ water_play.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
@@ -1948,7 +1914,6 @@ forest_school.each do |activity|
     end
     unless data['address']
       #make_api_call
-      api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
       url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cplace_id"
       response = URI.open(url).read
       result = JSON.parse(response)
@@ -1966,8 +1931,7 @@ forest_school.each do |activity|
     updated_contents = JSON.generate(data)
     File.open(file_path, 'w') { |file| file.write(updated_contents) }
   else
-    # make an initial query to get the place_id
-    api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
+    # make an initial query to get the place_i
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{activity}&inputtype=textquery&key=#{api_key}&fields=formatted_address%2Cname%2Crating%2Cplace_id%2Copening_hours%2Cgeometry"
     response = URI.open(url).read
     result = JSON.parse(response)
