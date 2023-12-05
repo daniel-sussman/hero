@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="activity"
 export default class extends Controller {
-  static targets = ['heart', 'attended', 'stars', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save']
+  static targets = ['heart', 'attended', 'stars', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal']
   static values = {
     userid: Number
   }
@@ -12,6 +12,7 @@ export default class extends Controller {
       rootMargin: "0px", // no margin
       threshold: 0.5, // trigger when 50% of the element is in view
     });
+    this.closed = true
 
     observer.observe(this.element);
   }
@@ -105,6 +106,9 @@ export default class extends Controller {
 
   expand(event) {
     if (event.target.classList.contains("option")) {
+      console.log("called");
+      const datamodel = document.querySelector(".bd-example-modal-lg");
+      datamodel.model(show);
       const selection = event.target.getAttribute("data-selection");
       const activityID = parseInt(this.element.getAttribute('data-value'), 10);
 
@@ -123,9 +127,26 @@ export default class extends Controller {
         this.#save()
       }
     }
-    this.ellipsisTarget.classList.toggle("d-none");
-    this.optionsTarget.classList.toggle("d-none");
-    this.menuTarget.classList.toggle("show-menu")
+
+    this.modalTarget.classList.add('show')
+    setTimeout(() => {
+      this.closed = false
+    }, 300);
+    document.addEventListener('click', (e) => {
+      if (this.modalTarget == e.target || this.modalTarget.contains(e.target)) {
+        // pressed on card so stay
+      } else {
+        // we gooooo
+        if (!this.closed) {
+          this.collapse()
+        }
+      }
+    })
+  }
+
+  collapse() {
+    this.closed = true
+    this.modalTarget.classList.remove('show')
   }
 
   #fewer() {
