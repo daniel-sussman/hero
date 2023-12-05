@@ -1,7 +1,10 @@
-<%= render 'searches/search', path: category_index_category_path(@category) %>
+
 
 <div class="container page-header">
   <div class="row">
+    <div class="col-12">
+      <%= render 'searches/search', path: category_index_category_path(@category) %>
+    </div>
     <div class="col-12">
       <h1><%= @category.name.capitalize %> activities</h1>
     </div>

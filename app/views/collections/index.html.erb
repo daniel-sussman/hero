@@ -1,22 +1,34 @@
-<div data-controller="search-collections">
-  <%= form_with url: collections_path, method: :get, html: {class: "mb-4", data: {search_collections_target: "form"}} do |f| %>
-          <%= f.label :query, "Type a collection title" %>
-          <%= f.text_field :query,
-                           class: "form-control",
-                           value: params[:query],
-                           data: {search_collections_target: "input", action:"keyup->search-collections#search"}
-                           %>
-        <% end %>
-</div>
-
-<div>
-  <%= render 'activities/map', activities: @activities %>
-</div>
-
-<div class="container">
-  <h2>Your Collections</h2>
-  <div>
-    <%= render "collection_cards", collections: @collections %>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+          <div data-controller="search-collections">
+            <%= form_with url: collections_path, method: :get, html: {class: "mb-4", data: {search_collections_target: "form"}} do |f| %>
+                    <%= f.label :query, "Type a collection title" %>
+                    <%= f.text_field :query,
+                                    class: "form-control",
+                                    value: params[:query],
+                                    data: {search_collections_target: "input", action:"keyup->search-collections#search"}
+                                    %>
+                  <% end %>
+          </div>
+      </div>
+    </div>
   </div>
-  <%= link_to "Add your collection", new_collection_path %>
-</div>
+</section>
+<section class="collection-result">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>Your Collections</h2>
+        <div class="result">
+          <%= render "collection_cards", collections: @collections %>
+        </div>
+        <%= link_to "Add your collection", new_collection_path %>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="map-container mb-5 mt-3">
+  <%= render 'activities/map', activities: @activities %>
+</section>
