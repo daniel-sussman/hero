@@ -12,7 +12,7 @@ User.destroy_all
 
 puts "Creating users"
 
-User.create(name: "Daniel", address: "285 Highbury Quadrant, London N5 2TD", email: "daniel@example.com", password: "password")
+user = User.create(name: "Daniel", address: "285 Highbury Quadrant, London N5 2TD", email: "daniel@example.com", password: "password")
 
 puts "Successfully created #{User.all.count} user."
 
@@ -50,16 +50,34 @@ libraries = Category.create(name: "libraries")
 water_play = Category.create(name: "water play")
 forest_school = Category.create(name: "forest school")
 
-puts "Wiping all activities from the database..."
+puts "#{Category.all.count} categories created."
 
-Activity.destroy_all
+puts "Our user is picking their five favorite categories..."
+
+UserCategory.create(user_id: user.id, category_id: playgrounds.id)
+UserCategory.create(user_id: user.id, category_id: museums.id)
+UserCategory.create(user_id: user.id, category_id: play_cafes.id)
+UserCategory.create(user_id: user.id, category_id: theatre.id)
+UserCategory.create(user_id: user.id, category_id: winter_holidays.id)
+
+# We're not wiping the activities for now...
+# puts "Wiping all activities from the database..."
+
+# Activity.destroy_all
 
 puts "Seeding the database with new activities..."
 
 Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
   google_data = JSON.parse(File.open(f).read)
   title = google_data["result"]["name"]
-  next if Activity.find_by(title: title)
+  existing_activity = Activity.find_by(title: title)
+  if existing_activity
+    google_data["categories"].each do |cat|
+      puts "Adding #{title} to #{cat}."
+      ActivityCategory.create!(activity_id: existing_activity.id, category_id: Category.find_by(name: cat).id)
+    end
+    next
+  end
 
   activity_attributes = {
     title: title,
@@ -108,6 +126,8 @@ Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
   end
 end
 
+
+# hardcoded activities:
 # params = {
 #   title: "Shoreditch Park Playground",
 #   address: "14 Rushton St, London N1 5DR",
@@ -584,8 +604,6 @@ puts "Successfully created #{Activity.all.count} activities."
 
 puts "Seeding the database with new encounters for the first user..."
 
-user = User.first
-
 a = Encounter.create(user_id: user.id, activity_id: Activity.all[0].id)
 b = Encounter.create(user_id: user.id, activity_id: Activity.all[1].id)
 c = Encounter.create(user_id: user.id, activity_id: Activity.all[2].id)
@@ -602,10 +620,10 @@ EncounterCollection.create(collection_id: collection.id, encounter_id: c.id)
 puts "There are #{collection.activities.count} activities in this collection."
 
 puts "Creating children..."
-child1 = Child.new(birthday:Date.parse('01/01/2017'))
+child1 = Child.new(birthday:Date.parse('10/10/2020'))
 child1.user = user
 child1.save!
-child2 = Child.new(birthday:Date.parse('23/05/2019'))
+child2 = Child.new(birthday:Date.parse('09/01/2023'))
 child2.user = user
 child2.save!
 puts "2 children created"

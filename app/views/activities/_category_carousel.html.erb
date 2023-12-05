@@ -12,13 +12,13 @@
       <div id="activitycarousel-<%= category.id %>" class="carousel slide" data-bs-touch="true">
         <div class="carousel-indicators">
           <% activities.each_with_index do |slide, i| %>
-            <button type="button" data-bs-target="#activitycarousel-<%= category.id %>" data-bs-slide-to="<%= i %>" class="<%= i == 1 ? "active" : "" ;%>" aria-current="<%= i == 1 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
+            <button type="button" data-bs-target="#activitycarousel-<%= category.id %>" data-bs-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" ;%>" aria-current="<%= i == 1 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
           <%end%>
         </div>
         <div class="carousel-inner">
           <% activities.each_with_index do |activity, i| %>
             <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: activity.id) if user_signed_in? %>
-            <div class="carousel-item <%= i == 1 ? "active" : "" ;%>" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value='<%= activity.id %>'>
+            <div class="carousel-item <%= i == 0 ? "active" : "" ;%>" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value='<%= activity.id %>'>
               <div class="activity-card mb-2">
                 <%= render 'activity', activity: activity, encounter: encounter %>
               </div>
