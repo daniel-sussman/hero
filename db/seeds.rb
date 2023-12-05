@@ -58,7 +58,7 @@ Activity.destroy_all
 
 puts "Seeding the database with new activities..."
 
-Dir[Rails.root.join("db/files/*.json")].first(2).each do |f|
+Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
   google_data = JSON.parse(File.open(f).read)
 
   activity_attributes = {

@@ -1,6 +1,6 @@
 <section class="activity-details">
   <div class="imgbox">
-    <img  class="img-fluid" src="<%= @activity.photo_url %>">
+    <%= cl_image_tag @activity.photo.key, class: 'img-fluid' %>
     <%= link_to activities_path, class: "close-btn" do %>
       <i class="fa-solid fa-xmark"></i>
     <% end %>
