@@ -1,7 +1,13 @@
-<div>
-  <h1>Create Your Collection</h1>
+<div class="container page-header">
+  <div class="row">
+    <div class="col-12">
+      <div>
+        <h1>Create your Collection</h1>
+      </div>
+      <%= simple_form_for @collection do |f| %>
+        <%= f.input :title, placeholder: 'Give your collection a title...'%>
+        <%= f.submit 'Create my Collection', class: "btn btn-info border rounded-2" %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<%= simple_form_for @collection do |f| %>
-  <%= f.input :title, placeholder: 'New Collection Title...'%>
-  <%= f.submit 'Create My Collection'%>
-<% end %>

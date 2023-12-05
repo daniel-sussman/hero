@@ -18,12 +18,14 @@
       justify-content: center;
       align-items: center;
       h3{
-        font-family: $headers-font;
+        font-family: $body-font;
         font-size: 16px;
         font-weight: 600;
         color: $secondary-color;
         text-transform: capitalize;
         text-align: center;
+        justify-content: center;
+        margin: 8px auto;
       }
     }
   }
