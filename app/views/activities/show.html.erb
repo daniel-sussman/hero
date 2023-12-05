@@ -1,6 +1,9 @@
 <section class="activity-details">
   <div class="imgbox">
-    <%= cl_image_tag @activity.photo.key, class: 'img-fluid' %>
+    <% if @activity.photo.present? %>
+      <%= cl_image_tag @activity.photo.key, class: 'img-fluid' %>
+      <%# If attached photo not present, show a default photo %>
+    <% end %>
     <%= link_to activities_path, class: "close-btn" do %>
       <i class="fa-solid fa-xmark"></i>
     <% end %>
