@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-12 categories-contentinfo">
       <%# Create custom activitycarousel %>
-      <div id="activitycarousel-<%= category.id %>" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
+      <div id="activitycarousel-<%= category.id %>" class="carousel slide" data-bs-touch="true">
         <div class="carousel-indicators">
           <% activities.each_with_index do |slide, i| %>
             <button type="button" data-bs-target="#activitycarousel-<%= category.id %>" data-bs-slide-to="<%= i %>" class="<%= i == 1 ? "active" : "" ;%>" aria-current="<%= i == 1 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
