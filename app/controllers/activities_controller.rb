@@ -3,6 +3,7 @@ class ActivitiesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
+    @page_activity = true
     @categories = Category.take(5)
     @categories_all = Category.all
     @all_recommended_activities = Activity.geocoded.take(25)
