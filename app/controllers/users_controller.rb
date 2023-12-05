@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     # raise
     @collection = Collection.where("user_id = #{@user.id}")
     @liked_activities = current_user.encounters.where(liked: true).order(updated_at: :desc)
+    @page_user = true
   end
 
   def map

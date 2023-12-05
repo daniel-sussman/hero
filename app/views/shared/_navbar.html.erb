@@ -1,14 +1,14 @@
-<div class="footer-container bg-white pb-4 pt-3 px-4 border-top">
+<div class="footer-container bg-white pb-4 pt-2 px-4 border-top">
   <div class="footer-nav">
-    <%= link_to (image_tag "hero_nav_logo.png", alt: "Hero logo", height: 45), activities_path %>
-    <%= link_to (image_tag "search_glass.png", alt: "Search", height: 30), categories_path %>
+    <%= link_to (image_tag "hero_nav_logo.png", alt: "Hero logo", height: 30), activities_path,  class: @page_activity ? 'border-bottom border-dark pb-2' : ''  %>
+    <%= link_to (image_tag "search_glass.png", alt: "Search", height: 30), categories_path,  class: @page_category ? 'border-bottom border-dark pb-2' : ''  %>
 
     <% if user_signed_in? %>
-      <%= link_to (image_tag "save.png", alt: "Saved", height: 30), collections_path %>
-      <%= link_to (image_tag "user.png", alt: "User", height: 30), users_path %>
+      <%= link_to (image_tag "save.png", alt: "Saved", height: 30), collections_path, class: @page_collection ? 'border-bottom border-dark pb-2' : '' %>
+      <%= link_to (image_tag "user.png", alt: "User", height: 30), users_path, class: @page_user ? 'border-bottom border-dark pb-2' : '' %>
     <% else %>
-      <%= link_to (image_tag "save.png", alt: "Saved", height: 30), new_user_session_path %>
-      <%= link_to (image_tag "user.png", alt: "User", height: 30), new_user_session_path %>
+      <%= link_to (image_tag "save.png", alt: "Saved", height: 30), new_user_session_path, class: @page_collection ? 'border-bottom border-dark pb-2' : ''  %>
+      <%= link_to (image_tag "user.png", alt: "User", height: 30), new_user_session_path, class: @page_collection ? 'border-bottom border-dark pb-2' : ''  %>
     <% end %>
   </div>
 </div>
