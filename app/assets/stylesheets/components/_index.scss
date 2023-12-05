@@ -22,21 +22,15 @@ h1{
   font-size: 30px;
   font-weight: 600;
   color: $secondary-color;
-  text-transform: capitalize;
-  margin: 15px 0px;
-}
-h2{
-  font-family: $headers-font;
-  font-size: 26px;
-  font-weight: 600;
-  color: $primary-color;
-  text-transform: capitalize;
+  // text-transform: capitalize;
   margin: 15px 0px;
 }
 
-.hero {
-  color: $cornflower-Blue-color;
-  font-size: 48px;
+h2{
+  font-family: $headers-font;
+  font-size: 22px;
+  font-weight: 600;
+  color: $primary-color;
+  // text-transform: capitalize;
   margin: 15px 0px;
-  text-transform: none;
 }

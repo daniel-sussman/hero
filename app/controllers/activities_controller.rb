@@ -3,20 +3,24 @@ class ActivitiesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @categories = Category.take(5)
-    @categories_all = Category.all
-    @all_recommended_activities = Activity.geocoded.take(25)
-    @activities = []
-    @categories.each do |_cat|
-      @activities << Activity.all.sample(5)
+    @page_activity = true
+
+    if user_signed_in?
+      @categories = current_user.categories
+    else
+      @categories = Category.take(5)
     end
 
-    #create encounters
-    @all_recommended_activities.each do |activity|
-      unless Encounter.where(user_id: current_user, activity_id: activity.id).length > 0
-        Encounter.create(user_id: current_user, activity_id: activity.id)
-      end
+    @activities = []
+    @categories.each do |cat|
+      @activities << Activity
+        .joins(activity_categories: :category)
+        .where("activity_categories.category_id = #{cat.id}")
+        .algorithm_sort(current_user).first(5)
     end
+
+    #populate the map with the activities shown in each category
+    @all_recommended_activities = @activities.flatten
 
     #geocoding
     @coords = [current_user.latitude, current_user.longitude] if user_signed_in? #replace default coords with IP address coords

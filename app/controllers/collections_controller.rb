@@ -6,7 +6,7 @@ class CollectionsController < ApplicationController
       redirect_to root_path
       return
     end
-
+    @page_collection = true
     @collections = current_user.collections
     @activities = Activity.where(id: current_user.encounters.where(saved: true).pluck(:activity_id).uniq)
     @coords = [current_user.latitude, current_user.longitude] if user_signed_in? #replace default coords with IP address coords

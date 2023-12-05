@@ -13,9 +13,27 @@ class Activity < ApplicationRecord
   def purge_photos
     self.photo.purge
   end
-  
+
   def color_code
     #to-do: color code by category
     "green"
+  end
+
+  def self.algorithm_sort(user)
+    activities_hash = {}
+
+    self.all.each do |activity|
+      activity_score = activity.distance_from(user)
+      unless activity.photo.present?
+        activity_score += 6.5
+      end
+      encounter_exists = Encounter.find_by(activity_id: activity.id, user_id: user.id)
+      if encounter_exists
+        encounter_exists.liked || encounter_exists.saved ? activity_score += 2 : activity_score += 5
+      end
+      activities_hash[activity.id] = activity_score
+    end
+
+    self.all.sort_by { |activity| activities_hash[activity.id] }
   end
 end

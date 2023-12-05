@@ -146,17 +146,17 @@
         font-family: $headers-font;
         font-size: 24px;
         font-weight: 600;
-        color: $secondary-color;
+        // color: $secondary-color;
         margin-bottom: 5px;
       }
       p{
-        font-size: 14px;
+        font-size: 16px;
         color: $gray;
       }
     }
     .mapinfo{
       color: $primary-color;
-      font-size: 22px;
+      font-size: 16px;
     }
     .visit-btn{
       max-width: 120px;
@@ -180,8 +180,8 @@
         font-family: 600;
       }
       p{
-        font-size: 14px;
-        color: $secondary-color;
+        font-size: 16px;
+        // color: $secondary-color;
         span{
           color:$primary-color;
         }

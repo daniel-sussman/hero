@@ -2,19 +2,24 @@
   <div class="container">
     <div class="row">
       <div class="col-12 custom-form">
-        <h2>Edit <%= resource_name.to_s.humanize %></h2>
+        <h1>Edit <%= resource_name.to_s.humanize %></h1>
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= f.error_notification %>
 
-          <%= f.fields_for :children do |p| %>
-            <%= p.input :birthday, :label => "child's birthday"%>
-          <% end %>
+          <div data-controller="children">
+            <%= f.simple_fields_for :children do |p| %>
+              <%= p.input :birthday, :label => "child's birthday"%>
+              <button data-action="click->children#deleteChild" data-children-target="delete" data-id="<%= p.object.id %>">delete</button>
+            <% end %>
+            <button class="btn btn-primary" data-action="click->children#addChild" data-children-target="button">Add child</button>
+          </div>
 
           <div class="form-inputs">
             <%= f.input :email, required: true, autofocus: true %>
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
             <% end %>
+            <%# <%= f.input :birthday, :label => "child's birthday"%>
             <%= f.input :password,
                         hint: "leave it blank if you don't want to change it",
                         required: false,
@@ -35,9 +40,9 @@
         <% end %>
       </div>
       <div class="col-12">
-      <h3>Cancel my account</h3>
+      <h2>Delete my account</h2>
       <div class="d-flex justify-content-start align-item-center mb-3">
-        Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :class=> 'btn btn-secondary  border text-white round-3 ms-3', data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+        <%= button_to "Cancel my account", registration_path(resource_name), :class=> 'btn btn-secondary  border text-white round-3 ms-3', data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
       </div>
       <%= link_to "Back", :back, class: "btn btn-dark mb-3 mb-3 text-white" %>
       </div>
