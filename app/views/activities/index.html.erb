@@ -1,11 +1,13 @@
 <div class="container page-header">
   <div class="row">
-    <div class="col-12">
-      <h1>Be a Hero...</h1>
-      <p>Here are your personalised suggestions for activities this week.</p>
+    <div class="col-12 pt-4 pb-2 d-flex justify-content-center">
+      <%= image_tag("hero_header_logo.png", :style => "height: 50px", :alt => "hero logo") %>
+    </div>
+        <div class="col-12 pt-3 pb-3 d-flex justify-content-center">
+      <h3 class="text-center text-justify">Keeping children occupied ever since the dissolution of the workhouses in 1930.</h3>
+    </div>
     </div>
   </div>
-</div>
 
 <% @categories.first(5).each_with_index do |category, i|%>
   <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
