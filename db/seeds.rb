@@ -60,9 +60,11 @@ puts "Seeding the database with new activities..."
 
 Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
   google_data = JSON.parse(File.open(f).read)
+  title = google_data["result"]["name"]
+  continue if Activity.find_by(title: title)
 
   activity_attributes = {
-    title: google_data["result"]["name"],
+    title: title,
     description: google_data.dig("result", "editorial_summary", "overview") || (google_data["result"]["reviews"][0]["text"] if google_data["result"]["reviews"]),
     # address: google_data["result"]["formatted_address"]
     latitude: google_data["result"]["geometry"]["location"]["lat"],

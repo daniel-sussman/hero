@@ -743,7 +743,6 @@ end
 
 
 winter_holidays = [
-  "'Carnaby Universe'",
   "Alexandra Palace Ice Rink",
   "All Souls Christmas Carols and Orchestra",
   "An Audience with Father Christmas at Kenwood House",
