@@ -30,7 +30,7 @@
     </div>
     <div class="col-12 like_carousel">
       <h3>Recently liked</h3>
-      <div id="likeactivitycarousel" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
+      <div id="likeactivitycarousel" class="carousel slide" data-bs-touch="true">
         <div class="carousel-indicators">
           <% @liked_activities.each_with_index do |slide, i| %>
             <button type="button" data-bs-target="#likeactivitycarousel" data-bs-slide-to="<%= i %>" class="<%= i == 1 ? "active" : "" ;%>" aria-current="<%= i == 1 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
