@@ -1,9 +1,8 @@
-<%= render 'searches/search', path: searches_path %>
-
 <div class="container page-header">
   <div class="row">
     <div class="col-12">
-      <h1>Be a hero...</h1>
+      <h1>Be a Hero...</h1>
+      <p>Here are your personalised suggestions for activities this week.</p>
     </div>
   </div>
 </div>
@@ -16,10 +15,6 @@
   <div class="row">
     <div class="col-12 map-box">
       <%= render 'map', activities: @all_recommended_activities %>
-    </div>
-    <div class="col-12 all-cat">
-      <h2><%= link_to "Search By Categories", categories_path %></h2>
-      <%= render "categories/category_cards_container", categories: @categories_all%>
     </div>
   </div>
 </div>
