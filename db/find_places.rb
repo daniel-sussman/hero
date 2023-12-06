@@ -166,7 +166,19 @@ museums = [
   "Discover Children's Story Centre",
   "Hackney Museum",
   "Museum of London Docklands",
-  "London Children's Museum"
+  "London Children's Museum",
+  "Valence House Museum",
+  "Museum of the Order of St John",
+  "Jewish Museum London",
+  "Rainham Hall",
+  "Golden Hinde",
+  "Bank of England Museum",
+  "The Cartoon Museum",
+  "Twist Museum",
+  "Gootopia",
+  "Tower of London",
+  "Hampton Court Palace",
+  "Cutty Sark"
 ]
 category = "museums"
 museums.each do |activity|
@@ -244,7 +256,8 @@ outdoor = [
   "Kew Gardens",
   "New River Walk",
   "King Henry's Walk Garden",
-  "Woodberry Wetlands, London Wildlife Trust"
+  "Woodberry Wetlands, London Wildlife Trust",
+  "Greenwich Park"
 ]
 category = "outdoor"
 outdoor.each do |activity|
@@ -612,7 +625,10 @@ sports = [
   "Hammersmith BMX Track",
   "Hemel Hempstead Snow Centre",
   "Lee Valley White Water Centre",
-  "QUEENS skate dine bowl"
+  "QUEENS skate dine bowl",
+  "Oxygen Acton Activity park",
+  "Oxygen Croydon Activity Park",
+  "Oxygen rayleigh"
 ]
 category = "sports"
 sports.each do |activity|
@@ -676,7 +692,24 @@ animals = [
   "Spitalfields City Farm",
   "Hackney City Farm",
   "London Zoo",
-  "Sea Life London Aquarium"
+  "Sea Life London Aquarium",
+  "Battersea Park Children's Zoo",
+  "Belmont Children's Farm",
+  "Brooks City Farm",
+  "Crystal Palace Farm",
+  "Deen City Farm",
+  "Forty Hall Farm",
+  "Freightliners Farm",
+  "Hobbledown Heath Hounslow",
+  "Horniman Musem & Gardens",
+  "Hounslow Urban Petting Farm",
+  "Kentish Town City Farm",
+  "Lee Valley Park Farms",
+  "Mudchute City Farm",
+  "Stepney City Farm",
+  "Surrey Docks City Farm",
+  "Vauxhall City Farm",
+  "Woodland Farm, Shooters Hill"
 ]
 category = "animals"
 animals.each do |activity|
@@ -988,7 +1021,6 @@ category = "playgrounds"
 playgrounds.each do |activity|
   file_path = "db/files/#{activity}.json"
   if File.exists?(file_path)
-    p "#{file_path} already exists"
     # TODO: Open the file and read its contents, add category
     file_contents = File.read(file_path)
     data = JSON.parse(file_contents)
@@ -1066,7 +1098,8 @@ play_cafes = [
   "Rainbow Cafe",
   "Role2Play",
   "AvoCuddle Playroom",
-  "Krazy Kidz Cafe Ltd"
+  "Krazy Kidz Cafe Ltd",
+  "Dalston Eastern Curve Garden"
 ]
 category = "play cafes"
 play_cafes.each do |activity|
@@ -1469,7 +1502,11 @@ soft_play = [
   "Yellow Warbler, Stoke Newington",
   "Yellow Warbler, Walthamstow",
   "Yonder, Walthamstow",
-  "ZAPspace, Stratford"
+  "ZAPspace, Stratford",
+  "Oxygen Acton Activity park",
+  "Oxygen Croydon Activity Park",
+  "Oxygen rayleigh",
+  "Oxygen Freejumping"
 ]
 category = "soft play"
 soft_play.each do |activity|
