@@ -2,9 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="activity"
 export default class extends Controller {
-  static targets = ['heart', 'attended', 'stars', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal']
+  static targets = ['heart', 'attended', 'stars', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection']
   static values = {
-    userid: Number
+    userid: Number,
+    encounterid: Number
   }
   connect() {
     const observer = new IntersectionObserver(this.handleIntersection.bind(this), {
@@ -106,26 +107,8 @@ export default class extends Controller {
 
   expand(event) {
     if (event.target.classList.contains("option")) {
-      console.log("called");
       const datamodel = document.querySelector(".bd-example-modal-lg");
       datamodel.model(show);
-      const selection = event.target.getAttribute("data-selection");
-      const activityID = parseInt(this.element.getAttribute('data-value'), 10);
-
-      fetch(`/activities/${activityID}/${selection}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-        }
-      });
-
-      if (selection === 'fewer') {
-        this.#fewer()
-      } else {
-        this.#save()
-      }
     }
 
     this.modalTarget.classList.add('show')
@@ -149,12 +132,70 @@ export default class extends Controller {
     this.modalTarget.classList.remove('show')
   }
 
-  #fewer() {
+  fewer() {
+    const activityID = parseInt(this.element.getAttribute('data-value'), 10);
 
+    fetch(`/activities/${activityID}/fewer`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      }
+    });
   }
 
-  #save() {
-    this.saveTarget.classList.toggle("save")
-    this.saveTarget.classList.toggle("saved")
+  save(event) {
+    const activityID = parseInt(this.element.getAttribute('data-value'), 10);
+
+    fetch(`/activities/${activityID}/save`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      }
+    });
+
+    this.collectionTargets.forEach(targ => {
+      if (targ.contains(event.target)) {
+        const collectionID = parseInt(targ.getAttribute('data-id'), 10);
+
+        fetch(`/collections/${collectionID}/add_activity`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+          },
+          body: JSON.stringify({
+            encounter_id: this.encounteridValue
+          }),
+        })
+        this.saveTarget.classList.remove("save")
+        this.saveTarget.classList.add("saved")
+        this.collapse()
+      }
+    })
+    if (!this.closed) {
+      // The user clicked the bookmark icon
+      this.saveTarget.classList.toggle("save")
+      this.saveTarget.classList.toggle("saved")
+
+      // If the activity was unsaved, remove it from collections
+      if (this.saveTarget.classList.contains("save")) {
+        fetch(`/collections/remove_activity`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+          },
+          body: JSON.stringify({
+            encounter_id: this.encounteridValue
+          }),
+        })
+      }
+    }
   }
 }

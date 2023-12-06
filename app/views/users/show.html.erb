@@ -30,23 +30,7 @@
     </div>
     <div class="col-12 like_carousel">
       <h3>Recently liked</h3>
-      <div id="likeactivitycarousel" class="carousel slide" data-bs-touch="true">
-        <div class="carousel-indicators">
-          <% @liked_activities.each_with_index do |slide, i| %>
-            <button type="button" data-bs-target="#likeactivitycarousel" data-bs-slide-to="<%= i %>" class="<%= i == 1 ? "active" : "" ;%>" aria-current="<%= i == 1 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
-          <%end%>
-        </div>
-        <div class="carousel-inner">
-          <% @liked_activities.each_with_index do |likeactivity, i| %>
-            <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: likeactivity.activity.id) if user_signed_in? %>
-            <div class="carousel-item <%= i == 1 ? "active" : "" ;%>" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value='<%= likeactivity.activity.id %>'>
-              <div class="activity-card mb-2">
-                  <%= render 'activities/activity', activity: likeactivity.activity, encounter: encounter %>
-              </div>
-            </div>
-          <%end%>
-        </div>
-      </div>
+      <%= render 'activities/carousel', activities: @liked_activities %>
     </div>
     <div class="col-12 mb-5 mt-3 btn-section">
       <div class="d-flex justify-content-between align-items-center">

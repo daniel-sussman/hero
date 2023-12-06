@@ -1,6 +1,6 @@
   <div class="col-12">
     <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: activity.id) if user_signed_in? %>
-    <div class="activity-card mb-4" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-value=<%= activity.id %>>
+    <div class="activity-card mb-4" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-activity-encounterid-value='<%= defined?(encounter) && encounter ? encounter.id : 0 %>' data-value=<%= activity.id %>>
       <%= render 'activities/activity', activity: activity, encounter: encounter %>
     </div>
   </div>

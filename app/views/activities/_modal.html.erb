@@ -1,0 +1,51 @@
+<div class="activity-modal" data-activity-target='modal' data-id="<%= activity.id%>">
+  <% if user_signed_in? %>
+    <div class="model-body container">
+      <div class="row">
+        <div class="col-12">
+          <div class="model-header mt-5 mb-3">
+            <div class='options' data-activity-target='options'>
+              <div class="iconbox d-flex flex-column align-items-center">
+                <div class="link-btn modal-btn mb-2" data-action='click->activity#fewer'>
+                  <span><i class='option fewer' data-activity-target='fewer'></i></span>
+                </div>
+                <p>Fewer like this</p>
+              </div>
+              <div class="iconbox d-flex flex-column align-items-center">
+                <div class="link-btn modal-btn mb-2" data-action='click->activity#save'>
+                  <span><i class='option <%= encounter && encounter.saved ? 'saved' : 'save' %>' data-activity-target='save'></i> </span>
+                </div>
+                <p>Save for later</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+            <div class="model-content">
+              <div class="row">
+                <div class="col-12 mt-2 mb-2">
+                  <h3>Save to my collections</h3>
+                  <hr>
+                </div>
+              </div>
+              <div class="row collection-container">
+                <% current_user.collections.each_with_index do |collection| %>
+                  <div class="col-12">
+                    <div class="collection-card" data-action='click->activity#save' data-activity-target='collection' data-id="<%= collection.id %>">
+                      <div class="imgbox">
+                        <img class="img-fluid" src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o">
+                      </div>
+                      <h4><%= collection.title %></h4>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <% else %>
+      <p>Please log in</p>
+    <% end %>
+  <div class="close-btn" data-action='click->activity#collapse'> <i class="fa-solid fa-xmark"></i></div>
+</div>

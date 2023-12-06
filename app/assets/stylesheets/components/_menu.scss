@@ -36,15 +36,15 @@
 .fewer {
   animation: expandOptions 0.3s;
   background-image: image-url('heart_broken.png');
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 32px;
   background-repeat: no-repeat;
   background-position: center center;
 }
 .save {
   background-image: image-url('save_to_collection.png');
   width: 30px;
-  height: 30px;
+  height: 48px;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -53,5 +53,5 @@
   opacity: 1;
   background-image: image-url('saved_to_collection.png');
   width: 30px;
-  height: 30px;
+  height: 48px;
 }

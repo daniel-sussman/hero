@@ -16,4 +16,10 @@ class User < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   validates :name, :address, presence: true
+
+  def encounter_collections
+    EncounterCollection
+      .joins(collection: :user)
+      .where(user: { id: id })
+  end
 end
