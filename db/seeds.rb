@@ -84,7 +84,9 @@ Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
     description: google_data.dig("result", "editorial_summary", "overview") || (google_data["result"]["reviews"][0]["text"] if google_data["result"]["reviews"]),
     # address: google_data["result"]["formatted_address"]
     latitude: google_data["result"]["geometry"]["location"]["lat"],
-    longitude: google_data["result"]["geometry"]["location"]["lng"]
+    longitude: google_data["result"]["geometry"]["location"]["lng"],
+    phone_number: google_data["result"]["formatted_phone_number"],
+    website_url: google_data["result"]["website"]
   }
   if google_data['result']['opening_hours']
     activity_attributes[:monday_opening_hours] = google_data["result"]["opening_hours"]["weekday_text"][0].split("day: ")[1]

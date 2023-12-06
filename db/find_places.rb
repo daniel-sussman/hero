@@ -2,6 +2,7 @@ require 'open-uri'
 require 'json'
 
 api_key = ENV['GOOGLEMAPS_API_KEY']
+# will have to actually supply the api key
 
 stay_and_play = [
   "ALL ABOARD TRAIN PLAY",
@@ -161,7 +162,11 @@ museums = [
   "British Museum",
   "Madame Tussauds London",
   "London Museum of Water & Steam",
-  "National Army Museum"
+  "National Army Museum",
+  "Discover Children's Story Centre",
+  "Hackney Museum",
+  "Museum of London Docklands",
+  "London Children's Museum"
 ]
 category = "museums"
 museums.each do |activity|
@@ -236,7 +241,10 @@ outdoor = [
   "Queen's Park Pitch and Putt",
   "Hampstead Heath Mixed Bathing Pond",
   "Welsh Harp Reservoir",
-  "Kew Gardens"
+  "Kew Gardens",
+  "New River Walk",
+  "King Henry's Walk Garden",
+  "Woodberry Wetlands, London Wildlife Trust"
 ]
 category = "outdoor"
 outdoor.each do |activity|
@@ -968,12 +976,19 @@ playgrounds = [
   "Woodhouse Urban Park, Kilburn",
   "Woodland Play Area, Burgess Park, Camberwell",
   "Wormholt Park Playground, White City",
-  "WWT London Wetland Centre Playground, Barnes"
+  "WWT London Wetland Centre Playground, Barnes",
+  "Clissold Park Playground",
+  "Highbury Fields Playground",
+  "St Paul's Shrubbery",
+  "Finsbury Park Playground",
+  "Woodberry Down Park",
+  "London Fields Playground"
 ]
 category = "playgrounds"
 playgrounds.each do |activity|
   file_path = "db/files/#{activity}.json"
   if File.exists?(file_path)
+    p "#{file_path} already exists"
     # TODO: Open the file and read its contents, add category
     file_contents = File.read(file_path)
     data = JSON.parse(file_contents)
@@ -1531,7 +1546,8 @@ swimming = [
   "Kings Hall Leisure Centre",
   "Tiller Leisure Centre",
   "Phoenix Fitness Centre and Janet Adegoke Swimming Pool",
-  "Wavelengths Leisure Centre"
+  "Wavelengths Leisure Centre",
+  "London Fields Lido"
 ]
 category = "swimming"
 swimming.each do |activity|
@@ -1954,3 +1970,5 @@ forest_school.each do |activity|
     # sleep(0.1)
   end
 end
+
+puts "Finished adding files."
