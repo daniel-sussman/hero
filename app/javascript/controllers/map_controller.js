@@ -16,7 +16,7 @@ export default class extends Controller {
         container: this.element,
         style: "mapbox://styles/mapbox/streets-v10",
         center: this.posValue,
-        zoom: 12
+        zoom: 10
       })
       this.#addHomeMarker();
     } else {

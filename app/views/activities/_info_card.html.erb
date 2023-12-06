@@ -1,3 +1,10 @@
-<h5><%= link_to activity.title, activity_path(activity) %></h5>
-
-<p><%= activity.address %></p>
+<div class="card">
+  <% if activity.photo.present? %>
+      <%= cl_image_tag activity.photo.key %>
+      <%# Else: show a default photo %>
+    <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= link_to activity.title, activity_path(activity) %></h5>
+    <p class="card-text"><%= activity.address %></p>
+  </div>
+</div>

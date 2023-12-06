@@ -1,8 +1,6 @@
-
-
 <div class="container page-header">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 pt-5 pb-3">
       <%= render 'searches/search', path: category_index_category_path(@category) %>
     </div>
     <div class="col-12">
@@ -26,3 +24,21 @@
     </div>
   </div>
 </section>
+
+<div class="mapcontainer" data-controller="showmap">
+  <button class="btn btn-primary showmap-btn" data-action='click->showmap#show' data-showmap-target='mapbutton'>
+    <i class="fa-solid fa-map-location-dot me-1"></i>
+    Show map
+  </button>
+
+  <div class="activity-modal mapmodel" data-showmap-target='modal'>
+    <div class="model-body container">
+        <div class="row">
+          <div class="col-12 map-box">
+            <%= render 'activities/map', activities: @activities %>
+          </div>
+        </div>
+      </div>
+    <div class="close-btn" data-action='click->showmap#collapse'> <i class="fa-solid fa-xmark"></i></div>
+  </div>
+</div>
