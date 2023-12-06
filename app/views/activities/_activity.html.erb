@@ -2,7 +2,8 @@
   <div class="image-box">
     <% if activity.photo.present? %>
       <%= cl_image_tag activity.photo.key %>
-      <%# Else: show a default photo %>
+    <% else %>
+      <%= image_tag "placeholder.gif", alt: "Placeholder image" %>
     <% end %>
     <%# <img src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o"> %>
     <!-- added data-action to the div -->

@@ -2,7 +2,8 @@
   <div class="imgbox">
     <% if @activity.photo.present? %>
       <%= cl_image_tag @activity.photo.key, class: 'img-fluid' %>
-      <%# If attached photo not present, show a default photo %>
+    <% else %>
+      <%= image_tag "placeholder.gif", alt: "Placeholder image" %>
     <% end %>
     <%= link_to activities_path, class: "close-btn" do %>
       <i class="fa-solid fa-xmark"></i>
