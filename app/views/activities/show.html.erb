@@ -6,7 +6,7 @@
       <%= image_tag "placeholder.gif", alt: "Placeholder image" %>
     <% end %>
     <%= link_to activities_path, class: "close-btn" do %>
-      <i class="fa-solid fa-xmark"></i>
+      <i class="fa-solid fa-hand-point-left"></i>
     <% end %>
   </div>
   <div class="container page-header">
@@ -23,42 +23,82 @@
                     <p><%= @activity.address %></p>
                   </div>
                 </div>
-              <p><%= @activity.description %></p>
-              <% if @activity.website_url.present? %>
-                <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
-              <% end %>
-                <h2>Opening Hours</h2>
-              <div class="opening-hours">
-                <p>Monday: <span><%= @activity.monday_opening_hours %></span></p>
-                <p>Tuesday: <span><%= @activity.tuesday_opening_hours %></span></p>
-                <p>Wednesday: <span><%= @activity.wednesday_opening_hours %></span></p>
-                <p>Thursday: <span><%= @activity.thursday_opening_hours %></span></p>
-                <p>Friday: <span><%= @activity.friday_opening_hours %></span></p>
-                <p>Saturday: <span><%= @activity.saturday_opening_hours %></span></p>
-                <p>Sunday: <span><%= @activity.sunday_opening_hours %></span></p>
+              <%# add tab  %>
+              <div class="details-tab-container">
+                <nav>
+                  <div class="nav nav-tabs mb-3 details-tab" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Information</button>
+                    <button class="nav-link" id="nav-time-tab" data-bs-toggle="tab" data-bs-target="#nav-time" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Timing <i class="fa-solid fa-clock-rotate-left ps-2"></i></button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">contact<i class="fa-solid fa-headset ps-2"></i></button>
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade active show" id="nav-info" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <p><%= @activity.description %></p>
+                    <% if @activity.website_url.present? %>
+                      <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
+                    <% end %>
+                  </div>
+                  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <% if @activity.website_url.present? %>
+                      <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
+                    <% end %>
+                    <% if @activity.phone_number.present? %>
+                    <h6>Phone: <%= @activity.phone_number %></h6>
+                    <% end %>
+                  </div>
+                  <div class="tab-pane fade" id="nav-time" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <h2>Opening Hours</h2>
+                    <div class="opening-hours">
+                      <p>Monday: <span><%= @activity.monday_opening_hours %></span></p>
+                      <p>Tuesday: <span><%= @activity.tuesday_opening_hours %></span></p>
+                      <p>Wednesday: <span><%= @activity.wednesday_opening_hours %></span></p>
+                      <p>Thursday: <span><%= @activity.thursday_opening_hours %></span></p>
+                      <p>Friday: <span><%= @activity.friday_opening_hours %></span></p>
+                      <p>Saturday: <span><%= @activity.saturday_opening_hours %></span></p>
+                      <p>Sunday: <span><%= @activity.sunday_opening_hours %></span></p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
+              <div class="user_review">
                 <% if @activity.encounters.empty? %>
                   <h2>Write the first review on this activity</h2>
                   <%= link_to "Log in now", user_session_path %>
                 <% else %>
+                  <h5>User Review : </h5>
                   <% @activity.encounters.each do |review|%>
-                    <% review.rating.to_i.times do %>
-                      <%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %>
-                    <% end %>
-                    <%= review.review %>
-                    <%= review.user.name%>
+                  <div class="reviewbox mt-3">
+                    <div class="reviewhead">
+                      <div class="userinfo">
+                        <%= image_tag "heros.jpeg", class: "avatar-large" %>
+                        <h5><%= review.user.name%></h5>
+                      </div>
+                      <div class="userrating">
+                        <h6>Rating</h6>
+                        <Span>
+                          <% review.rating.to_i.times do %>
+                            <%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %>
+                          <% end %>
+                        </Span>
+                      </div>
+                    </div>
+                    <div class="userreviewcontent mt-3 mb-3">
+                      <p><sup><i class="fa-solid fa-quote-left me-2"></i></sup><%= review.review%><sub><i class="fa-solid fa-quote-right ms-2"></i></sub></p>
+                    </div>
+                  </div>
+                  <hr>
                   <% end %>
                 <% end %>
               </div>
-              <div>
+              <div class="user_review-form">
                 <% if user_signed_in? %>
-                  <h5>Your Review</h5>
+                  <h4>Add Your Review</h4>
                     <%= simple_form_for(@encounter) do |f| %>
                       <%= f.input :activity_id, as: :hidden, input_html: { value: @activity.id } %>
                       <%= f.input :review, placeholder: "Your review is..." %>
                       <%= f.input :rating, as: :select, collection: (1..5), required: true, label: false, input_html: { data: { controller: "star-rating" } } %>
-                      <%= f.submit "Submit", class: "btn btn-flat mt-2" %>
+                      <%= f.submit "Submit", class: "btn btn-info mt-2" %>
                     <% end %>
                   <% end %>
               </div>
