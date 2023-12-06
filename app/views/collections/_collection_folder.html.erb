@@ -38,7 +38,7 @@
     <%= link_to collection_path(collection), data: {turbo_method: :delete, turbo_confirm: "Delete #{name}?"} do %>
       <span class="delete"><i class="fa-solid fa-xmark"></i></span>
     <% end %>
-    <span class="edit"><i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-collection#reveal"></i></span>
+    <div class="edit" data-action="click->edit-collection#reveal"></div>
     <%= simple_form_for collection, html: {class: "d-none", data: {edit_collection_target: "form", action: "submit->edit-collection#update"}} do |f| %>
       <%= f.input :title %>
       <%= f.submit "Update collection"%>
