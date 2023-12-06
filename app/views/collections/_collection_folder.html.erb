@@ -1,0 +1,26 @@
+<div class="collection-folder">
+  <% if collection.count >= 4 %>
+    <div class="folder folder-grid">
+      <% collection.first(4).each do |encounter| %>
+        <% activity = encounter.activity %>
+        <% if activity.photo.present? %>
+          <%= cl_image_tag activity.photo.key, class: 'img-small' %>
+        <% else %>
+          <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-small' %>
+        <% end %>
+      <% end %>
+      <span class="folder-title"><p><%= name %></p></span>
+    </div>
+  <% elsif collection.count > 0 %>
+    <div class="folder">
+      <% activity = collection.first.activity %>
+      <% if activity.photo.present? %>
+        <%= cl_image_tag activity.photo.key, class: 'img-big' %>
+      <% else %>
+        <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-big' %>
+      <% end %>
+      <span class="folder-title"><p><%= name %></p></span>
+    </div>
+  <% end %>
+
+</div>

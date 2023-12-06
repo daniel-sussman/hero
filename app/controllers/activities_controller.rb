@@ -25,6 +25,7 @@ class ActivitiesController < ApplicationController
     #geocoding
     @coords = [current_user.latitude, current_user.longitude] if user_signed_in? #replace default coords with IP address coords
 
+    #@all_recommended_activities are the activities we want to show
     @markers = @all_recommended_activities.map do |activity|
       {
         lat: activity.latitude,
