@@ -36,6 +36,31 @@
                 <p>Saturday: <span><%= @activity.saturday_opening_hours %></span></p>
                 <p>Sunday: <span><%= @activity.sunday_opening_hours %></span></p>
               </div>
+              <div>
+                <% if @activity.encounters.empty? %>
+                  <h2>Write the first review on this activity</h2>
+                  <%= link_to "Log in now", user_session_path %>
+                <% else %>
+                  <% @activity.encounters.each do |review|%>
+                    <% review.rating.to_i.times do %>
+                      <%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %>
+                    <% end %>
+                    <%= review.review %>
+                    <%= review.user.name%>
+                  <% end %>
+                <% end %>
+              </div>
+              <div>
+                <% if user_signed_in? %>
+                  <h5>Your Review</h5>
+                    <%= simple_form_for(@encounter) do |f| %>
+                      <%= f.input :activity_id, as: :hidden, input_html: { value: @activity.id } %>
+                      <%= f.input :review, placeholder: "Your review is..." %>
+                      <%= f.input :rating, as: :select, collection: (1..5), required: true, label: false, input_html: { data: { controller: "star-rating" } } %>
+                      <%= f.submit "Submit", class: "btn btn-flat mt-2" %>
+                    <% end %>
+                  <% end %>
+              </div>
             </div>
           </div>
         </div>

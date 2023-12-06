@@ -7,14 +7,6 @@
       <h2><%= @user.name %></h2>
       <%= image_tag "heros.jpeg", class: "avatar-large" %>
     </div>
-    <% if @children.present? %>
-      <div class="col-12">
-        <h3>My children's birthdays</h3>
-        <% @children.each do |child|%>
-          <%= child.birthday%><br>
-        <%end %>
-      </div>
-    <% end %>
     <div class="col-12">
       <h3>My activities</h3>
       <ul class="list-activities">
