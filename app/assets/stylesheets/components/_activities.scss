@@ -38,6 +38,12 @@
           font-size: 18px;
         }
       }
+      .link-btn.modal-btn {
+        position: relative !important;
+        border-radius: 50% !important;
+        height: 60px;
+        width: 60px;
+      }
       .link-btn.expanded{
         width: 192px;
       }
@@ -196,7 +202,7 @@
 
 .activity-modal {
   width: 100vw;
-  height: 62vh;
+  height: 55vh;
   border-radius: 10px;
   background: rgba(38,70,83,.8);
   backdrop-filter: blur(10px);

@@ -4,7 +4,11 @@ class UsersController < ApplicationController
     @children = @user.children
     # raise
     @collection = Collection.where("user_id = #{@user.id}")
-    @liked_activities = current_user.encounters.where(liked: true).order(updated_at: :desc)
+    @liked_activities = current_user.encounters
+                               .where(liked: true)
+                               .order(updated_at: :desc)
+                               .includes(:activity) # eager load associated activities
+                               .map(&:activity)
     @page_user = true
   end
 

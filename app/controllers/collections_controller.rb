@@ -1,6 +1,6 @@
 class CollectionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
-  before_action :set_collection, only: [:show, :edit, :update, :destroy]
+  before_action :set_collection, only: [:show, :edit, :update, :destroy, :add_activity]
   def index
     if !current_user
       redirect_to root_path
@@ -62,7 +62,6 @@ class CollectionsController < ApplicationController
   end
 
   def update
-    @colllection = Collection.find(params[:id])
     @collection.update(collection_params)
 
     respond_to do |format|
@@ -74,6 +73,21 @@ class CollectionsController < ApplicationController
   def destroy
     @collection.destroy
     redirect_to collections_path, notice: 'Collection was successfully deleted.', status: :see_other
+  end
+
+  def add_activity
+    return if EncounterCollection.find_by(collection_id: @collection.id, encounter_id: params[:encounter_id])
+
+    # remove activity from any of the user's other collections
+    current_user.collections.each do |collection|
+      EncounterCollection.find_by(collection_id: collection.id, encounter_id: params[:encounter_id])&.destroy
+    end
+
+    EncounterCollection.create(collection_id: @collection.id, encounter_id: params[:encounter_id])
+  end
+
+  def remove_activity
+    current_user.encounter_collections.find_by(encounter_id: params[:encounter_id])&.destroy
   end
 
   private

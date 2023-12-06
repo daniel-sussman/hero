@@ -10,6 +10,8 @@ class Activity < ApplicationRecord
 
   has_one_attached :photo
 
+  validates :title, uniqueness: true
+
   def purge_photos
     self.photo.purge
   end
@@ -20,9 +22,11 @@ class Activity < ApplicationRecord
   end
 
   def self.algorithm_sort(user)
+    return all unless user
+
     activities_hash = {}
 
-    self.all.each do |activity|
+    all.each do |activity|
       activity_score = activity.distance_from(user)
       unless activity.photo.present?
         activity_score += 6.5
@@ -34,6 +38,6 @@ class Activity < ApplicationRecord
       activities_hash[activity.id] = activity_score
     end
 
-    self.all.sort_by { |activity| activities_hash[activity.id] }
+    all.sort_by { |activity| activities_hash[activity.id] }
   end
 end

@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   resources :collections do
     member do
       get :collection_index
+      post :add_activity
+    end
+    collection do
+      patch :remove_activity
     end
   end
   resources :searches, only: [:index]

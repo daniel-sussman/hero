@@ -26,69 +26,8 @@
       <span><i class='ellipsis' data-activity-target='ellipsis'></i></span>
     </div>
 
-    <div class="activity-modal" data-activity-target='modal' data-id="<%= activity.id%>">
-      <div class="model-body container">
-        <div class="row">
-          <div class="col-12">
-            <div class="model-header mt-5">
-              <div class='options' data-activity-target='options'>
-                <div class="iconbox">
-                  <div class="round">
-                    <span><i class='option fewer' data-activity-target='fewer' data-selection='fewer'></i></span>
-                  </div>
-                  Fewer
-                </div>
-                <div class="iconbox">
-                  <div class="round">
-                    <span><i class='option <%= encounter && encounter.saved ? 'saved' : 'save' %>' data-activity-target='save' data-selection='save'></i> </span>
-                  </div>
-                  Saved
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-              <div class="model-content">
-                <div class="row">
-                  <div class="col-12 mt-2 mb-2">
-                    <h3>Your collections</h3>
-                    <hr>
-                  </div>
-                </div>
-                <div class="row collection-container">
-                  <% current_user.collections.each_with_index do |collection, i| %>
-                    <div class="col-12">
-                      <div class="collection-card">
-                        <div class="imgbox">
-                          <img class="img-fluid" src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o">
-                        </div>
-                        <h4><%= collection.title %></h4>
-                      </div>
-                    </div>
-                     <div class="col-12">
-                      <div class="collection-card">
-                        <div class="imgbox">
-                          <img class="img-fluid" src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o">
-                        </div>
-                        <h4><%= collection.title %></h4>
-                      </div>
-                    </div>
-                     <div class="col-12">
-                      <div class="collection-card">
-                        <div class="imgbox">
-                          <img class="img-fluid" src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o">
-                        </div>
-                        <h4><%= collection.title %></h4>
-                      </div>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-      <div class="close-btn" data-action='click->activity#collapse'> <i class="fa-solid fa-xmark"></i></div>
-    </div>
+    <%= render 'activities/modal', activity: activity, encounter: encounter %>
+
   </div>
   <div class="text-box p-3">
     <div class="header">
