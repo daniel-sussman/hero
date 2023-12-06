@@ -5,7 +5,7 @@
         <%= link_to category_path(category) do %>
           <div class="card h-100">
             <div class="card-img">
-              <img src="https://picsum.photos/200/200?<%= category.name %>" class="card-img-top" alt="...">
+              <%= image_tag "#{category.name}.jpg", class: "card-img" %>
             </div>
             <div class="card-body">
               <h3><%= category.name %></h3>

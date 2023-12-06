@@ -11,6 +11,8 @@
     }
     .card-img{
       overflow: hidden;
+      height: 150px;
+      object-fit: cover;
     }
     .card-body{
       padding: 8px;
