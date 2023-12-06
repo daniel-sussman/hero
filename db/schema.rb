@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_29_150632) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_06_133753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_150632) do
     t.string "saturday_opening_hours"
     t.string "sunday_opening_hours"
     t.string "website_url"
+    t.string "phone_number"
   end
 
   create_table "activity_categories", force: :cascade do |t|
