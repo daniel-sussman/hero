@@ -1,0 +1,27 @@
+.collection-folder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  .folder {
+    height: 120px;
+  }
+  .folder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 4px;
+  }
+  .folder-title {
+    position: relative;
+    bottom: 12px;
+  }
+  .img-big {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .img-small {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

@@ -1,7 +1,11 @@
 <div class="container page-header">
   <div class="row">
     <div class="col-12">
-      <h1>Your Collections</h1>
+      <div>
+        <h1><%= current_user.name %></h1>
+        <p>Replace this with the user header</p>
+      </div>
+
       <div>
         <%= render "collection_cards", collections: @collections %>
       </div>
