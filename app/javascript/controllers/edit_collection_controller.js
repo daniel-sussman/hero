@@ -1,15 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["infos", "form", "card"]
+  static targets = ["infos", "form"]
 
   connect() {
-    console.log("this.infosTarget", this.infosTarget)
+    console.log("hello")
     console.log("this.formTarget", this.formTarget)
   }
 
   reveal() {
-    this.infosTarget.classList.add("d-none")
+    console.log("Showing the form")
     this.formTarget.classList.remove("d-none")
   }
 

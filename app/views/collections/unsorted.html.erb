@@ -1,0 +1,8 @@
+<div>
+  <h1>Unsorted activities</h1>
+</div>
+<div>
+  <% @activities.each do |activity| %>
+    <%= render 'activities/activity_card', activity: activity %>
+  <% end %>
+</div>

@@ -3,9 +3,9 @@
     <h2>My collections</h2>
   </div>
   <div id="collections" class="row">
-    <%= render "collection_folder", collection: current_user.default_collection, name: "Unsorted activities" %>
+    <%= render "collection_folder", encounters: current_user.default_collection, name: "Unsorted activities" %>
     <% collections.each do |collection| %>
-      <%= render "collection_folder", collection: EncounterCollection.where(collection_id: collection.id).map(&:encounter), name: collection.title %>
+        <%= render "collection_folder", encounters: EncounterCollection.where(collection_id: collection.id).map(&:encounter), name: collection.title, collection: collection %>
     <% end %>
   </div>
 </div>

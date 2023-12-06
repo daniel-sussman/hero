@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       post :add_activity
     end
     collection do
+      get :unsorted
       patch :remove_activity
     end
   end

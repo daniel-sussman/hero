@@ -2,8 +2,22 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 15px;
-
   .collection-folder {
+    position: relative;
+    .edit i {
+      font-size: large;
+      color: white;
+      position: absolute;
+      bottom: 20px;
+      right: 20px
+    }
+    .delete i {
+      font-size: large;
+      color: white;
+      position: absolute;
+      top: 6px;
+      right: 20px
+    }
     .folder {
       height: 150px;
       position: relative;
@@ -25,12 +39,14 @@
         }
       }
     }
+    .folder-empty {
+      background-color: $secondary-color;
+    }
     .folder-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 4px;
     }
-
     .img-big {
       width: 100%;
       height: 100%;
