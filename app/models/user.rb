@@ -22,4 +22,12 @@ class User < ApplicationRecord
       .joins(collection: :user)
       .where(user: { id: id })
   end
+
+  def default_collection
+    encounters
+      .where(saved: true)
+      .select do |encounter|
+        EncounterCollection.find_by(encounter_id: encounter.id).nil?
+      end
+  end
 end

@@ -8,7 +8,11 @@ class CollectionsController < ApplicationController
     end
     @page_collection = true
     @collections = current_user.collections
-    @activities = Activity.where(id: current_user.encounters.where(saved: true).pluck(:activity_id).uniq)
+
+    saved_encounters = current_user.encounters.where(saved: true)
+
+    @activities = Activity.where(id: saved_encounters.pluck(:activity_id).uniq)
+
     @coords = [current_user.latitude, current_user.longitude] if user_signed_in? #replace default coords with IP address coords
 
     @markers = @activities.map do |activity|
