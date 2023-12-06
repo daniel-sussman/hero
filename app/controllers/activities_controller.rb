@@ -40,6 +40,9 @@ class ActivitiesController < ApplicationController
   def show
     @activity = Activity.find(params[:id])
     @encounter = Encounter.find_or_initialize_by(activity: @activity, user: current_user)
+
+
+    @reviews = Encounter.where(activity_id: params[:id], review: !false).map(&:review)
   end
 
   def like

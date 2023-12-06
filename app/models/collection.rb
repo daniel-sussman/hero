@@ -12,8 +12,4 @@ class Collection < ApplicationRecord
 #   def default(user_id)
 #     Encounters.where(user_id: user_id, saved: true)
 #   end
-
-  def editable?
-    self.title.downcase != "all saved activities"
-  end
 end

@@ -1,30 +1,47 @@
-<div class="collection-folder col-6 mb-3">
-  <% if collection.count >= 4 %>
-    <div class="folder folder-grid">
-      <% collection.first(4).each do |encounter| %>
-        <% activity = encounter.activity %>
-        <% if activity.photo.present? %>
-          <%= cl_image_tag activity.photo.key, class: 'img-small' %>
-        <% else %>
-          <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-small' %>
+<div class="collection-folder col-6 mb-3" data-controller="<%= "edit-collection" if defined?(collection) %>" id="<%= name.downcase.gsub(' ', '-') %>">
+  <%= link_to ( defined?(collection) ? collection_path(collection) : unsorted_collections_path ) do %>
+    <% if encounters.count >= 4 %>
+      <div class="folder folder-grid">
+        <% encounters.first(4).each do |encounter| %>
+          <% activity = encounter.activity %>
+          <% if activity.photo.present? %>
+            <%= cl_image_tag activity.photo.key, class: 'img-small' %>
+          <% else %>
+            <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-small' %>
+          <% end %>
         <% end %>
-      <% end %>
-      <div class="overlay">
-        <h5 class="folder-title"><%= name %></h5>
+        <div class="overlay">
+          <h5 class="folder-title"><%= name %></h5>
+        </div>
       </div>
-    </div>
-  <% elsif collection.count > 0 %>
-    <div class="folder">
-      <% activity = collection.first.activity %>
-      <% if activity.photo.present? %>
-        <%= cl_image_tag activity.photo.key, class: 'img-big' %>
-      <% else %>
-        <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-big' %>
-      <% end %>
-      <div class="overlay">
-        <h5 class="folder-title"><%= name %></h5>
+    <% elsif encounters.count > 0 %>
+      <div class="folder">
+        <% activity = encounters.first.activity %>
+        <% if activity.photo.present? %>
+          <%= cl_image_tag activity.photo.key, class: 'img-big' %>
+        <% else %>
+          <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-big' %>
+        <% end %>
+        <div class="overlay">
+          <h5 class="folder-title"><%= name %></h5>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <div class="folder folder-empty">
+        <div class="overlay">
+          <h5 class="folder-title"><%= name %></h5>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-
+  <% if defined?(collection) %>
+    <%= link_to collection_path(collection), data: {turbo_method: :delete, turbo_confirm: "Delete #{name}?"} do %>
+      <span class="delete"><i class="fa-solid fa-xmark"></i></span>
+    <% end %>
+    <span class="edit"><i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-collection#reveal"></i></span>
+    <%= simple_form_for collection, html: {class: "d-none", data: {edit_collection_target: "form", action: "submit->edit-collection#update"}} do |f| %>
+      <%= f.input :title %>
+      <%= f.submit "Update collection"%>
+    <% end %>
+  <% end %>
 </div>

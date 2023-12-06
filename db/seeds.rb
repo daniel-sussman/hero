@@ -59,10 +59,10 @@ UserCategory.create(user_id: user.id, category_id: play_cafes.id)
 UserCategory.create(user_id: user.id, category_id: theatre.id)
 UserCategory.create(user_id: user.id, category_id: winter_holidays.id)
 
-# We're not wiping the activities for now...
-# puts "Wiping all activities from the database..."
+# Caution: wiping activities from db...
+puts "Wiping all activities from the database..."
 
-# Activity.destroy_all
+Activity.destroy_all
 
 puts "Seeding the database with new activities..."
 
@@ -613,7 +613,7 @@ puts "Successfully created three encounters."
 
 puts "Giving the user a new collection..."
 
-collection = Collection.create(user_id: user.id, title: "All Saved Activities")
+collection = Collection.create(user_id: user.id, title: "Stuff to do on Saturday")
 EncounterCollection.create(collection_id: collection.id, encounter_id: a.id)
 EncounterCollection.create(collection_id: collection.id, encounter_id: b.id)
 EncounterCollection.create(collection_id: collection.id, encounter_id: c.id)

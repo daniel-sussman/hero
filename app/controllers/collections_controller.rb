@@ -70,7 +70,7 @@ class CollectionsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.text{render partial: "collections/collection_infos", locals: {collection: @collection}, formats: [:html]}
+      format.text{render partial: "collections/collection_folder", locals: {collection: @collection, name: @collection.title, encounters: @collection.encounters }, formats: [:html]}
     end
   end
 
@@ -92,6 +92,14 @@ class CollectionsController < ApplicationController
 
   def remove_activity
     current_user.encounter_collections.find_by(encounter_id: params[:encounter_id])&.destroy
+  end
+
+  def unsorted
+    @activities = current_user.default_collection.map(&:activity)
+
+    if params[:query].present?
+      @search_activities = @activities.where("title ILIKE ?", "%#{params[:query]}%")
+    end
   end
 
   private
