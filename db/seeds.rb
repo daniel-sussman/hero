@@ -1,5 +1,4 @@
 api_key = ENV['GOOGLEMAPS_API_KEY']
-# api_key = 'AIzaSyCyXUFkhIMwi0K1UuiQdlHgspBSrMqpVrM'
 
 puts "Wiping all users from the database..."
 

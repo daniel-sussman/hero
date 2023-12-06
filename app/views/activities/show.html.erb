@@ -62,9 +62,8 @@
                 </div>
               </div>
               <div class="user_review">
-                <% if @activity.encounters.empty? %>
+                <% unless @reviews.present? %>  
                   <h2>Write the first review on this activity</h2>
-                  <%= link_to "Log in now", user_session_path %>
                 <% else %>
                   <h5>User Review : </h5>
                   <% @activity.encounters.each do |review|%>
