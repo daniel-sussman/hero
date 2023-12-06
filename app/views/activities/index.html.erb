@@ -1,3 +1,4 @@
+
 <div class="container page-header">
   <div class="row">
     <div class="col-12 pt-4 pb-2 d-flex justify-content-center">
@@ -13,10 +14,20 @@
   <%= render 'category_carousel', category: category, activities: @activities[i], number: i + 1 %>
 <% end %>
 
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-12 map-box">
-      <%= render 'map', activities: @all_recommended_activities %>
-    </div>
+<div class="mapcontainer" data-controller="showmap">
+  <button class="btn btn-primary showmap-btn" data-action='click->showmap#show' data-showmap-target='mapbutton'>
+    <i class="fa-solid fa-map-location-dot me-1"></i>
+    Show map
+  </button>
+
+  <div class="activity-modal mapmodel" data-showmap-target='modal'>
+    <div class="model-body container">
+        <div class="row">
+          <div class="col-12 map-box">
+            <%= render 'map', activities: @all_recommended_activities %>
+          </div>
+        </div>
+      </div>
+    <div class="close-btn" data-action='click->showmap#collapse'> <i class="fa-solid fa-xmark"></i></div>
   </div>
 </div>

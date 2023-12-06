@@ -5,6 +5,7 @@
 @import "avatar";
 @import "carousel";
 @import "categorycard";
+@import "collection_folders";
 @import "footernav";
 @import "form_legend_clear";
 @import "menu";
@@ -33,4 +34,42 @@ h2{
   color: $primary-color;
   // text-transform: capitalize;
   margin: 15px 0px;
+}
+
+.showmap-btn{
+  font-size: 14px;
+  position: fixed;
+  bottom: 100px;
+  border-radius: 41px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.4);
+}
+.mapmodel{
+  height: 100vh;
+  padding-top: 15px;
+  border-radius: 0px;
+  .close-btn {
+      top:unset;
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      font-size: 30px;
+      cursor: pointer;
+      transition: revert;
+      right: 0;
+      display: flex;
+      justify-content: center;
+  }
+  .map-box{
+    .mapboxgl-popup-close-button{
+      font-size: 44px;
+      top: 5%;
+      right: 2%;
+      color: $light-white-color;
+      text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.9);
+    }
+  }
 }
