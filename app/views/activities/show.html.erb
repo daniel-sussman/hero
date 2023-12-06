@@ -38,9 +38,8 @@
                 <p>Sunday: <span><%= @activity.sunday_opening_hours %></span></p>
               </div>
               <div>
-                <% if @activity.encounters.empty? %>
+                <% unless @reviews.present? %>
                   <h2>Write the first review on this activity</h2>
-                  <%= link_to "Log in now", user_session_path %>
                 <% else %>
                   <% @activity.encounters.each do |review|%>
                     <% review.rating.to_i.times do %>
