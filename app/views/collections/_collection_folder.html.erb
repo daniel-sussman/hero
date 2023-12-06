@@ -1,4 +1,4 @@
-<div class="collection-folder">
+<div class="collection-folder col-6 mb-3">
   <% if collection.count >= 4 %>
     <div class="folder folder-grid">
       <% collection.first(4).each do |encounter| %>
@@ -9,7 +9,9 @@
           <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-small' %>
         <% end %>
       <% end %>
-      <span class="folder-title"><p><%= name %></p></span>
+      <div class="overlay">
+        <h5 class="folder-title"><%= name %></h5>
+      </div>
     </div>
   <% elsif collection.count > 0 %>
     <div class="folder">
@@ -19,7 +21,9 @@
       <% else %>
         <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-big' %>
       <% end %>
-      <span class="folder-title"><p><%= name %></p></span>
+      <div class="overlay">
+        <h5 class="folder-title"><%= name %></h5>
+      </div>
     </div>
   <% end %>
 
