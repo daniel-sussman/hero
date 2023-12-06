@@ -13,7 +13,7 @@ class Activity < ApplicationRecord
   validates :title, uniqueness: true
 
   def reviews
-    encounters.find { |encounter| encounter.review.present? }
+    encounters.find { |encounter| encounter.review.present? } || []
   end
 
   def purge_photos

@@ -4,4 +4,55 @@
     width: 100%;
     object-fit: cover;
   }
+  .details-tab-container{
+    // border-bottom: 2px solid $primary-color;
+    .details-tab{
+      border-bottom: 2px solid $primary-color;
+      &.nav-tabs .nav-link.active,
+      &.nav-tabs .nav-item.show {
+        border: 2px solid $primary-color;
+        border-bottom: none;
+        background-color:$primary-color;
+        color: $white;
+        border-radius: 7px 7px 0px 0px;
+      }
+      &.nav-tabs .nav-link{
+        border: 2px solid $orange-color;
+        border-bottom: none;
+        background-color:$white;
+        color: $gray;
+        border-radius: 7px 7px 0px 0px;
+      }
+    }
+  }
+  .user_review{
+    .reviewhead{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .userinfo{
+        display: flex;
+        align-items: center;
+        img{
+          max-width: 50px;
+          max-height: 50px;
+        }
+        h5{
+          margin-bottom: 0px;
+          margin-left: 10px;
+        }
+      }
+      .userrating{
+        h6{
+          margin-bottom: 0px;
+        }
+      }
+    }
+    .userreviewcontent{
+      p{
+        font-size: 18px;
+      }
+    }
+  }
 }
