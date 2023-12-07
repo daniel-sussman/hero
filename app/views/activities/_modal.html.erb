@@ -26,12 +26,22 @@
                 <div class="col-12 mt-2 mb-2">
                   <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">My collections</h3>
-                    <span class="btn btn-info border rounded-2"><i class="fa-solid fa-plus" data-action='click->activity#new_collection'></i></span>
+                    <span class="btn btn-info border rounded-2" data-action='click->activity#new_collection'><i class="fa-solid fa-plus"></i></span>
                   </div>
                   <hr>
                 </div>
               </div>
               <div class="row collection-container">
+                <div class="col-12 d-none" data-activity-target='formDiv'>
+                  <div class="collection-card">
+                    <div class="imgbox">
+                      <%= render 'collections/folder_img', activities: [] %>
+                    </div>
+                    <%= simple_form_for new_collection, data: { activity_target: 'form', action: 'submit->activity#new_collection_save' } do |f| %>
+                      <%= f.input :title, placeholder: 'Give your collection a title...'%>
+                    <% end %>
+                  </div>
+                </div>
                 <% current_user.collections.each_with_index do |collection| %>
                   <div class="col-12">
                     <div class="collection-card" data-action='click->activity#save' data-activity-target='collection' data-id="<%= collection.id %>">
@@ -42,16 +52,6 @@
                     </div>
                   </div>
                 <% end %>
-                <div class="col-12 d-none">
-                  <div class="collection-card">
-                    <div class="imgbox">
-                      <%= render 'collections/folder_img', activities: [] %>
-                    </div>
-                    <%= simple_form_for new_collection, data: { activity_target: 'form', action: 'submit->insert-in-list#send' } do |f| %>
-                      <%= f.input :title, placeholder: 'Give your collection a title...'%>
-                    <% end %>
-                  </div>
-                </div>
               </div>
             </div>
         </div>
