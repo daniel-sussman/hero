@@ -31,7 +31,7 @@
                         <% @activity.encounters.each do |r|%>
                           <% a.push(r.rating) if r.rating %>
                         <% end %>
-                        <% b = a.inject{ |sum, el| sum + el }.to_i / a.size %>
+                        <% b = a.size == 0 ? 0 : a.inject{ |sum, el| sum + el }.to_i / a.size %>
 
                         <p class="mb-0">Rating</p>
                         <div class="rating d-flex justify-content-start">
@@ -55,7 +55,7 @@
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade <%= 'active show' unless params[:leave_review].present? %>" id="nav-info" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <p><%= @activity.description %></p>
+                    <p><%= @activity.description || "Sorry, we don't seem to have very good information on this activity at the moment." %></p>
                     <% if @activity.website_url.present? %>
                       <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
                     <% end %>
