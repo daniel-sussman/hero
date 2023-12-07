@@ -38,7 +38,7 @@
                       <%= render 'collections/folder_img', activities: [] %>
                     </div>
                     <%= simple_form_for new_collection, data: { activity_target: 'form', action: 'submit->activity#new_collection_save' } do |f| %>
-                      <%= f.input :title, placeholder: 'Give your collection a title...'%>
+                      <%= f.input :title, placeholder: 'Enter a title...', label: false, input_html: { class: 'collection-form-input' } %>
                     <% end %>
                   </div>
                 </div>
