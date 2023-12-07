@@ -18,6 +18,7 @@ puts "Successfully created #{User.all.count} user."
 puts "Wiping all categories from the database..."
 
 ActivityCategory.destroy_all
+Activity.destroy_all
 Category.destroy_all
 
 puts "Creating categories..."
@@ -59,15 +60,12 @@ UserCategory.create(user_id: user.id, category_id: play_cafes.id)
 UserCategory.create(user_id: user.id, category_id: theatre.id)
 UserCategory.create(user_id: user.id, category_id: winter_holidays.id)
 
-# Don't wipe existing activities from db...
-# puts "Wiping all activities from the database..."
-
-# Activity.destroy_all
 
 puts "Seeding the database with new activities..."
 
 Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
   google_data = JSON.parse(File.open(f).read)
+
   title = google_data["result"]["name"]
   existing_activity = Activity.find_by(title: title)
   if existing_activity
@@ -75,7 +73,6 @@ Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
       puts "Adding #{title} to #{cat}."
       ActivityCategory.create!(activity_id: existing_activity.id, category_id: Category.find_by(name: cat).id)
     end
-    next
   end
 
   activity_attributes = {
@@ -107,7 +104,11 @@ Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
   if google_data['address']
     activity_attributes[:address] = google_data['address']
   end
-  new_activity = Activity.create!(activity_attributes)
+  new_activity = Activity.new(activity_attributes)
+  next if !new_activity.valid? && new_activity.errors.messages[:title][0] == "has already been taken"
+  new_activity.save!
+
+  puts "Created Activity #{new_activity.title}"
 
   if google_data['result']['photos']
     photo_reference = google_data['result']['photos'][0]['photo_reference']
@@ -124,6 +125,30 @@ Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
 
   google_data["categories"].each do |cat|
     ActivityCategory.create!(activity_id: new_activity.id, category_id: Category.find_by(name: cat).id)
+  end
+
+  puts "Creating a user and encounter for activity #{new_activity.title}"
+
+  # iterate through all reviews in googledata except first
+  # create a user
+  next unless google_data["result"]["reviews"]
+
+  google_data["result"]["reviews"].each_with_index do |review, i|
+    next if i == 0
+
+    user = User.new(name: review["author_name"], address: "285 Highbury Quadrant, London N5 2TD", email: "activit-#{new_activity.id}-user-#{i}@example.com", password: "password")
+    # binding.pry
+    if !user.valid?
+      puts user.email
+    end
+    user.save!
+
+    Encounter.create!(
+      review: review["text"],
+      rating: review["rating"].to_i,
+      user: user,
+      activity: new_activity
+    )
   end
 end
 
