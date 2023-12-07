@@ -233,49 +233,83 @@
     }
   }
   .collection-container{
-    overflow: auto;
-    overscroll-behavior-x: auto;
-    height: 215px;
-    &::-webkit-scrollbar {
-      width: 10px;
-      margin-right: 5px;
-    }
+      overflow: auto;
+      overscroll-behavior-x: auto;
+      height: 215px;
+      &::-webkit-scrollbar {
+        width: 10px;
+        margin-right: 5px;
+      }
 
-    /* Track */
-    &::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px grey;
-      border-radius: 10px;
-    }
+      /* Track */
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+      }
 
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-      background:$primary-color;
-      border-radius: 10px;
-    }
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background:$primary-color;
+        border-radius: 10px;
+      }
 
-    /* Handle on hover */
-    &::-webkit-scrollbar-thumb:hover {
-      background: $orange-color;
-    }
-    .collection-card{
-    display:flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 8px;
-    .imgbox{
-      height: 100px;
-      width:  100px;
-      background: rgba(38,70,83,.1);
-      padding: 10px;
-      border: 1px solid #fff;
-      border-radius: 5px;
-      img{
-        height: 100% !important;
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: $orange-color;
+      }
+      .collection-card{
+      display:flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 8px;
+      .imgbox{
+        height: 100px;
+        width:  100px;
+        background: rgba(38,70,83,.1);
+        padding: 10px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        img{
+          height: 100% !important;
+        }
+      }
+      h4{
+        margin-left: 15px;
       }
     }
-    h4{
-      margin-left: 15px;
+  }
+  &.landing-model{
+    width: 100vw;
+    height: 100vh;
+    border-radius: 10px 10px 0px 0px;
+    background: rgba(255,255,255,.8);
+    backdrop-filter: blur(10px);
+    .model-body{
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      text-align: center;
+      color: #000;
+      position: relative;
+      .landing_bottom{
+        position: absolute;
+        bottom: 35px;
+      }
+    }
+    .getstart{
+      color: #fff;
+      background-color: $orange-color;
+      border-radius: 10px;
+      font-size: 18px;
+      border: 1px solid $orange-color;
+      padding: 10px 40px;
     }
   }
 }
+.bodymodel.dontshow-landing{
+  .landing-model{
+    display: none !important;
+  }
 }
