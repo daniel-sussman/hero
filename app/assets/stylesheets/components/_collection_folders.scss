@@ -4,12 +4,11 @@
   margin-bottom: 15px;
   .collection-folder {
     position: relative;
-    .edit i {
-      font-size: large;
-      color: white;
+    .edit {
       position: absolute;
-      bottom: 20px;
-      right: 20px
+      bottom: 10px;
+      height: 20px;
+      width: 88%;
     }
     .delete i {
       font-size: large;
@@ -59,4 +58,11 @@
       min-height: 74px;
     }
   }
+}
+.btn-info {
+  --bs-btn-color: #264653 !important;
+  --bs-btn-bg: #e9c46a !important;
+  --bs-btn-hover-color: #264653 !important;
+  --bs-btn-hover-bg: #e9c46a !important;
+  --bs-btn-hover-border-color: #e9c46a !important;
 }

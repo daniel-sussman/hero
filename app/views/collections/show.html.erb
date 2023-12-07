@@ -1,14 +1,23 @@
-<%= render 'searches/search', activities: @search_activities, path: collection_path %>
+<div class="container page-header">
+  <div class="row">
+    <div class="col-12">
+      <%= render 'searches/search', activities: @search_activities, path: collection_path %>
 
-<% if @search_activities %>
-  <%= render 'searches/search_results', activities: @search_activities %>
-<% else %>
-  <div>
-    <h1><%= @collection.title %></h1>
+      <% if @search_activities %>
+        <%= render 'searches/search_results', activities: @search_activities %>
+      <% else %>
+        <div class="title d-flex">
+          <%= link_to collections_path do %>
+            <%= image_tag 'return.png' %>
+          <% end %>
+          <h1><%= @collection.title %></h1>
+        </div>
+        <div>
+          <% @activities.each do |activity| %>
+            <%= render 'activities/activity_card', activity: activity %>
+          <% end %>
+        </div>
+      <%end%>
+    </div>
   </div>
-  <div>
-    <% @activities.each do |activity| %>
-      <%= render 'activities/activity_card', activity: activity %>
-    <% end %>
-  </div>
-<%end%>
+</div>
