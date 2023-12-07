@@ -59,14 +59,14 @@ UserCategory.create(user_id: user.id, category_id: play_cafes.id)
 UserCategory.create(user_id: user.id, category_id: theatre.id)
 UserCategory.create(user_id: user.id, category_id: winter_holidays.id)
 
-# Caution: wiping activities from db...
-puts "Wiping all activities from the database..."
+# Don't wipe existing activities from db...
+# puts "Wiping all activities from the database..."
 
-Activity.destroy_all
+# Activity.destroy_all
 
 puts "Seeding the database with new activities..."
 
-Dir[Rails.root.join("db/files/*.json")].each do |f|
+Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
   google_data = JSON.parse(File.open(f).read)
   title = google_data["result"]["name"]
   existing_activity = Activity.find_by(title: title)
