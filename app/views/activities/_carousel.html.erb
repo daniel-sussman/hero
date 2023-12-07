@@ -9,7 +9,8 @@
   <div class="carousel-inner">
     <% activities.each_with_index do |activity, i| %>
       <% encounter = Encounter.find_by(user_id: current_user.id, activity_id: activity.id) if user_signed_in? %>
-      <div class="carousel-item <%= i == 0 ? "active" : "" ;%>" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-activity-encounterid-value='<%= defined?(encounter) && encounter ? encounter.id : 0 %>' data-value='<%= activity.id %>'>
+
+      <div class="carousel-item <%= i == 0 ? "active" : "" ;%>" data-controller='activity' data-activity-userid-value='<%= user_signed_in? ? current_user.id : 0 %>' data-activity-encounterid-value='<%= defined?(encounter) && encounter ? encounter.id : 0 %>' data-activity-activityid-value='<%= activity.id %>'>
         <div class="activity-card mb-2">
           <%= render 'activities/activity', activity: activity, encounter: encounter %>
         </div>

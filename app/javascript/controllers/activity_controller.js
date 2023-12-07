@@ -2,10 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="activity"
 export default class extends Controller {
-  static targets = ['heart', 'attended', 'stars', 'review', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection']
+  static targets = ['heart', 'attended', 'stars', 'review', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection', 'form', 'formDiv']
   static values = {
     userid: Number,
-    encounterid: Number
+    encounterid: Number,
+    activityid: Number,
   }
   connect() {
     const observer = new IntersectionObserver(this.handleIntersection.bind(this), {
@@ -16,6 +17,7 @@ export default class extends Controller {
     this.closed = true
     this.ratingBox = false
     observer.observe(this.element);
+    console.log(this.activityidValue)
   }
 
   handleIntersection(entries, observer) {
@@ -29,7 +31,7 @@ export default class extends Controller {
   }
 
   createEncounter() {
-    const activityID = parseInt(this.element.getAttribute('data-value'), 10)
+    const activityID = this.activityidValue
     fetch('/encounters', {
       method: 'POST',
       headers: {
@@ -45,7 +47,7 @@ export default class extends Controller {
   }
 
   like() {
-    const activityID = parseInt(this.element.getAttribute('data-value'), 10)
+    const activityID = this.activityidValue
     fetch(`/activities/${activityID}/like`, {
       method: 'PATCH',
       headers: {
@@ -67,7 +69,7 @@ export default class extends Controller {
   }
 
   expandRatingBox() {
-    const activityID = parseInt(this.element.getAttribute('data-value'), 10)
+    const activityID = this.activityidValue
 
     fetch(`/activities/${activityID}/attended`, {
       method: 'PATCH',
@@ -104,7 +106,7 @@ export default class extends Controller {
   rate(event) {
     if (event.target.classList.contains("star")) {
       const rating = event.target.getAttribute("data-rating");
-      const activityID = parseInt(this.element.getAttribute('data-value'), 10);
+      const activityID = this.activityidValue
 
       fetch(`/activities/${activityID}/rating`, {
         method: 'PATCH',
@@ -132,7 +134,7 @@ export default class extends Controller {
   }
 
   review() {
-    const activityID = parseInt(this.element.getAttribute('data-value'), 10)
+    const activityID = this.activityidValue
     fetch(`/activities/${activityID}#review`, {
       method: 'GET',
     });
@@ -166,7 +168,7 @@ export default class extends Controller {
   }
 
   fewer() {
-    const activityID = parseInt(this.element.getAttribute('data-value'), 10);
+    const activityID = this.activityidValue
 
     fetch(`/activities/${activityID}/fewer`, {
       method: 'PATCH',
@@ -179,8 +181,8 @@ export default class extends Controller {
   }
 
   save(event) {
-    const activityID = parseInt(this.element.getAttribute('data-value'), 10);
-
+    const activityID = this.activityidValue
+    console.log(activityID)
     fetch(`/activities/${activityID}/save`, {
       method: 'PATCH',
       headers: {
@@ -188,54 +190,58 @@ export default class extends Controller {
         'Accept': 'application/json',
         'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
       }
+    }).then((response) => {
+
+      this.collectionTargets.forEach(targ => {
+        if (targ.contains(event.target)) {
+          const collectionID = parseInt(targ.getAttribute('data-id'), 10);
+          console.log(collectionID)
+          console.log(targ.dataset.id)
+          fetch(`/collections/${collectionID}/add_activity`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+              encounter_id: this.encounteridValue
+            }),
+          }).then(response => response.json())
+          .then((data) => {
+            if (data.modal) this.modalTarget.outerHTML = data.modal
+          })
+          this.saveTarget.classList.remove("save")
+          this.saveTarget.classList.add("saved")
+          this.collapse()
+        }
+      })
+      if (!this.closed) {
+        // THERE IS A BUG HERE! Check if user clicked the bookmark icon
+        this.saveTarget.classList.toggle("save")
+        this.saveTarget.classList.toggle("saved")
+
+        // If the activity was unsaved, remove it from collections
+        if (this.saveTarget.classList.contains("save")) {
+          fetch(`/collections/remove_activity`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+              encounter_id: this.encounteridValue
+            }),
+          })
+        }
+      }
     });
 
-    this.collectionTargets.forEach(targ => {
-      if (targ.contains(event.target)) {
-        const collectionID = parseInt(targ.getAttribute('data-id'), 10);
-
-        fetch(`/collections/${collectionID}/add_activity`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-          },
-          body: JSON.stringify({
-            encounter_id: this.encounteridValue
-          }),
-        }).then(response => response.json())
-        .then((data) => {
-          if (data.modal) this.modalTarget.outerHTML = data.modal
-        })
-        this.saveTarget.classList.remove("save")
-        this.saveTarget.classList.add("saved")
-        this.collapse()
-      }
-    })
-    if (!this.closed) {
-      // THERE IS A BUG HERE! Check if user clicked the bookmark icon
-      this.saveTarget.classList.toggle("save")
-      this.saveTarget.classList.toggle("saved")
-
-      // If the activity was unsaved, remove it from collections
-      if (this.saveTarget.classList.contains("save")) {
-        fetch(`/collections/remove_activity`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-          },
-          body: JSON.stringify({
-            encounter_id: this.encounteridValue
-          }),
-        })
-      }
-    }
   }
 
   new_collection() {
+    this.formDivTarget.classList.remove("d-none")
     // fetch(`/collections/${collectionID}/add_activity`, {
     //   method: 'POST',
     //   headers: {
@@ -251,4 +257,11 @@ export default class extends Controller {
     //   if (data.modal) this.modalTarget.outerHTML = data.modal
     // })
   }
+
+  new_collection_save(event) {
+    event.preventDefault()
+
+    console.log(this.formTarget.action)
+  }
+
 }
