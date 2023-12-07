@@ -5,9 +5,11 @@
     <% else %>
       <%= image_tag "placeholder.gif", alt: "Placeholder image" %>
     <% end %>
-    <%= link_to request.referer, class: "close-btn" do %>
-      <i class="fa-solid fa-hand-point-left"></i>
-    <% end %>
+    <div class="title">
+      <%= link_to request.referer, class: "close-btn" do %>
+        <%= image_tag 'return.png', class: "white" %>
+      <% end %>
+    </div>
   </div>
   <div class="container page-header">
     <div class="row">

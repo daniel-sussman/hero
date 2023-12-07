@@ -43,6 +43,10 @@ h2{
   margin-top: 12px;
 }
 
+.white {
+  filter: brightness(0) invert(1);
+}
+
 .showmap-btn{
   font-size: 16px;
   position: fixed;
