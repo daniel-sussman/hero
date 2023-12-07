@@ -30,12 +30,15 @@
     <meta name="twitter:image:src" content="<%= meta_image %>">
   </head>
 
-  <body>
+  <body class="body" >
     <div class="viewbox">
       <%= render "shared/flashes" %>
       <%= yield %>
       <div class="spacer"></div>
       <%= render "shared/navbar" %>
+    </div>
+    <div class="bodymodel" data-controller='landingmodel' data-landingmodel-target='body'>
+     <%= render 'layouts/landingpage' %>
     </div>
   </body>
 </html>
