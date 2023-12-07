@@ -32,6 +32,8 @@
       height: 150px;
       position: relative;
       box-shadow: 0px 3px 4px rgba(0,0,0,0.4);
+      border-radius: 15px;
+      overflow: hidden;
       .overlay {
         position: absolute;
         background: rgba(57, 57, 57, 0.5);
@@ -44,6 +46,7 @@
         .folder-title {
           font-size: 16px;
           font-weight: 500;
+          font-family: $body-font;
           color: $white;
           text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.9);
         }

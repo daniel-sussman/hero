@@ -15,57 +15,59 @@
     <div class="row">
       <div class="col-12">
           <div class="container infobox">
-                <div class="head d-flex justify-content-between align-items-center">
-                  <div class="textinfo">
-                    <h1><%= @activity.title %></h1>
-                   </p><% if user_signed_in? %>
-                    <i class="fa-solid fa-location-dot"></i>
-                    <%= @activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi
-                  <% end %></p>
-                    <p><%= @activity.address %></p>
-                  </div>
+            <div class="head d-flex justify-content-between align-items-center">
+              <div class="textinfo">
+                <h1><%= @activity.title %></h1>
+                </p><% if user_signed_in? %>
+                <i class="fa-solid fa-location-dot"></i>
+                <%= @activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi
+              <% end %></p>
+                <p><%= @activity.address %></p>
+              </div>
+            </div>
+            <div class="details-tab-container">
+              <nav>
+                <div class="nav nav-tabs mb-3 details-tab" id="nav-tab" role="tablist">
+                  <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fa-solid fa-circle-info"></i></button>
+                  <button class="nav-link" id="nav-time-tab" data-bs-toggle="tab" data-bs-target="#nav-time" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fa-solid fa-clock"></i></button>
+                  <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fa-solid fa-phone"></i></button>
+                  <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false"><i class="fa-solid fa-comments"></i></button>
                 </div>
-              <%# add tab  %>
-              <div class="details-tab-container">
-                <nav>
-                  <div class="nav nav-tabs mb-3 details-tab" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fa-solid fa-circle-info"></i></button>
-                    <button class="nav-link" id="nav-time-tab" data-bs-toggle="tab" data-bs-target="#nav-time" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fa-solid fa-clock"></i></button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-phone"></i></button>
-                  </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade active show" id="nav-info" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <p><%= @activity.description %></p>
-                    <% if @activity.website_url.present? %>
-                      <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
-                    <% end %>
-                  </div>
-                  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <% if @activity.website_url.present? %>
-                      <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
-                    <% end %>
-                    <% if @activity.phone_number.present? %>
-                    <h6>Phone: <%= @activity.phone_number %></h6>
-                    <% end %>
-                  </div>
-                  <div class="tab-pane fade" id="nav-time" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    <h2>Opening Hours</h2>
-                    <div class="opening-hours">
-                      <p>Monday: <span><%= @activity.monday_opening_hours %></span></p>
-                      <p>Tuesday: <span><%= @activity.tuesday_opening_hours %></span></p>
-                      <p>Wednesday: <span><%= @activity.wednesday_opening_hours %></span></p>
-                      <p>Thursday: <span><%= @activity.thursday_opening_hours %></span></p>
-                      <p>Friday: <span><%= @activity.friday_opening_hours %></span></p>
-                      <p>Saturday: <span><%= @activity.saturday_opening_hours %></span></p>
-                      <p>Sunday: <span><%= @activity.sunday_opening_hours %></span></p>
-                    </div>
-                  </div>
+              </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade active show" id="nav-info" role="tabpanel" aria-labelledby="nav-home-tab">
+                <p><%= @activity.description %></p>
+                <% if @activity.website_url.present? %>
+                  <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
+                <% end %>
+              </div>
+              <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <% if @activity.website_url.present? %>
+                  <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
+                <% end %>
+                <% if @activity.phone_number.present? %>
+                <h6>Phone: <%= @activity.phone_number %></h6>
+                <% end %>
+              </div>
+              <div class="tab-pane fade" id="nav-time" role="tabpanel" aria-labelledby="nav-time-tab">
+                <h2>Opening Hours</h2>
+                <div class="opening-hours">
+                  <p>Monday: <span><%= @activity.monday_opening_hours %></span></p>
+                  <p>Tuesday: <span><%= @activity.tuesday_opening_hours %></span></p>
+                  <p>Wednesday: <span><%= @activity.wednesday_opening_hours %></span></p>
+                  <p>Thursday: <span><%= @activity.thursday_opening_hours %></span></p>
+                  <p>Friday: <span><%= @activity.friday_opening_hours %></span></p>
+                  <p>Saturday: <span><%= @activity.saturday_opening_hours %></span></p>
+                  <p>Sunday: <span><%= @activity.sunday_opening_hours %></span></p>
                 </div>
               </div>
-              <%= render 'review' %>
+              <div class="tab-pane fade active show" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+                <%= render 'review' %>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 </section>

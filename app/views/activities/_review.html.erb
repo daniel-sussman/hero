@@ -1,8 +1,8 @@
-<div class="user_review">
+<div class="user_review pt-2">
+<h2>Reviews</h2>
   <% unless @reviews.present? %>
-    <h2>Write the first review on this activity</h2>
+    <p>There are no reviews... yet!</h2>
   <% else %>
-    <h5>User Review : </h5>
     <% @activity.encounters.each do |review|%>
     <div class="reviewbox mt-3">
       <div class="reviewhead">
@@ -28,12 +28,12 @@
     <% end %>
   <% end %>
 </div>
-<div class="user_review-form <%= 'd-none' if @hide_reviewer %>" id="leave-a-review">
-  <h4>Add Your Review</h4>
+<div class="pb-4 user_review-form <%= 'd-none' if @hide_reviewer %>" id="leave-a-review">
+  <h3>Add a Review</h3>
     <%= simple_form_for(@encounter) do |f| %>
       <%= f.input :activity_id, as: :hidden, input_html: { value: @activity.id } %>
-      <%= f.input :review, placeholder: "Your review is..." %>
-      <%= f.input :rating, as: :select, collection: (1..5), required: true, label: false, input_html: { data: { controller: "star-rating" } } %>
-      <%= f.submit "Submit", class: "btn btn-info mt-2" %>
+      <%= f.input :review, placeholder: "Tell us what you think...", label: false %>
+      <%= f.input :rating, as: :select, collection: (1..5), required: true, input_html: { data: { controller: "star-rating" } } %>
+      <%= f.submit "Submit", class: "btn btn-info mt-2 rounded-4" %>
     <% end %>
 </div>
