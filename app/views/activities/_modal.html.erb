@@ -11,7 +11,7 @@
                 </div>
                 <p>Fewer like this</p>
               </div>
-              <div class="iconbox d-flex flex-column align-items-center">
+              <div class="iconbox d-flex flex-column align-items-center" data-activity-target="savebutton">
                 <div class="link-btn modal-btn mb-2" data-action='click->activity#save'>
                   <span><i class='option <%= encounter && encounter.saved ? 'saved' : 'save' %>' data-activity-target='save'></i> </span>
                 </div>
@@ -32,7 +32,7 @@
                 </div>
               </div>
               <div class="row collection-container">
-                <div class="col-12 d-none" data-activity-target='formDiv'>
+                <div class="col-12 d-none" data-activity-target="formdiv">
                   <div class="collection-card">
                     <div class="imgbox">
                       <%= render 'collections/folder_img', activities: [] %>
@@ -43,14 +43,7 @@
                   </div>
                 </div>
                 <% current_user.collections.each_with_index do |collection| %>
-                  <div class="col-12">
-                    <div class="collection-card" data-action='click->activity#save' data-activity-target='collection' data-id="<%= collection.id %>">
-                      <div class="imgbox">
-                        <%= render 'collections/folder_img', activities: collection.activities %>
-                      </div>
-                      <h4><%= collection.title %></h4>
-                    </div>
-                  </div>
+                  <%= render 'collections/collection_menu_option', collection: collection %>
                 <% end %>
               </div>
             </div>
