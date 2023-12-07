@@ -101,6 +101,7 @@
         font-weight: 600;
         color: $gray;
         text-transform: capitalize;
+        text-overflow: ellipsis;
         a{
           text-decoration: none;
         }
