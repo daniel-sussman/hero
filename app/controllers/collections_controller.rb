@@ -47,6 +47,8 @@ class CollectionsController < ApplicationController
       @search_activities = @activities.where("title ILIKE ?", "%#{params[:query]}%")
     end
 
+    @coords = [current_user.latitude, current_user.longitude] if user_signed_in?
+
     @markers = @activities.map do |activity|
       {
         lat: activity.latitude,
