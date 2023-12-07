@@ -66,7 +66,7 @@ Activity.destroy_all
 
 puts "Seeding the database with new activities..."
 
-Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
+Dir[Rails.root.join("db/files/*.json")].each do |f|
   google_data = JSON.parse(File.open(f).read)
   title = google_data["result"]["name"]
   existing_activity = Activity.find_by(title: title)
