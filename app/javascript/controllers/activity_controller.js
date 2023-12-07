@@ -17,7 +17,6 @@ export default class extends Controller {
     this.closed = true
     this.ratingBox = false
     observer.observe(this.element);
-    console.log(this.activityidValue)
   }
 
   handleIntersection(entries, observer) {
@@ -31,6 +30,9 @@ export default class extends Controller {
   }
 
   createEncounter() {
+    if (this.encounteridValue > 0) {
+      return;
+    }
     const activityID = this.activityidValue
     fetch('/encounters', {
       method: 'POST',
@@ -45,9 +47,8 @@ export default class extends Controller {
       }),
     }).then((response) => response.json())
       .then((data) => {
-        console.log(data)
         this.encounteridValue = data.encounter.id
-
+        console.log(this.encounteridValue)
       })
   }
 
@@ -187,7 +188,7 @@ export default class extends Controller {
 
   save(event) {
     const activityID = this.activityidValue
-    console.log(activityID)
+
     fetch(`/activities/${activityID}/save`, {
       method: 'PATCH',
       headers: {
@@ -200,8 +201,8 @@ export default class extends Controller {
       this.collectionTargets.forEach(targ => {
         if (targ.contains(event.target)) {
           const collectionID = parseInt(targ.getAttribute('data-id'), 10);
-          console.log(collectionID)
-          console.log(targ.dataset.id)
+
+
           fetch(`/collections/${collectionID}/add_activity`, {
             method: 'POST',
             headers: {
