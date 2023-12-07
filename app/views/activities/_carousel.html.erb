@@ -3,7 +3,7 @@
 <div id="activitycarousel<%= category_tag %>" class="carousel slide" data-bs-touch="true">
   <div class="carousel-indicators">
     <% activities.each_with_index do |slide, i| %>
-      <button type="button" data-bs-target="#activitycarousel<%= category_tag %>" data-bs-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" ;%>" aria-current="<%= i == 1 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
+      <button type="button" data-bs-target="#activitycarousel<%= category_tag %>" data-bs-slide-to="<%= i %>" class="<%= i == 0 ? "active" : "" ;%>" aria-current="<%= i == 0 ? "true" : "" ;%>" aria-label="Slide <%= i %>"></button>
     <%end%>
   </div>
   <div class="carousel-inner">
