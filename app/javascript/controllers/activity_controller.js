@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="activity"
 export default class extends Controller {
-  static targets = ['heart', 'attended', 'stars', 'review', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection']
+  static targets = ['heart', 'attended', 'stars', 'review', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection', 'form']
   static values = {
     userid: Number,
     encounterid: Number
@@ -236,6 +236,7 @@ export default class extends Controller {
   }
 
   new_collection() {
+    this.formTarget.classList.remove("d-none")
     // fetch(`/collections/${collectionID}/add_activity`, {
     //   method: 'POST',
     //   headers: {

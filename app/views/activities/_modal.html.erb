@@ -47,7 +47,7 @@
                     <div class="imgbox">
                       <%= render 'collections/folder_img', activities: [] %>
                     </div>
-                    <%= simple_form_for new_collection do |f| %>
+                    <%= simple_form_for new_collection, data: { activity_target: 'form', action: 'submit->insert-in-list#send' } do |f| %>
                       <%= f.input :title, placeholder: 'Give your collection a title...'%>
                     <% end %>
                   </div>

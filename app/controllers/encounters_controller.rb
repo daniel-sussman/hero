@@ -7,8 +7,8 @@ class EncountersController < ApplicationController
       redirect_to @encounter.activity
     else
       #what is purpose of lines below?
-      render "activities/show", status: :unprocessable_entity
-      head(:unprocessable_entity)
+      # render "activities/show", status: :unprocessable_entity
+      # head(:unprocessable_entity)
     end
   end
 
@@ -18,8 +18,8 @@ class EncountersController < ApplicationController
       redirect_to @encounter.activity
     else
       #what is purpose of lines below?
-      render "activities/show", status: :unprocessable_entity
-      head(:unprocessable_entity)
+      # render "activities/show", status: :unprocessable_entity
+      # head(:unprocessable_entity)
     end
   end
 end
