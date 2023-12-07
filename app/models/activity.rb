@@ -24,6 +24,9 @@ class Activity < ApplicationRecord
     #to-do: color code by category
     "green"
   end
+  def encounter(user)
+    encounters.find_by(user:)
+  end
 
   def self.algorithm_sort(user)
     return all unless user

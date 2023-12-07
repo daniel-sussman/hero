@@ -43,7 +43,12 @@ export default class extends Controller {
         user_id: this.useridValue,
         activity_id: activityID
       }),
-    })
+    }).then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        this.encounteridValue = data.encounter.id
+
+      })
   }
 
   like() {

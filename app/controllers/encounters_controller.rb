@@ -4,9 +4,10 @@ class EncountersController < ApplicationController
     @encounter.user = current_user
 
     if @encounter.save
-      redirect_to @encounter.activity
+      render json: { encounter: @encounter.attributes }
     else
       #what is purpose of lines below?
+      render json: { encounter: @encounter.errors.messages, encounter_object: @encounter }
       # render "activities/show", status: :unprocessable_entity
       # head(:unprocessable_entity)
     end
