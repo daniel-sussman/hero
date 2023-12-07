@@ -14,15 +14,30 @@
   <div class="container page-header">
     <div class="row">
       <div class="col-12">
-          <div class="container infobox">
-                <div class="head d-flex justify-content-between align-items-center">
+          <div class="row infobox">
+                <div class="col-12 head d-flex justify-content-between align-items-center">
                   <div class="textinfo">
                     <h1><%= @activity.title %></h1>
                    </p><% if user_signed_in? %>
                     <i class="fa-solid fa-location-dot"></i>
                     <%= @activity.distance_to([current_user.latitude, current_user.longitude]).round(1) %> mi
                   <% end %></p>
-                    <p><%= @activity.address %></p>
+                    <div class="row">
+                      <div class="col-6">
+                        <p><%= @activity.address %></p>
+                      </div>
+                      <div class="col-36">
+                        <% a = []%>
+                        <% @activity.encounters.each do |r|%>
+                          <% a.push(r.rating) %>
+                        <% end %>
+                        <% b = a.inject{ |sum, el| sum + el }.to_i / a.size %>
+                        <p>Heroes' stars</p>
+                        <% b.times do %>
+                          <p><%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %></p>
+                        <% end %>
+                      </div>
+                    </div>
                   </div>
                 </div>
               <%# add tab  %>
