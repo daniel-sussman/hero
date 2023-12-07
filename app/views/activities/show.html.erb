@@ -32,7 +32,7 @@
                           <% a.push(r.rating) %>
                         <% end %>
                         <% b = a.inject{ |sum, el| sum + el }.to_i / a.size %>
-                        <p>Heroes' stars</p>
+                        <p>Rating</p>
                         <% b.times do %>
                           <p><%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %></p>
                         <% end %>
@@ -47,6 +47,7 @@
                     <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fa-solid fa-circle-info"></i></button>
                     <button class="nav-link" id="nav-time-tab" data-bs-toggle="tab" data-bs-target="#nav-time" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fa-solid fa-clock"></i></button>
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-phone"></i></button>
+                    <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-comments"></i></button>
                   </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -76,9 +77,11 @@
                       <p>Sunday: <span><%= @activity.sunday_opening_hours %></span></p>
                     </div>
                   </div>
+                  <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <%= render 'review' %>
+                  </div>
                 </div>
               </div>
-              <%= render 'review' %>
             </div>
           </div>
         </div>
