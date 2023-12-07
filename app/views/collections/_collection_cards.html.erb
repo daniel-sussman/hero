@@ -1,13 +1,13 @@
 <div data-search-collections-target="collection_card">
-  <div class="border-b mb-2 d-flex justify-content-between">
-    <%= link_to new_collection_path, class: "btn btn-info border rounded-2" do %>
-      <i class="fa-solid fa-plus"></i>
-    <% end %>
-  </div>
   <div id="collections" class="row">
-    <%= render "collection_folder", encounters: current_user.default_collection, name: "Unsorted activities" %>
+    <%= render "collection_folder", encounters: current_user.default_collection, name: "Unsorted Activities" %>
     <% collections.each do |collection| %>
         <%= render "collection_folder", encounters: EncounterCollection.where(collection_id: collection.id).map(&:encounter), name: collection.title, collection: collection %>
+    <% end %>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= link_to new_collection_path, class: "btn btn-info border rounded-4" do %>
+      Create a Collection
     <% end %>
   </div>
 </div>

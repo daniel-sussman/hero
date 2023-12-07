@@ -1,8 +1,6 @@
 <div class="container page-header">
   <div class="row">
     <div class="col-12">
-      <%= render 'searches/search', activities: @search_activities, path: collection_path %>
-
       <% if @search_activities %>
         <%= render 'searches/search_results', activities: @search_activities %>
       <% else %>
