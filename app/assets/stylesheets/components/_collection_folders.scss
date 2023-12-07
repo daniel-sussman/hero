@@ -1,3 +1,14 @@
+.collection-folder {
+  height: 100%;
+}
+.collection-folder.collection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1px;
+}
+.collection-folder.folder-empty {
+  background-color: $secondary-color;
+}
 #collections{
   display: flex;
   flex-wrap: wrap;

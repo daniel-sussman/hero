@@ -80,14 +80,23 @@ class CollectionsController < ApplicationController
   end
 
   def add_activity
-    return if EncounterCollection.find_by(collection_id: @collection.id, encounter_id: params[:encounter_id])
+    encounter_id = params[:encounter_id]
+    encounter = Encounter.find(encounter_id)
+
+    if EncounterCollection.find_by(collection_id: @collection.id, encounter_id: encounter_id)
+      return render(json: {})
+    end
 
     # remove activity from any of the user's other collections
     current_user.collections.each do |collection|
-      EncounterCollection.find_by(collection_id: collection.id, encounter_id: params[:encounter_id])&.destroy
+      EncounterCollection.find_by(collection_id: collection.id, encounter_id: encounter_id)&.destroy
     end
 
-    EncounterCollection.create(collection_id: @collection.id, encounter_id: params[:encounter_id])
+    EncounterCollection.create(collection_id: @collection.id, encounter_id: encounter_id)
+
+    render json: {
+      modal: render_to_string(partial: "activities/modal", locals: { encounter: encounter, activity: encounter.activity }, formats: [:html])
+    }
   end
 
   def remove_activity
