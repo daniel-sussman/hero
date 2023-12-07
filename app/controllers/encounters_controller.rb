@@ -6,7 +6,9 @@ class EncountersController < ApplicationController
     if @encounter.save
       redirect_to @encounter.activity
     else
+      #what is purpose of lines below?
       render "activities/show", status: :unprocessable_entity
+      head(:unprocessable_entity)
     end
   end
 
@@ -15,7 +17,9 @@ class EncountersController < ApplicationController
     if @encounter.update(encounter_params)
       redirect_to @encounter.activity
     else
+      #what is purpose of lines below?
       render "activities/show", status: :unprocessable_entity
+      head(:unprocessable_entity)
     end
   end
 end

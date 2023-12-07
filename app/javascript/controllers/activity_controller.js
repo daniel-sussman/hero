@@ -204,6 +204,9 @@ export default class extends Controller {
           body: JSON.stringify({
             encounter_id: this.encounteridValue
           }),
+        }).then(response => response.json())
+        .then((data) => {
+          if (data.modal) this.modalTarget.outerHTML = data.modal
         })
         this.saveTarget.classList.remove("save")
         this.saveTarget.classList.add("saved")
@@ -211,7 +214,7 @@ export default class extends Controller {
       }
     })
     if (!this.closed) {
-      // The user clicked the bookmark icon
+      // THERE IS A BUG HERE! Check if user clicked the bookmark icon
       this.saveTarget.classList.toggle("save")
       this.saveTarget.classList.toggle("saved")
 
@@ -230,5 +233,22 @@ export default class extends Controller {
         })
       }
     }
+  }
+
+  new_collection() {
+    // fetch(`/collections/${collectionID}/add_activity`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    //     'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+    //   },
+    //   body: JSON.stringify({
+    //     encounter_id: this.encounteridValue
+    //   }),
+    // }).then(response => response.json())
+    // .then((data) => {
+    //   if (data.modal) this.modalTarget.outerHTML = data.modal
+    // })
   }
 }

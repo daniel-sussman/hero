@@ -24,7 +24,10 @@
             <div class="model-content">
               <div class="row">
                 <div class="col-12 mt-2 mb-2">
-                  <h3>Save to my collections</h3>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">My collections</h3>
+                    <span class="btn btn-info border rounded-2"><i class="fa-solid fa-plus" data-action='click->activity#new_collection'></i></span>
+                  </div>
                   <hr>
                 </div>
               </div>
@@ -33,12 +36,22 @@
                   <div class="col-12">
                     <div class="collection-card" data-action='click->activity#save' data-activity-target='collection' data-id="<%= collection.id %>">
                       <div class="imgbox">
-                        <img class="img-fluid" src="https://res.cloudinary.com/drdreto8e/image/upload/c_fill/v1/production/roqtndlhb07m0w1kgg55sgemwo6o">
+                        <%= render 'collections/folder_img', activities: collection.activities %>
                       </div>
                       <h4><%= collection.title %></h4>
                     </div>
                   </div>
                 <% end %>
+                <div class="col-12">
+                  <div class="collection-card">
+                    <div class="imgbox">
+                      <%= render 'collections/folder_img', activities: [] %>
+                    </div>
+                    <%= simple_form_for new_collection do |f| %>
+                      <%= f.input :title, placeholder: 'Give your collection a title...'%>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
         </div>

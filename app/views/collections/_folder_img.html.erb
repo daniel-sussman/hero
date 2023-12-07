@@ -1,0 +1,22 @@
+<% if activities.count >= 4 %>
+  <div class="collection-folder collection-grid">
+    <% activities.first(4).each do |activity| %>
+      <% if activity.photo.present? %>
+        <%= cl_image_tag activity.photo.key, class: 'img-small' %>
+      <% else %>
+        <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-small' %>
+      <% end %>
+    <% end %>
+  </div>
+<% elsif activities.count > 0 %>
+  <div class="collection-folder">
+    <% activity = activities.first %>
+    <% if activity.photo.present? %>
+      <%= cl_image_tag activity.photo.key, class: 'img-big' %>
+    <% else %>
+      <%= image_tag "placeholder.gif", alt: "Placeholder image", class: 'img-big' %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="collection-folder folder-empty"></div>
+<% end %>
