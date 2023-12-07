@@ -2,30 +2,32 @@
   <% unless @reviews.present? %>
     <h2>Write the first review on this activity</h2>
   <% else %>
-    <h5>User Review : </h5>
-    <% @activity.encounters.each do |review|%>
-    <div class="reviewbox mt-3">
-      <div class="reviewhead">
-        <div class="userinfo">
-          <%num = rand(100..999)%>
-          <img class="avatar-large" alt="No alt" src="https://ozgrozer.github.io/100k-faces/0/4/004<%=num%>.jpg">
-          <h5><%= review.user.name%></h5>
+    <div>
+      <h5>User Review : </h5>
+      <% @activity.encounters.each do |review|%>
+        <div class="reviewbox mt-3">
+          <div class="reviewhead">
+            <div class="userinfo">
+              <%num = rand(100..999)%>
+              <img class="avatar-large" alt="No alt" src="https://ozgrozer.github.io/100k-faces/0/4/004<%=num%>.jpg">
+              <h5><%= review.user.name%></h5>
+            </div>
+            <div class="userrating">
+              <h6>Rating</h6>
+              <Span>
+                <% review.rating.to_i.times do %>
+                  <%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %>
+                <% end %>
+              </Span>
+            </div>
+          </div>
+          <div class="userreviewcontent mt-3 mb-3">
+            <p><sup><i class="fa-solid fa-quote-left me-2"></i></sup><%= review.review%><sub><i class="fa-solid fa-quote-right ms-2"></i></sub></p>
+          </div>
         </div>
-        <div class="userrating">
-          <h6>Rating</h6>
-          <Span>
-            <% review.rating.to_i.times do %>
-              <%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %>
-            <% end %>
-          </Span>
-        </div>
-      </div>
-      <div class="userreviewcontent mt-3 mb-3">
-        <p><sup><i class="fa-solid fa-quote-left me-2"></i></sup><%= review.review%><sub><i class="fa-solid fa-quote-right ms-2"></i></sub></p>
-      </div>
+        <hr>
+      <% end %>
     </div>
-    <hr>
-    <% end %>
   <% end %>
 </div>
 <div class="user_review-form <%= 'd-none' if @hide_reviewer %>" id="leave-a-review">
