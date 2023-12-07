@@ -11,10 +11,11 @@ User.destroy_all
 
 puts "Creating users"
 
-user = User.create(name: "Daniel", address: "285 Highbury Quadrant, London N5 2TD", email: "daniel@example.com", password: "password")
+user = User.create(name: "Daniel", address: "138 Kingsland Rd, London E2 8DY", email: "daniel@example.com", password: "password")
 
 puts "Successfully created #{User.all.count} user."
 
+#careful, wiping the database...
 puts "Wiping all categories from the database..."
 
 ActivityCategory.destroy_all
@@ -55,23 +56,26 @@ puts "#{Category.all.count} categories created."
 puts "Our user is picking their five favorite categories..."
 
 UserCategory.create(user_id: user.id, category_id: playgrounds.id)
-UserCategory.create(user_id: user.id, category_id: museums.id)
 UserCategory.create(user_id: user.id, category_id: play_cafes.id)
 UserCategory.create(user_id: user.id, category_id: theatre.id)
 UserCategory.create(user_id: user.id, category_id: winter_holidays.id)
-
+UserCategory.create(user_id: user.id, category_id: museums.id)
 
 puts "Seeding the database with new activities..."
 
-Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
+Dir[Rails.root.join("db/files/*.json")].each do |f|
   google_data = JSON.parse(File.open(f).read)
 
   title = google_data["result"]["name"]
   existing_activity = Activity.find_by(title: title)
   if existing_activity
     google_data["categories"].each do |cat|
-      puts "Adding #{title} to #{cat}."
-      ActivityCategory.create!(activity_id: existing_activity.id, category_id: Category.find_by(name: cat).id)
+      category_id = Category.find_by(name: cat).id
+      existing_activity_category = ActivityCategory.find_by(activity_id: existing_activity.id, category_id: category_id)
+      unless existing_activity_category
+        puts "Adding #{title} to #{cat}."
+        ActivityCategory.create!(activity_id: existing_activity.id, category_id: category_id)
+      end
     end
   end
 
@@ -136,7 +140,7 @@ Dir[Rails.root.join("db/files/*.json")].first(40).each do |f|
   google_data["result"]["reviews"].each_with_index do |review, i|
     next if i == 0
 
-    user = User.new(name: review["author_name"], address: "285 Highbury Quadrant, London N5 2TD", email: "activit-#{new_activity.id}-user-#{i}@example.com", password: "password")
+    user = User.new(name: review["author_name"], address: "138 Kingsland Rd, London E2 8DY", email: "activit-#{new_activity.id}-user-#{i}@example.com", password: "password")
     # binding.pry
     if !user.valid?
       puts user.email

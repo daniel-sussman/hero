@@ -294,9 +294,11 @@
       color: #000;
       position: relative;
       .landing_bottom{
-        position: absolute;
-        bottom: 35px;
+
       }
+    }
+    .modal-content{
+      font-size: 1.6rem
     }
     .getstart{
       color: #fff;
