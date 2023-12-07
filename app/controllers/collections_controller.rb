@@ -46,6 +46,16 @@ class CollectionsController < ApplicationController
     if params[:query].present?
       @search_activities = @activities.where("title ILIKE ?", "%#{params[:query]}%")
     end
+
+    @markers = @activities.map do |activity|
+      {
+        lat: activity.latitude,
+        lng: activity.longitude,
+        info_card_html: render_to_string(partial: "activities/info_card", locals: { activity: activity }),
+        marker_html: render_to_string(partial: "activities/marker_#{activity.color_code}")
+      }
+    end
+    @home_marker = render_to_string(partial: "activities/marker_home")
   end
 
   def new
