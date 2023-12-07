@@ -3,10 +3,7 @@
     <div class="col-12">
       <h1>My Account</h1>
     </div>
-    <div class="col-12 d-flex justify-content-between align-content-center">
-      <h2><%= @user.name %></h2>
-      <%= image_tag "heros.jpeg", class: "avatar-large" %>
-    </div>
+    <%= render 'user_profile' %>
     <div class="col-12">
       <h3>My activities</h3>
       <ul class="list-activities">
