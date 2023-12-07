@@ -1,9 +1,8 @@
 <div class="user_review">
   <% unless @reviews.present? %>
-    <h2>Write the first review on this activity</h2>
+    <p>There are no reviews... yet</p>
   <% else %>
     <div>
-      <h5>User Review : </h5>
       <% @activity.encounters.each do |review|%>
         <div class="reviewbox mt-3">
           <div class="reviewhead">
@@ -13,7 +12,6 @@
               <h5><%= review.user.name%></h5>
             </div>
             <div class="userrating">
-              <h6>Rating</h6>
               <Span>
                 <% review.rating.to_i.times do %>
                   <%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %>
@@ -31,11 +29,11 @@
   <% end %>
 </div>
 <div class="user_review-form <%= 'd-none' if @hide_reviewer %>" id="leave-a-review">
-  <h4>Add Your Review</h4>
+  <h4>Add a Review</h4>
     <%= simple_form_for(@encounter) do |f| %>
       <%= f.input :activity_id, as: :hidden, input_html: { value: @activity.id } %>
-      <%= f.input :review, placeholder: "Your review is..." %>
-      <%= f.input :rating, as: :select, collection: (1..5), required: true, label: false, input_html: { data: { controller: "star-rating" } } %>
-      <%= f.submit "Submit", class: "btn btn-info mt-2" %>
+      <%= f.input :review, placeholder: "Your review is...", label: false %>
+      <%= f.input :rating, as: :select, collection: (1..5), required: true, input_html: { data: { controller: "star-rating" } } %>
+      <%= f.submit "Submit", class: "btn btn-info mt-2 rounded-4" %>
     <% end %>
 </div>
