@@ -7,7 +7,8 @@
     <div class="reviewbox mt-3">
       <div class="reviewhead">
         <div class="userinfo">
-          <%= image_tag "heros.jpeg", class: "avatar-large" %>
+          <%num = rand(100..999)%>
+          <img class="avatar-large" alt="No alt" src="https://ozgrozer.github.io/100k-faces/0/4/004<%=num%>.jpg">
           <h5><%= review.user.name%></h5>
         </div>
         <div class="userrating">
