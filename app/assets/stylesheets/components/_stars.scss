@@ -42,3 +42,10 @@
 .star-5 {
   background-image: image-url('star-five.png');
 }
+
+.review {
+  animation: expandStars 0.7s;
+  position: absolute;
+  top: 56px;
+  left: 56px;
+}

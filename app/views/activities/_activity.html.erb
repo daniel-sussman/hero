@@ -12,7 +12,7 @@
     </div>
 
     <div class="link-btn btn-checkview" data-action="click->activity#attended" data-activity-target='link'>
-      <span><i class='<%= encounter && encounter.attended ? "star star-#{encounter.rating}" : 'checkmark' %>' data-activity-target='attended'></i></span>
+      <span><i class='<%= encounter && encounter.rating ? "star star-#{encounter.rating}" : 'checkmark' %>' data-activity-target='attended'></i></span>
     </div>
 
     <div class="stars d-none" data-activity-target="stars" data-action="click->activity#rate">
@@ -21,6 +21,10 @@
       <span><i class='star star-3' data-rating='3'></i></span>
       <span><i class='star star-4' data-rating='4'></i></span>
       <span><i class='star star-5' data-rating='5'></i></span>
+    </div>
+
+    <div class="review d-none" data-activity-target="review" data-action="click->activity#review">
+      <%= link_to 'Leave a review?', leave_review_activity_path(activity) %>
     </div>
 
     <div class='link-btn btn-subnav' data-action='click->activity#expand' data-activity-target='menu'>

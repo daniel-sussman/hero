@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       patch :attended
       patch :rating
       patch :fewer
+      get :leave_review
     end
   end
   resources :categories, only: [:index, :show] do

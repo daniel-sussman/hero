@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_encounter, only: %i[like attended rating save click fewer]
+  before_action :set_encounter, only: %i[like attended rating save click fewer leave_review]
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
@@ -41,6 +41,12 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
     @encounter = Encounter.find_or_initialize_by(activity: @activity, user: current_user)
     @reviews = @activity.reviews
+    if params[:leave_review]
+      @hide_reviewer = false
+      # redirect_to "#{activity_path(@activity)}#leave-a-review"
+    else
+      @hide_reviewer = true
+    end
   end
 
   def like
@@ -65,6 +71,10 @@ class ActivitiesController < ApplicationController
 
   def fewer
     @encounter.update(show_me_fewer: !@encounter.show_me_fewer)
+  end
+
+  def leave_review
+    redirect_to action: 'show', id: params[:id], leave_review: true
   end
 
   private

@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="activity"
 export default class extends Controller {
-  static targets = ['heart', 'attended', 'stars', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection']
+  static targets = ['heart', 'attended', 'stars', 'review', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection']
   static values = {
     userid: Number,
     encounterid: Number
@@ -14,7 +14,7 @@ export default class extends Controller {
       threshold: 0.5, // trigger when 50% of the element is in view
     });
     this.closed = true
-
+    this.ratingBox = false
     observer.observe(this.element);
   }
 
@@ -59,7 +59,16 @@ export default class extends Controller {
   }
 
   attended() {
+    if (this.ratingBox) {
+      this.shrinkRatingBox()
+    } else {
+      this.expandRatingBox()
+    }
+  }
+
+  expandRatingBox() {
     const activityID = parseInt(this.element.getAttribute('data-value'), 10)
+
     fetch(`/activities/${activityID}/attended`, {
       method: 'PATCH',
       headers: {
@@ -68,9 +77,28 @@ export default class extends Controller {
         'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
       }
     })
-    this.starsTarget.classList.toggle("d-none");
-    this.attendedTarget.classList.toggle("d-none");
-    this.linkTarget.classList.add("expanded")
+
+    this.starsTarget.classList.remove("d-none");
+    this.reviewTarget.classList.remove("d-none");
+    this.attendedTarget.classList.add("d-none");
+    this.linkTarget.classList.add("expanded");
+    this.ratingBox = true;
+
+    document.addEventListener('click', (e) => {
+      if (this.linkTarget == e.target || this.linkTarget.contains(e.target)) {
+        // pressed on me so stay
+      } else {
+        this.shrinkRatingBox()
+      }
+    })
+  }
+
+  shrinkRatingBox() {
+    this.starsTarget.classList.add("d-none");
+    this.reviewTarget.classList.add("d-none");
+    this.attendedTarget.classList.remove("d-none");
+    this.linkTarget.classList.remove("expanded");
+    this.ratingBox = false
   }
 
   rate(event) {
@@ -90,8 +118,6 @@ export default class extends Controller {
         }),
       });
 
-      // Toggle the visibility of stars and the checkmark
-      this.starsTarget.classList.toggle("d-none");
       // Update the checkmark text based on the selected rating
       for (let i = 1; i <= 5; i++) {
         this.attendedTarget.classList.remove(`star-${i}`);
@@ -99,10 +125,17 @@ export default class extends Controller {
       this.attendedTarget.classList.add('star')
       this.attendedTarget.classList.add(`star-${rating}`);
       this.attendedTarget.classList.remove('checkmark')
-      this.attendedTarget.classList.toggle("d-none");
-      this.linkTarget.classList.remove("expanded")
+
+      this.shrinkRatingBox()
       // this.attendedTarget.innerHTML = `<span><i class='star'></i></span> Rated ${rating}`;
     }
+  }
+
+  review() {
+    const activityID = parseInt(this.element.getAttribute('data-value'), 10)
+    fetch(`/activities/${activityID}#review`, {
+      method: 'GET',
+    });
   }
 
   expand(event) {
