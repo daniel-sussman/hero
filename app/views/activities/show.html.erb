@@ -61,11 +61,11 @@
                     <% end %>
                   </div>
                   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <% if @activity.phone_number.present? %>
+                    <h6 class="my-3">Phone: <%= @activity.phone_number %></h6>
+                    <% end %>
                     <% if @activity.website_url.present? %>
                       <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
-                    <% end %>
-                    <% if @activity.phone_number.present? %>
-                    <h6>Phone: <%= @activity.phone_number %></h6>
                     <% end %>
                   </div>
                   <div class="tab-pane fade" id="nav-time" role="tabpanel" aria-labelledby="nav-contact-tab">
