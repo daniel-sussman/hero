@@ -63,7 +63,7 @@ UserCategory.create(user_id: user.id, category_id: museums.id)
 
 puts "Seeding the database with new activities..."
 
-Dir[Rails.root.join("db/files/*.json")].each do |f|
+Dir[Rails.root.join("db/files/*.json")].first(30).each do |f|
   google_data = JSON.parse(File.open(f).read)
 
   title = google_data["result"]["name"]
