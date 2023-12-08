@@ -19,7 +19,7 @@ class CollectionsController < ApplicationController
       {
         lat: activity.latitude,
         lng: activity.longitude,
-        info_card_html: render_to_string(partial: "activities/info_card", locals: { activity: activity }),
+        info_card_html: render_to_string(partial: "activities/info_card", locals: { activity: activity }, formats: [:html]),
         marker_html: render_to_string(partial: "activities/marker_#{activity.color_code}")
       }
     end
@@ -47,6 +47,8 @@ class CollectionsController < ApplicationController
       @search_activities = @activities.where("title ILIKE ?", "%#{params[:query]}%")
     end
 
+    @coords = [current_user.latitude, current_user.longitude] if user_signed_in?
+
     @markers = @activities.map do |activity|
       {
         lat: activity.latitude,
@@ -66,7 +68,14 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(collection_params)
     @collection.user = current_user
     if @collection.save
-      redirect_to collections_path, notice: 'You created a new collection.'
+      respond_to do |format|
+        format.html { redirect_to collections_path, notice: 'You created a new collection.' }
+        format.json do
+          render json: {
+            html: render_to_string(partial: 'collections/collection_menu_option', locals: { collection: @collection }, formats: :html)
+          }
+        end
+      end
     else
       render :new, status: :unprocessable_entity
     end

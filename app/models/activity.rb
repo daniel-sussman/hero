@@ -21,9 +21,64 @@ class Activity < ApplicationRecord
   end
 
   def color_code
-    #to-do: color code by category
-    "green"
+    case categories[0].name
+    when "playgrounds"
+      "cyan"
+    when "soft play"
+      "blue"
+    when "museums"
+      "red"
+    when "leisure centres"
+      "blue"
+    when "swimming"
+      "blue"
+    when "bouncy castles"
+      "blue"
+    when "restaurants and cafes"
+      "yellow"
+    when "arts and crafts"
+      "red"
+    when "music"
+      "orange"
+    when "adventure playgrounds"
+      "cyan"
+    when "indoor"
+      "yellow"
+    when "outdoor"
+      "green"
+    when "theatre"
+      "orange"
+    when "stay and play"
+      "yellow"
+    when "play cafes"
+      "yellow"
+    when "animals"
+      "green"
+    when "farms"
+      "green"
+    when "science"
+      "red"
+    when "dance and gymnastics"
+      "blue"
+    when "sports"
+      "blue"
+    when "historic"
+      "red"
+    when "theme parks"
+      "orange"
+    when "winter holidays"
+      "orange"
+    when "libraries"
+      "yellow"
+    when "water play"
+      "cyan"
+    when "forest school"
+      "green"
+    else
+      "cyan"
+    end
   end
+
   def encounter(user)
     encounters.find_by(user:)
   end

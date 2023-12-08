@@ -1,0 +1,8 @@
+<div class="col-12">
+  <div class="collection-card" data-action='click->activity#save' data-activity-target='collection' data-id="<%= collection.id %>">
+    <div class="imgbox">
+      <%= render 'collections/folder_img', activities: collection.activities %>
+    </div>
+    <h4><%= collection.title %></h4>
+  </div>
+</div>

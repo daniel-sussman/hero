@@ -15,8 +15,8 @@
     <div class="row">
       <div class="col-12">
           <div class="row infobox">
-                <div class="col-12 head d-flex justify-content-between align-items-center">
-                  <div class="textinfo">
+                <div class="head">
+                  <div class="col-12 textinfo">
                     <h1><%= @activity.title %></h1>
                    </p><% if user_signed_in? %>
                     <i class="fa-solid fa-location-dot"></i>
@@ -26,22 +26,25 @@
                       <div class="col-6">
                         <p><%= @activity.address %></p>
                       </div>
-                      <div class="col-36">
+                      <div class="col-6">
                         <% a = []%>
                         <% @activity.encounters.each do |r|%>
-                          <% a.push(r.rating) %>
+                          <% a.push(r.rating) if r.rating %>
                         <% end %>
-                        <% b = a.inject{ |sum, el| sum + el }.to_i / a.size %>
-                        <p>Rating</p>
-                        <% b.times do %>
-                          <p><%= image_tag "star-five", style: "height:100%;width:20px;margin:0px;padding:0;" %></p>
-                        <% end %>
+                        <% b = a.size == 0 ? 0 : a.inject{ |sum, el| sum + el }.to_i / a.size %>
+
+                        <p class="mb-0">Rating</p>
+                        <div class="rating d-flex justify-content-start">
+                          <% b.times do %>
+                            <p class="pe-2"><%= image_tag "star-five.png", style: "height:100%;width:20px;margin:0px;padding:0;" %></p>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               <%# add tab  %>
-              <div class="details-tab-container">
+              <div class="details-tab-container mt-3">
                 <nav>
                   <div class="nav nav-tabs mb-3 details-tab" id="nav-tab" role="tablist">
                     <button class="nav-link <%= 'active' unless params[:leave_review].present? %>" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fa-solid fa-circle-info"></i></button>
@@ -52,7 +55,7 @@
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade <%= 'active show' unless params[:leave_review].present? %>" id="nav-info" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <p><%= @activity.description %></p>
+                    <p><%= @activity.description || "Sorry, we don't seem to have very good information on this activity at the moment." %></p>
                     <% if @activity.website_url.present? %>
                       <%= link_to 'Visit website', @activity.website_url, class: "visit-btn", target: '_blank' %>
                     <% end %>

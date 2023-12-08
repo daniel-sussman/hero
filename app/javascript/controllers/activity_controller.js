@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="activity"
 export default class extends Controller {
-  static targets = ['heart', 'attended', 'stars', 'review', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection', 'form', 'formDiv']
+  static targets = ['heart', 'attended', 'stars', 'review', 'link', 'menu', 'ellipsis', 'options', 'fewer', 'save', 'modal', 'collection', 'form', 'formdiv', 'savebutton']
   static values = {
     userid: Number,
     encounterid: Number,
@@ -48,7 +48,6 @@ export default class extends Controller {
     }).then((response) => response.json())
       .then((data) => {
         this.encounteridValue = data.encounter.id
-        console.log(this.encounteridValue)
       })
   }
 
@@ -223,7 +222,10 @@ export default class extends Controller {
         }
       })
       if (!this.closed) {
-        // THERE IS A BUG HERE! Check if user clicked the bookmark icon
+        // THERE IS A BUG HERE! Check if user clicked the bookmark icon.
+        // if (this.savebuttonTarget.contains(event.target) && this.saveTarget.classList.contains("saved")) {
+        //   console.log('does the bug appear?')
+        // }
         this.saveTarget.classList.toggle("save")
         this.saveTarget.classList.toggle("saved")
 
@@ -247,27 +249,24 @@ export default class extends Controller {
   }
 
   new_collection() {
-    this.formDivTarget.classList.remove("d-none")
-    // fetch(`/collections/${collectionID}/add_activity`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    //     'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-    //   },
-    //   body: JSON.stringify({
-    //     encounter_id: this.encounteridValue
-    //   }),
-    // }).then(response => response.json())
-    // .then((data) => {
-    //   if (data.modal) this.modalTarget.outerHTML = data.modal
-    // })
+    this.formdivTarget.classList.remove("d-none")
   }
 
   new_collection_save(event) {
     event.preventDefault()
 
-    console.log(this.formTarget.action)
+    // console.log(this.formTarget)
+    console.log(new FormData(this.formTarget))
+    fetch(this.formTarget.action, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(this.formTarget)
+    })
+      .then(response => response.json())
+      .then((data) => {
+        this.formdivTarget.insertAdjacentHTML('afterend', data.html)
+        this.formdivTarget.classList.add("d-none")
+      })
   }
 
 }

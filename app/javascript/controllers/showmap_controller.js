@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ['modal' ,'mapbutton']
 
   connect() {
-    console.log("connercted");
+
   }
   show(){
     console.log("click is called");

@@ -8,6 +8,7 @@
 @import "collection_folders";
 @import "footernav";
 @import "form_legend_clear";
+@import "info_card";
 @import "menu";
 @import "navbar";
 @import "stars";
@@ -44,6 +45,11 @@ h2{
   margin-top: 12px;
 }
 
+.title-icon {
+  height: 24px;
+  margin-right: 8px;
+}
+
 .white {
   filter: brightness(0) invert(1);
 }
@@ -58,6 +64,7 @@ h2{
   -moz-transform: translateX(-50%);
   transform: translateX(-50%);
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
   z-index: 1;
 }
 .mapmodel{
