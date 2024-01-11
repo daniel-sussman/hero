@@ -1,5 +1,7 @@
 Welcome to Hero! An app that makes it simple to find and plan activities in London that your kids will love.
 
+<img src="./app/assets/images/animation.gif">
+
 ## Get Started
 
 In order to get setup:
