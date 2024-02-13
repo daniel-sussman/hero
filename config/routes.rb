@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     get :show, on: :collection
     get :map, on: :collection
+    get :sign_up2, on: :collection
   end
   resources :collections do
     member do
